@@ -9,11 +9,8 @@
 <meta name="apple-mobile-web-app-title" content="FamilyCal">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1e8ef0">
-<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWU4ZWYwIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiMwMGJjZDQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyMmM5OGEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiByeT0iNDAiIGZpbGw9InVybCgjYmcpIi8+PHJlY3QgeD0iMzAiIHk9IjMwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcng9IjE2IiByeT0iMTYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4yMikiLz48cmVjdCB4PSIzMCIgeT0iMzAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMzIiIHJ4PSIxNiIgcnk9IjE2IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMzUpIi8+PHRleHQgeD0iOTAiIHk9IjUzIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLE5vdG8gU2FucyBKUCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkZhbWlseUNhbDwvdGV4dD48L3N2Zz4=">
-
-<!-- OneSignal Web Push SDK -->
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWU4ZWYwIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiMwMGJjZDQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyMmM5OGEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiByeT0iNDAiIGZpbGw9InVybCgjYmcpIi8+PHRleHQgeD0iOTAiIHk9IjEwNSIgZm9udC1zaXplPSI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+Ug/wvdGV4dD48L3N2Zz4=">
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -23,253 +20,313 @@
   --danger:#ff5c6a;--danger-light:#ffe5e7;--warning:#ff9f1c;--warning-light:#fff4e0;
   --p1:#1e8ef0;--p1-light:#dff0ff;--p2:#22c98a;--p2-light:#dcf8ef;
   --text:#18394a;--text2:#4a7a8a;--text3:#9ec4ce;
-  --shadow:0 2px 16px rgba(30,142,240,.08);--shadow-md:0 4px 24px rgba(30,142,240,.13);
+  --shadow:0 2px 16px rgba(30,142,240,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;font-weight:400;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 5% 5%,rgba(30,142,240,.07) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 95% 95%,rgba(34,201,138,.08) 0%,transparent 60%);pointer-events:none;z-index:0}
-.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:16px}
+.app{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:14px}
 
-/* Header */
-.header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;margin-bottom:14px;background:var(--surface);border-radius:18px;box-shadow:var(--shadow);border:1.5px solid var(--border);flex-wrap:wrap;gap:10px}
-.header-left{display:flex;align-items:center;gap:12px}
-.header-logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 3px 10px rgba(30,142,240,.28);flex-shrink:0}
-.header-left h1{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 50%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+/* ── Header ── */
+.header{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;margin-bottom:11px;background:var(--surface);border-radius:16px;box-shadow:var(--shadow);border:1.5px solid var(--border);flex-wrap:wrap;gap:8px}
+.header-left{display:flex;align-items:center;gap:10px}
+.header-logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 3px 10px rgba(30,142,240,.28);flex-shrink:0}
+.header-left h1{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 50%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .header-left p{font-size:11px;color:var(--text3);margin-top:1px}
-.header-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
-
-/* Sync badge */
-.sync-badge{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-size:12px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;transition:all .2s;font-weight:500}
+.header-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.sync-badge,.notif-btn{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:18px;font-size:11px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;transition:all .2s;font-weight:500}
 .sync-badge:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
-.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;transition:background .3s}
+.notif-btn:hover{border-color:var(--warning);color:var(--warning);background:var(--warning-light)}
+.notif-btn.active{border-color:var(--warning);background:var(--warning-light);color:var(--warning)}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0}
 .sync-badge.connected .sync-dot{background:var(--green);box-shadow:0 0 6px var(--green)}
 .sync-badge.syncing .sync-dot{background:var(--warning);animation:blink .8s infinite}
 .sync-badge.error .sync-dot{background:var(--danger)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-
-/* Notification bell */
-.notif-btn{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-size:12px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;transition:all .2s;font-weight:500;position:relative}
-.notif-btn:hover{border-color:var(--warning);color:var(--warning);background:var(--warning-light)}
-.notif-btn.active{border-color:var(--warning);background:var(--warning-light);color:var(--warning)}
-
-.btn{padding:8px 15px;border-radius:11px;border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;transition:all .18s;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.btn{padding:6px 13px;border-radius:10px;border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;transition:all .18s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
 .btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:white;box-shadow:0 3px 10px rgba(30,142,240,.28)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 5px 16px rgba(30,142,240,.38)}
+.btn-primary:hover{transform:translateY(-1px)}
 .btn-green{background:linear-gradient(135deg,var(--green),var(--green-mid));color:white;box-shadow:0 3px 10px rgba(34,201,138,.26)}
-.btn-green:hover{transform:translateY(-2px);box-shadow:0 5px 16px rgba(34,201,138,.36)}
+.btn-green:hover{transform:translateY(-1px)}
 .btn-secondary{background:var(--surface);color:var(--text2);border:1.5px solid var(--border)}
 .btn-secondary:hover{background:var(--blue-light);color:var(--blue);border-color:var(--blue)}
-.btn-icon{background:var(--surface);border:1.5px solid var(--border);color:var(--text2);padding:6px 10px;border-radius:10px;cursor:pointer;font-size:14px;transition:all .15s;display:flex;align-items:center}
+.btn-icon{background:var(--surface);border:1.5px solid var(--border);color:var(--text2);padding:5px 9px;border-radius:9px;cursor:pointer;font-size:13px;transition:all .15s;display:flex;align-items:center}
 .btn-icon:hover{background:var(--blue-light);color:var(--blue);border-color:var(--blue)}
 .btn-danger{background:var(--danger-light);color:var(--danger);border:1.5px solid rgba(255,92,106,.3)}
 .btn-danger:hover{background:rgba(255,92,106,.2)}
 
-/* Date type toggle */
-.date-type-toggle{display:flex;gap:6px;margin-bottom:10px}
-.date-type-btn{flex:1;padding:7px 10px;border-radius:10px;border:2px solid var(--border);cursor:pointer;transition:all .15s;text-align:center;font-size:12px;font-weight:700;background:var(--surface3);color:var(--text3);font-family:'Noto Sans JP',sans-serif}
-.date-type-btn.active{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+/* ── Tab Navigation ── */
+.tabs-nav{display:flex;gap:4px;margin-bottom:13px;background:var(--surface);border-radius:14px;padding:5px;box-shadow:var(--shadow);border:1.5px solid var(--border)}
+.tab-btn{flex:1;padding:8px 6px;border-radius:10px;border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;transition:all .2s;background:transparent;color:var(--text3);display:flex;align-items:center;justify-content:center;gap:4px}
+.tab-btn:hover:not(.tab-active){background:var(--surface2);color:var(--text2)}
+.tab-btn.tab-active-blue{background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;box-shadow:0 3px 12px rgba(30,142,240,.28)}
+.tab-btn.tab-active-green{background:linear-gradient(135deg,var(--green),var(--green-mid));color:white;box-shadow:0 3px 12px rgba(34,201,138,.28)}
+.tab-btn.tab-active-orange{background:linear-gradient(135deg,var(--warning),#ffbe55);color:white;box-shadow:0 3px 12px rgba(255,159,28,.28)}
+.tab-content{display:none}
+.tab-content.active{display:block}
 
-/* Main */
-.main{display:grid;grid-template-columns:1fr 340px;gap:16px}
-
-/* Calendar */
-.cal-panel{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
-.cal-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter));border-bottom:1.5px solid var(--border);gap:10px}
-.cal-month-nav{display:flex;align-items:center;gap:8px}
-.cal-month-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--text);min-width:130px;text-align:center}
-.nav-btn{width:32px;height:32px;background:var(--surface);border:1.5px solid var(--border);border-radius:9px;color:var(--blue);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;transition:all .15s;box-shadow:var(--shadow)}
+/* ── Calendar Layout ── */
+.cal-page{display:grid;grid-template-columns:1fr 300px;gap:13px}
+.cal-panel{background:var(--surface);border:1.5px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.cal-topbar{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter));border-bottom:1.5px solid var(--border);gap:8px}
+.cal-month-nav{display:flex;align-items:center;gap:6px}
+.cal-month-title{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:var(--text);min-width:120px;text-align:center}
+.nav-btn{width:29px;height:29px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;color:var(--blue);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;transition:all .15s}
 .nav-btn:hover{background:var(--blue);color:white;border-color:var(--blue)}
-.cal-person-header{display:grid;grid-template-columns:60px 1fr 1fr;border-bottom:2px solid var(--border);background:var(--surface3)}
-.cal-date-col-head{padding:10px 8px;font-size:11px;color:var(--text3);font-weight:700;letter-spacing:.05em}
-.cal-person-col{padding:10px 12px;font-weight:700;font-size:13px;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:6px;border-left:1.5px solid var(--border)}
+
+/* Calendar person header */
+.cal-person-header{display:grid;grid-template-columns:56px 1fr 1fr;border-bottom:2px solid var(--border);background:var(--surface3)}
+.cal-date-col-head{padding:7px 5px;font-size:10px;color:var(--text3);font-weight:700;letter-spacing:.04em}
+.cal-person-col{padding:7px 10px;font-weight:700;font-size:12px;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:5px;border-left:1.5px solid var(--border)}
 .person-col-1{color:var(--blue)}.person-col-2{color:var(--green)}
-.person-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.person-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .p1-dot{background:var(--blue)}.p2-dot{background:var(--green)}
-.cal-scroll{max-height:calc(100vh - 260px);overflow-y:auto}
-.cal-row{display:grid;grid-template-columns:60px 1fr 1fr;border-bottom:1px solid var(--border);min-height:52px;transition:background .12s}
+
+/* Calendar rows – fixed row height, chips wrap */
+.cal-scroll{max-height:calc(100vh - 230px);overflow-y:auto}
+.cal-row{display:grid;grid-template-columns:56px 1fr 1fr;border-bottom:1px solid var(--border);/* ★ 固定高さ */min-height:56px;height:56px;overflow:hidden;transition:background .12s}
 .cal-row:hover{background:rgba(30,142,240,.03)}
 .cal-row.today{background:rgba(30,142,240,.05)}
 .cal-row.today .cal-date-cell{background:var(--blue-light)}
-.cal-row.weekend-sat .cal-date-cell .day-num{color:var(--blue)}
-.cal-row.weekend-sun .cal-date-cell .day-num{color:var(--danger)}
+.cal-row.weekend-sat .day-num{color:var(--blue)}
+.cal-row.weekend-sun .day-num{color:var(--danger)}
+.cal-row.is-holiday .day-num{color:var(--danger)}
 .cal-row.weekend-sat,.cal-row.weekend-sun{background:rgba(0,0,0,.012)}
-.cal-date-cell{padding:10px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border-right:1px solid var(--border);transition:all .12s;user-select:none}
+.cal-row.is-holiday{background:rgba(255,92,106,.03)}
+.cal-date-cell{padding:5px 3px 3px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;cursor:pointer;border-right:1px solid var(--border);transition:all .12s;user-select:none}
 .cal-date-cell:hover{background:var(--blue-light)}
 .cal-row.selected .cal-date-cell{background:var(--green-light)}
-.day-num{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:var(--text);line-height:1}
-.day-week{font-size:10px;font-weight:700;color:var(--text3);margin-top:2px;font-family:'Nunito',sans-serif;letter-spacing:.04em}
+.day-num{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:var(--text);line-height:1}
+.day-week{font-size:9px;font-weight:700;color:var(--text3);font-family:'Nunito',sans-serif}
+.day-holiday-label{font-size:7px;color:var(--danger);font-weight:700;text-align:center;line-height:1.2;margin-top:1px;width:100%;word-break:keep-all;padding:0 1px}
 .cal-row.today .day-num,.cal-row.today .day-week{color:var(--blue)}
-.cal-event-cell{padding:6px 8px;display:flex;flex-direction:column;gap:3px;border-left:1.5px solid var(--border);cursor:pointer}
+
+/* Event cells – chips wrap inside fixed height row */
+.cal-event-cell{padding:3px 5px;display:flex;flex-direction:column;gap:2px;border-left:1.5px solid var(--border);cursor:pointer;overflow:hidden;height:56px}
 .cal-event-cell:hover{background:rgba(30,142,240,.04)}
-.cal-event-chip{display:flex;align-items:center;gap:5px;padding:4px 8px;border-radius:7px;font-size:11px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;cursor:pointer;transition:all .12s}
-.cal-event-chip:hover{opacity:.85;transform:translateX(2px)}
+/* ★ チップは折り返し・2行まで */
+.cal-event-chip{display:flex;align-items:flex-start;gap:3px;padding:2px 6px;border-radius:5px;font-size:10px;font-weight:500;/* 折り返し */white-space:normal;word-break:break-all;line-height:1.3;/* 2行クランプ */display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:100%;cursor:pointer;transition:opacity .12s}
+.cal-event-chip:hover{opacity:.8}
 .chip-p1{background:var(--p1-light);color:var(--p1);border:1px solid rgba(30,142,240,.2)}
 .chip-p2{background:var(--p2-light);color:var(--p2);border:1px solid rgba(34,201,138,.2)}
 .chip-task-p1,.chip-task-p2{background:rgba(255,159,28,.12);color:var(--warning);border:1px solid rgba(255,159,28,.2)}
-.chip-done{opacity:.5;text-decoration:line-through}
+.chip-done{opacity:.45;text-decoration:line-through}
 .chip-custom{border-width:1px;border-style:solid}
-.chip-time{font-size:10px;opacity:.75;flex-shrink:0}
+.chip-time{font-size:9px;opacity:.75;flex-shrink:0;white-space:nowrap}
 
-/* Sidebar */
-.sidebar{display:flex;flex-direction:column;gap:14px}
-.panel{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
-.panel-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1.5px solid var(--border);background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter))}
-.panel-title{font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:7px;font-family:'Nunito',sans-serif}
-.panel-badge{font-size:11px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;border-radius:10px;padding:2px 8px;font-weight:700}
-.panel-add-btn{width:30px;height:30px;background:linear-gradient(135deg,var(--green),var(--green-mid));border:none;border-radius:9px;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;transition:all .15s;box-shadow:0 3px 8px rgba(34,201,138,.3);font-weight:700}
+/* ── Sidebar ── */
+.sidebar{display:flex;flex-direction:column;gap:12px}
+.panel{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.panel-header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1.5px solid var(--border);background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter))}
+.panel-title{font-size:13px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif}
+.panel-badge{font-size:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;border-radius:9px;padding:2px 7px;font-weight:700}
+.panel-add-btn{width:27px;height:27px;background:linear-gradient(135deg,var(--green),var(--green-mid));border:none;border-radius:8px;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;transition:all .15s;font-weight:700}
 .panel-add-btn:hover{transform:scale(1.12) rotate(5deg)}
-.today-section{padding:12px}
-.today-chip-list{display:flex;flex-direction:column;gap:5px}
-.today-chip{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;font-size:12px;cursor:pointer;transition:all .15s}
+.today-section{padding:9px}
+.today-chip-list{display:flex;flex-direction:column;gap:4px}
+.today-chip{display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;font-size:11px;cursor:pointer;transition:all .15s}
 .today-chip:hover{border-color:var(--blue);background:var(--blue-light)}
 .today-chip.done{opacity:.5;text-decoration:line-through}
-.filter-tabs{display:flex;gap:5px;padding:10px 12px 0;flex-wrap:wrap}
-.filter-tab{font-size:12px;padding:4px 11px;border-radius:20px;border:1.5px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .15s;font-family:'Noto Sans JP',sans-serif;font-weight:700}
-.filter-tab.active{background:linear-gradient(135deg,var(--blue),var(--cyan));border-color:transparent;color:white;box-shadow:0 3px 10px rgba(30,142,240,.22)}
-.tasks-list{padding:10px;display:flex;flex-direction:column;gap:5px;max-height:380px;overflow-y:auto}
-.task-item{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;background:var(--surface3);border:1.5px solid var(--border);border-radius:11px;transition:all .15s}
+
+/* ── Tasks Tab ── */
+.tasks-page{max-width:720px;margin:0 auto}
+.filter-tabs{display:flex;gap:4px;padding:9px 10px 0;flex-wrap:wrap}
+.filter-tab{font-size:11px;padding:3px 10px;border-radius:18px;border:1.5px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .15s;font-family:'Noto Sans JP',sans-serif;font-weight:700}
+.filter-tab.active{background:linear-gradient(135deg,var(--blue),var(--cyan));border-color:transparent;color:white}
+.tasks-list{padding:8px;display:flex;flex-direction:column;gap:4px}
+.task-item{display:flex;align-items:flex-start;gap:7px;padding:8px 10px;background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;transition:all .15s}
 .task-item:hover{border-color:var(--green);background:var(--green-light)}
 .task-item.done{opacity:.55}
-.task-check{width:18px;height:18px;border-radius:5px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s;background:white}
+.task-check{width:17px;height:17px;border-radius:5px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s;background:white}
 .task-check:hover{border-color:var(--green);background:var(--green-light)}
 .task-check.checked{background:linear-gradient(135deg,var(--green),var(--green-mid));border-color:transparent}
-.task-check.checked::after{content:'✓';color:white;font-size:11px;font-weight:900}
+.task-check.checked::after{content:'✓';color:white;font-size:10px;font-weight:900}
 .task-content{flex:1}
-.task-name{font-size:13px;font-weight:700;color:var(--text)}
+.task-name{font-size:12px;font-weight:700;color:var(--text)}
 .task-item.done .task-name{text-decoration:line-through;color:var(--text3)}
-.task-meta{display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap}
-.task-due{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:3px;font-weight:500}
+.task-meta{display:flex;align-items:center;gap:5px;margin-top:2px;flex-wrap:wrap}
+.task-due{font-size:10px;color:var(--text3);font-weight:500}
 .task-due.overdue{color:var(--danger)}.task-due.today-due{color:var(--warning)}
-.task-person-tag{font-size:10px;padding:1px 7px;border-radius:8px;font-weight:700}
+.task-person-tag{font-size:9px;padding:1px 6px;border-radius:7px;font-weight:700}
 .tag-p1{background:var(--blue-light);color:var(--blue)}
 .tag-p2{background:var(--green-light);color:var(--green)}
 .tag-both{background:linear-gradient(90deg,var(--blue-light),var(--green-light));color:var(--text2)}
-.task-priority{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.task-priority{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:3px}
 .priority-high{background:var(--danger)}.priority-medium{background:var(--warning)}.priority-low{background:var(--green)}
 .event-actions{display:flex;gap:3px;opacity:0;transition:opacity .15s}
 .task-item:hover .event-actions{opacity:1}
-.icon-btn{width:24px;height:24px;border:1.5px solid var(--border);background:var(--surface);border-radius:6px;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s}
+.icon-btn{width:22px;height:22px;border:1.5px solid var(--border);background:var(--surface);border-radius:5px;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .15s}
 .icon-btn:hover{color:var(--blue);border-color:var(--blue);background:var(--blue-light)}
 .icon-btn.delete:hover{color:var(--danger);border-color:var(--danger);background:var(--danger-light)}
-.empty-state{padding:24px;text-align:center;color:var(--text3);font-size:13px}
+.empty-state{padding:24px;text-align:center;color:var(--text3);font-size:12px}
 
-/* Modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(24,57,74,.38);backdrop-filter:blur(6px);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+/* ── Shopping Tab ── */
+.shop-page{max-width:720px;margin:0 auto}
+.shop-panel{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.shop-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1.5px solid var(--border);background:linear-gradient(135deg,var(--warning-light),#fff8ee)}
+.shop-title{font-size:14px;font-weight:700;color:var(--text);font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:6px}
+.shop-badge{font-size:10px;background:linear-gradient(135deg,var(--warning),#ffbe55);color:white;border-radius:9px;padding:2px 7px;font-weight:700}
+.shop-input-area{padding:12px 14px;border-bottom:1.5px solid var(--border);background:var(--surface3)}
+.shop-input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:8px 12px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;outline:none;transition:all .15s}
+.shop-input:focus{border-color:var(--warning);background:var(--warning-light);box-shadow:0 0 0 3px rgba(255,159,28,.09)}
+.shop-body{padding:12px 14px}
+.shop-section-label{font-size:10px;color:var(--text3);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin:10px 0 5px;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:5px}
+.shop-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;margin-bottom:4px;transition:all .15s}
+.shop-item:hover{border-color:var(--warning);background:var(--warning-light)}
+.shop-item.shop-checked{opacity:.5}
+.shop-check{width:18px;height:18px;border-radius:5px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;background:white}
+.shop-check:hover{border-color:var(--warning)}
+.shop-check.checked{background:linear-gradient(135deg,var(--warning),#ffbe55);border-color:transparent}
+.shop-check.checked::after{content:'✓';color:white;font-size:10px;font-weight:900}
+.shop-item-name{flex:1;font-size:13px;font-weight:500;color:var(--text)}
+.shop-item.shop-checked .shop-item-name{text-decoration:line-through;color:var(--text3)}
+.shop-item-qty{font-size:10px;color:var(--text3);flex-shrink:0}
+.shop-clear-btn{font-size:11px;padding:4px 10px;border-radius:8px;border:1.5px solid rgba(255,92,106,.3);background:var(--danger-light);color:var(--danger);cursor:pointer;font-weight:700;font-family:'Noto Sans JP',sans-serif;transition:all .15s}
+.shop-clear-btn:hover{background:rgba(255,92,106,.2)}
+
+/* date type toggle */
+.date-type-toggle{display:flex;gap:5px;margin-bottom:9px}
+.date-type-btn{flex:1;padding:6px 7px;border-radius:8px;border:2px solid var(--border);cursor:pointer;transition:all .15s;text-align:center;font-size:11px;font-weight:700;background:var(--surface3);color:var(--text3);font-family:'Noto Sans JP',sans-serif}
+.date-type-btn.active{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+
+/* ── Modal ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(24,57,74,.38);backdrop-filter:blur(6px);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .2s}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--surface);border:2px solid var(--border);border-radius:22px;padding:26px;width:100%;max-width:460px;transform:translateY(18px) scale(.98);transition:transform .22s;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(30,142,240,.14)}
+.modal{background:var(--surface);border:2px solid var(--border);border-radius:20px;padding:22px;width:100%;max-width:460px;transform:translateY(18px) scale(.98);transition:transform .22s;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(30,142,240,.14)}
 .modal-overlay.open .modal{transform:translateY(0) scale(1)}
-.modal-title{font-family:'Nunito',sans-serif;font-size:21px;font-weight:900;margin-bottom:18px;color:var(--text)}
-.form-group{margin-bottom:14px}
-.form-label{display:block;font-size:12px;color:var(--text2);margin-bottom:5px;font-weight:700;letter-spacing:.04em}
-.form-input,.form-select,.form-textarea{width:100%;background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:9px 13px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:400;outline:none;transition:all .15s}
+.modal-title{font-family:'Nunito',sans-serif;font-size:19px;font-weight:900;margin-bottom:16px;color:var(--text)}
+.form-group{margin-bottom:12px}
+.form-label{display:block;font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:700;letter-spacing:.04em}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;padding:8px 12px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;outline:none;transition:all .15s}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--blue);background:var(--blue-light);box-shadow:0 0 0 3px rgba(30,142,240,.09)}
 .form-select option{background:white}
-.form-textarea{resize:vertical;min-height:65px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.person-selector{display:flex;gap:8px}
-.person-option{flex:1;padding:9px 8px;border-radius:11px;border:2px solid var(--border);cursor:pointer;transition:all .15s;text-align:center;font-size:12px;font-weight:700;background:var(--surface3);color:var(--text3)}
-.person-option:hover{border-color:var(--blue)}
+.form-textarea{resize:vertical;min-height:58px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.person-selector{display:flex;gap:6px}
+.person-option{flex:1;padding:7px 6px;border-radius:10px;border:2px solid var(--border);cursor:pointer;transition:all .15s;text-align:center;font-size:11px;font-weight:700;background:var(--surface3);color:var(--text3)}
 .person-option.selected-p1{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
 .person-option.selected-p2{border-color:var(--green);background:var(--green-light);color:var(--green)}
 .person-option.selected-both{border-color:var(--cyan);background:linear-gradient(135deg,var(--blue-light),var(--green-light));color:var(--text2)}
-.person-icon{font-size:18px;display:block;margin-bottom:2px}
-.color-picker{display:flex;gap:7px;flex-wrap:wrap}
-.color-option{width:28px;height:28px;border-radius:8px;cursor:pointer;border:3px solid transparent;transition:all .15s;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.person-icon{font-size:15px;display:block;margin-bottom:2px}
+.color-picker{display:flex;gap:6px;flex-wrap:wrap}
+.color-option{width:25px;height:25px;border-radius:7px;cursor:pointer;border:3px solid transparent;transition:all .15s}
 .color-option:hover{transform:scale(1.15)}
 .color-option.selected{border-color:var(--text);transform:scale(1.1)}
-.modal-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:22px}
-
-/* Sync / notification modal parts */
-.sync-box{background:var(--surface3);border:1.5px solid var(--border);border-radius:13px;padding:15px;margin-bottom:13px}
-.sync-box h3{font-size:14px;font-weight:700;margin-bottom:9px;color:var(--text);font-family:'Nunito',sans-serif}
-.step-list{display:flex;flex-direction:column;gap:9px;margin-bottom:13px}
-.step-item{display:flex;gap:9px;font-size:12px;color:var(--text2);align-items:flex-start;line-height:1.6}
-.step-num{width:21px;height:21px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:white;flex-shrink:0;margin-top:1px;font-family:'Nunito',sans-serif}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+.sync-box{background:var(--surface3);border:1.5px solid var(--border);border-radius:11px;padding:13px;margin-bottom:11px}
+.sync-box h3{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text);font-family:'Nunito',sans-serif}
+.step-list{display:flex;flex-direction:column;gap:7px;margin-bottom:11px}
+.step-item{display:flex;gap:7px;font-size:11px;color:var(--text2);align-items:flex-start;line-height:1.6}
+.step-num{width:18px;height:18px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:white;flex-shrink:0;margin-top:1px}
 .step-item a{color:var(--blue);text-decoration:none;font-weight:700}
-.step-item a:hover{text-decoration:underline}
-.info-note{background:var(--blue-light);border:1.5px solid rgba(30,142,240,.2);border-radius:9px;padding:9px 11px;font-size:12px;color:var(--blue);line-height:1.6;margin-bottom:13px;font-weight:500}
-.warn-note{background:var(--warning-light);border:1.5px solid rgba(255,159,28,.3);border-radius:9px;padding:9px 11px;font-size:12px;color:#b36b00;line-height:1.6;margin-bottom:13px;font-weight:500}
-.divider{height:1.5px;background:var(--border);margin:14px 0;border-radius:2px}
-.success-box{background:var(--green-light);border:1.5px solid rgba(34,201,138,.3);border-radius:13px;padding:13px 15px;margin-bottom:15px;display:flex;align-items:center;gap:11px}
-
-/* Install banner */
-#install-banner{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter));border:1.5px solid var(--border);border-radius:16px;padding:12px 16px;margin-bottom:14px;box-shadow:var(--shadow)}
-
-::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{animation:fadeIn .22s ease forwards}
-@media(max-width:700px){.main{grid-template-columns:1fr}.sidebar{order:-1}.cal-month-title{font-size:16px;min-width:100px}}
+.info-note{background:var(--blue-light);border:1.5px solid rgba(30,142,240,.2);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--blue);line-height:1.6;margin-bottom:11px;font-weight:500}
+.warn-note{background:var(--warning-light);border:1.5px solid rgba(255,159,28,.3);border-radius:8px;padding:8px 10px;font-size:11px;color:#b36b00;line-height:1.6;margin-bottom:11px;font-weight:500}
+.divider{height:1.5px;background:var(--border);margin:11px 0;border-radius:2px}
+.success-box{background:var(--green-light);border:1.5px solid rgba(34,201,138,.3);border-radius:11px;padding:11px 13px;margin-bottom:13px;display:flex;align-items:center;gap:10px}
+#install-banner{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter));border:1.5px solid var(--border);border-radius:13px;padding:10px 13px;margin-bottom:11px;box-shadow:var(--shadow)}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .2s ease forwards}
+@media(max-width:720px){.cal-page{grid-template-columns:1fr}.cal-month-title{font-size:15px;min-width:105px}}
 </style>
 </head>
 <body>
 <div class="app">
 
-<!-- Install banner -->
+<!-- Install Banner -->
 <div id="install-banner" style="display:none;">
-  <div style="display:flex;align-items:center;gap:12px;flex:1;">
-    <div style="font-size:28px;flex-shrink:0;">📲</div>
-    <div>
-      <div style="font-size:13px;font-weight:700;color:var(--text);">ホーム画面に追加できます</div>
-      <div style="font-size:11px;color:var(--text2);margin-top:2px;">Safari の <strong>共有ボタン</strong> → <strong>「ホーム画面に追加」</strong> をタップ</div>
-    </div>
-  </div>
-  <button onclick="document.getElementById('install-banner').style.display='none'" style="background:none;border:none;font-size:18px;color:var(--text3);cursor:pointer;padding:4px;">✕</button>
+  <div style="display:flex;align-items:center;gap:10px;flex:1;"><div style="font-size:22px;flex-shrink:0;">📲</div><div><div style="font-size:12px;font-weight:700;">ホーム画面に追加できます</div><div style="font-size:10px;color:var(--text2);margin-top:1px;">Safari の共有ボタン → 「ホーム画面に追加」</div></div></div>
+  <button onclick="document.getElementById('install-banner').style.display='none'" style="background:none;border:none;font-size:16px;color:var(--text3);cursor:pointer;padding:4px;">✕</button>
 </div>
 
 <!-- Header -->
 <div class="header">
   <div class="header-left">
     <div class="header-logo">🗓️</div>
-    <div>
-      <h1>FamilyCal</h1>
-      <p id="header-date"></p>
-    </div>
+    <div><h1>FamilyCal</h1><p id="header-date"></p></div>
   </div>
   <div class="header-actions">
-    <div class="sync-badge" id="sync-badge" onclick="openSyncModal()">
-      <div class="sync-dot" id="sync-dot"></div>
-      <span id="sync-label">同期設定</span>
-    </div>
-    <div class="notif-btn" id="notif-btn" onclick="openNotifModal()" title="通知設定">
-      🔔 <span id="notif-label">通知設定</span>
-    </div>
-    <button class="btn-icon" onclick="openSettingsModal()" title="メンバー設定">⚙️</button>
-    <button class="btn btn-secondary" onclick="openEventModal()">＋ 予定</button>
-    <button class="btn btn-green" onclick="openTaskModal()">＋ タスク</button>
+    <div class="sync-badge" id="sync-badge" onclick="openSyncModal()"><div class="sync-dot"></div><span id="sync-label">同期設定</span></div>
+    <div class="notif-btn" id="notif-btn" onclick="openNotifModal()">🔔 <span id="notif-label">通知設定</span></div>
+    <button class="btn-icon" onclick="openSettingsModal()">⚙️</button>
   </div>
 </div>
 
-<!-- Main -->
-<div class="main">
-  <div class="cal-panel">
-    <div class="cal-topbar">
-      <div class="cal-month-nav">
-        <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
-        <div class="cal-month-title" id="cal-title"></div>
-        <button class="nav-btn" onclick="changeMonth(1)">›</button>
-        <button class="nav-btn" onclick="goToday()" style="font-size:11px;font-family:'Nunito';font-weight:900;width:auto;padding:0 10px;">今日</button>
-      </div>
-    </div>
-    <div class="cal-person-header">
-      <div class="cal-date-col-head"></div>
-      <div class="cal-person-col person-col-1"><div class="person-dot p1-dot"></div><span id="p1-col-name">自分</span></div>
-      <div class="cal-person-col person-col-2"><div class="person-dot p2-dot"></div><span id="p2-col-name">家族</span></div>
-    </div>
-    <div class="cal-scroll" id="cal-scroll"><div id="cal-rows"></div></div>
-  </div>
+<!-- Tabs -->
+<div class="tabs-nav">
+  <button class="tab-btn tab-active-green" id="tab-tasks" onclick="switchTab('tasks')">✅ タスク</button>
+  <button class="tab-btn" id="tab-cal" onclick="switchTab('cal')">📅 カレンダー</button>
+  <button class="tab-btn" id="tab-shop" onclick="switchTab('shop')">🛒 買い物リスト</button>
+</div>
 
-  <div class="sidebar">
-    <div class="panel">
-      <div class="panel-header">
-        <div class="panel-title">✨ 今日のタスク</div>
-        <button class="panel-add-btn" onclick="openTaskModal()">+</button>
+<!-- ═══ Tab: Calendar ═══ -->
+<div class="tab-content" id="page-cal">
+  <div class="cal-page">
+    <!-- Calendar -->
+    <div class="cal-panel">
+      <div class="cal-topbar">
+        <div class="cal-month-nav">
+          <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
+          <div class="cal-month-title" id="cal-title"></div>
+          <button class="nav-btn" onclick="changeMonth(1)">›</button>
+          <button class="nav-btn" onclick="goToday()" style="font-size:10px;font-family:'Nunito';font-weight:900;width:auto;padding:0 8px;">今日</button>
+        </div>
+        <button class="btn btn-secondary" onclick="openEventModal()" style="font-size:11px;padding:5px 10px;">＋ 予定</button>
       </div>
-      <div class="today-section"><div class="today-chip-list" id="today-tasks-list"></div></div>
+      <div class="cal-person-header">
+        <div class="cal-date-col-head"></div>
+        <div class="cal-person-col person-col-1"><div class="person-dot p1-dot"></div><span id="p1-col-name">自分</span></div>
+        <div class="cal-person-col person-col-2"><div class="person-dot p2-dot"></div><span id="p2-col-name">家族</span></div>
+      </div>
+      <div class="cal-scroll" id="cal-scroll"><div id="cal-rows"></div></div>
     </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">✨ 今日のタスク</div>
+          <button class="panel-add-btn" onclick="openTaskModal()">+</button>
+        </div>
+        <div class="today-section"><div class="today-chip-list" id="today-tasks-list"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title">📅 今日の予定</div></div>
+        <div class="today-section"><div class="today-chip-list" id="today-events-list"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Tab: Tasks (デフォルト表示) ═══ -->
+<div class="tab-content active" id="page-tasks">
+  <div class="tasks-page">
+
+    <!-- ★ 今日のスケジュール＆タスク -->
+    <div class="panel" style="margin-bottom:14px;">
+      <div class="panel-header" style="background:linear-gradient(135deg,#fff8e1,var(--green-lighter));">
+        <div class="panel-title" style="font-size:14px;">☀️ 今日のスケジュールとタスク <span id="today-date-label" style="font-size:11px;color:var(--text3);font-weight:400;margin-left:4px;"></span></div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-secondary" onclick="openEventModal()" style="font-size:11px;padding:4px 9px;">＋ 予定</button>
+          <button class="btn btn-green" onclick="openTaskModal()" style="font-size:11px;padding:4px 9px;">＋ タスク</button>
+        </div>
+      </div>
+      <div style="padding:10px 12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;" id="today-combined-grid">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase;font-family:'Nunito',sans-serif;">📅 今日の予定</div>
+          <div class="today-chip-list" id="today-events-list"></div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase;font-family:'Nunito',sans-serif;">✅ 今日のタスク</div>
+          <div class="today-chip-list" id="today-tasks-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- タスク全件 -->
     <div class="panel">
       <div class="panel-header">
-        <div class="panel-title">✅ タスク <span class="panel-badge" id="task-count">0</span></div>
-        <button class="panel-add-btn" onclick="openTaskModal()">+</button>
+        <div class="panel-title">📋 すべてのタスク <span class="panel-badge" id="task-count">0</span></div>
+        <button class="btn btn-green" onclick="openTaskModal()" style="font-size:11px;padding:5px 11px;">＋ タスク追加</button>
       </div>
       <div class="filter-tabs">
         <button class="filter-tab active" onclick="setTaskFilter('all',this)">すべて</button>
@@ -281,20 +338,68 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
 </div>
+
+<!-- ═══ Tab: Calendar ═══ -->
+<div class="tab-content" id="page-shop">
+  <div class="shop-page">
+    <div class="shop-panel">
+      <div class="shop-header">
+        <div class="shop-title">🛒 買い物リスト <span class="shop-badge" id="shop-count">0</span></div>
+        <button class="shop-clear-btn" onclick="clearCheckedShop()">✓ 済みを削除</button>
+      </div>
+      <!-- 入力エリア -->
+      <div class="shop-input-area">
+        <div class="form-row" style="margin-bottom:8px;">
+          <div>
+            <label class="form-label">品名 *</label>
+            <input class="shop-input" id="shop-name" placeholder="例：牛乳、卵..." onkeydown="if(event.key==='Enter')addShopItem()">
+          </div>
+          <div>
+            <label class="form-label">数量・メモ</label>
+            <input class="shop-input" id="shop-qty" placeholder="例：2本、特売品">
+          </div>
+        </div>
+        <div class="form-row" style="margin-bottom:8px;">
+          <div>
+            <label class="form-label">カテゴリ</label>
+            <select class="form-input" id="shop-cat" style="padding:7px 10px;font-size:12px;">
+              <option value="食品">🥬 食品</option>
+              <option value="飲み物">🥤 飲み物</option>
+              <option value="日用品">🧴 日用品</option>
+              <option value="子供関係">👶 子供関係</option>
+              <option value="ペット用品">🐾 ペット用品</option>
+              <option value="その他">📦 その他</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">担当</label>
+            <div class="person-selector" id="shop-person-selector">
+              <div class="person-option selected-p1" data-val="p1" onclick="selectPersonShop('p1')"><span class="person-icon">👤</span><span id="shop-p1-label">自分</span></div>
+              <div class="person-option" data-val="p2" onclick="selectPersonShop('p2')"><span class="person-icon">👤</span><span id="shop-p2-label">家族</span></div>
+              <div class="person-option" data-val="both" onclick="selectPersonShop('both')"><span class="person-icon">👥</span><span>2人</span></div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="addShopItem()" style="width:100%;justify-content:center;">＋ リストに追加</button>
+      </div>
+      <!-- リスト表示 -->
+      <div class="shop-body" id="shop-list"></div>
+    </div>
+  </div>
 </div>
 
-<!-- Event Modal -->
+</div><!-- /app -->
+
+<!-- ── Event Modal ── -->
 <div class="modal-overlay" id="event-modal">
   <div class="modal">
     <div class="modal-title">📅 <span id="event-modal-title">新しい予定</span></div>
-    <div class="form-group">
-      <label class="form-label">対象者 *</label>
+    <div class="form-group"><label class="form-label">対象者 *</label>
       <div class="person-selector" id="ev-person-selector">
         <div class="person-option" data-val="p1" onclick="selectPersonEv('p1')"><span class="person-icon">👤</span><span id="ev-p1-label">自分</span></div>
         <div class="person-option" data-val="p2" onclick="selectPersonEv('p2')"><span class="person-icon">👤</span><span id="ev-p2-label">家族</span></div>
         <div class="person-option" data-val="both" onclick="selectPersonEv('both')"><span class="person-icon">👥</span><span>2人とも</span></div>
-      </div>
-    </div>
+      </div></div>
     <div class="form-group"><label class="form-label">タイトル *</label><input class="form-input" id="ev-name" placeholder="予定のタイトル"></div>
     <div class="form-group"><label class="form-label">日付 *</label><input class="form-input" type="date" id="ev-date"></div>
     <div class="form-row">
@@ -303,148 +408,132 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <div class="form-group"><label class="form-label">メモ</label><textarea class="form-textarea" id="ev-note" placeholder="メモ（任意）"></textarea></div>
     <div class="form-group"><label class="form-label">カラー</label><div class="color-picker" id="ev-color-picker"></div></div>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('event-modal')">キャンセル</button>
-      <button class="btn btn-primary" onclick="saveEvent()">保存</button>
-    </div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('event-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveEvent()">保存</button></div>
   </div>
 </div>
 
-<!-- Task Modal -->
+<!-- ── Task Modal ── -->
 <div class="modal-overlay" id="task-modal">
   <div class="modal">
     <div class="modal-title">✅ <span id="task-modal-title">新しいタスク</span></div>
-    <div class="form-group">
-      <label class="form-label">対象者 *</label>
+    <div class="form-group"><label class="form-label">対象者 *</label>
       <div class="person-selector" id="tk-person-selector">
         <div class="person-option" data-val="p1" onclick="selectPersonTk('p1')"><span class="person-icon">👤</span><span id="tk-p1-label">自分</span></div>
         <div class="person-option" data-val="p2" onclick="selectPersonTk('p2')"><span class="person-icon">👤</span><span id="tk-p2-label">家族</span></div>
         <div class="person-option" data-val="both" onclick="selectPersonTk('both')"><span class="person-icon">👥</span><span>2人とも</span></div>
-      </div>
-    </div>
+      </div></div>
     <div class="form-group"><label class="form-label">タスク名 *</label><input class="form-input" id="tk-name" placeholder="タスクの内容"></div>
     <div class="form-group">
       <label class="form-label">日付タイプ</label>
       <div class="date-type-toggle">
         <div class="date-type-btn active" id="tk-type-single" onclick="setTaskDateType('single')">📅 指定日</div>
-        <div class="date-type-btn" id="tk-type-range" onclick="setTaskDateType('range')">📆 期間（〜から〜まで）</div>
+        <div class="date-type-btn" id="tk-type-range" onclick="setTaskDateType('range')">📆 期間</div>
       </div>
-      <div id="tk-date-single">
-        <label class="form-label">期日</label>
-        <input class="form-input" type="date" id="tk-due">
-      </div>
+      <div id="tk-date-single"><label class="form-label">期日</label><input class="form-input" type="date" id="tk-due"></div>
       <div id="tk-date-range" style="display:none;">
         <div class="form-row">
-          <div class="form-group" style="margin-bottom:0;"><label class="form-label">開始日（〜から）</label><input class="form-input" type="date" id="tk-start"></div>
-          <div class="form-group" style="margin-bottom:0;"><label class="form-label">終了日（〜まで）</label><input class="form-input" type="date" id="tk-end"></div>
+          <div class="form-group" style="margin-bottom:0;"><label class="form-label">開始日</label><input class="form-input" type="date" id="tk-start"></div>
+          <div class="form-group" style="margin-bottom:0;"><label class="form-label">終了日</label><input class="form-input" type="date" id="tk-end"></div>
         </div>
       </div>
     </div>
     <div class="form-group"><label class="form-label">優先度</label><select class="form-select" id="tk-priority"><option value="medium">中</option><option value="high">高</option><option value="low">低</option></select></div>
     <div class="form-group"><label class="form-label">メモ</label><textarea class="form-textarea" id="tk-note" placeholder="メモ（任意）"></textarea></div>
     <div class="form-group"><label class="form-label">カラー</label><div class="color-picker" id="tk-color-picker"></div></div>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('task-modal')">キャンセル</button>
-      <button class="btn btn-green" onclick="saveTask()">保存</button>
-    </div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('task-modal')">キャンセル</button><button class="btn btn-green" onclick="saveTask()">保存</button></div>
   </div>
 </div>
 
-<!-- Settings Modal -->
+<!-- ── Settings Modal ── -->
 <div class="modal-overlay" id="settings-modal">
-  <div class="modal" style="max-width:400px;">
+  <div class="modal" style="max-width:380px;">
     <div class="modal-title">⚙️ メンバー設定</div>
     <div class="form-group"><label class="form-label" style="color:var(--blue);">👤 1人目の名前</label><input class="form-input" id="settings-p1" placeholder="例：自分の名前"></div>
     <div class="form-group"><label class="form-label" style="color:var(--green);">👤 2人目の名前</label><input class="form-input" id="settings-p2" placeholder="例：妻・夫の名前"></div>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('settings-modal')">キャンセル</button>
-      <button class="btn btn-primary" onclick="saveSettings()">保存</button>
-    </div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('settings-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveSettings()">保存</button></div>
   </div>
 </div>
 
-<!-- Sync Modal -->
+<!-- ── Sync Modal ── -->
 <div class="modal-overlay" id="sync-modal">
-  <div class="modal" style="max-width:500px;">
+  <div class="modal" style="max-width:480px;">
     <div class="modal-title">🔗 家族と同期</div>
     <div id="sync-connected-view" style="display:none;">
-      <div class="success-box"><div style="font-size:26px;">🟢</div><div><div style="font-size:14px;font-weight:700;color:var(--green);font-family:'Nunito',sans-serif;">同期中！</div><div style="font-size:12px;color:var(--text2);margin-top:2px;">30秒ごとに自動同期されます</div></div></div>
-      <div class="form-group"><label class="form-label">ファミリーコード</label><div style="display:flex;gap:8px;"><input class="form-input" id="display-bin-id" readonly style="flex:1;color:var(--blue);font-weight:700;"><button class="btn btn-primary" onclick="copyBinId()">コピー</button></div></div>
+      <div class="success-box"><div style="font-size:22px;">🟢</div><div><div style="font-size:13px;font-weight:700;color:var(--green);">同期中！</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">30秒ごとに自動同期されます</div></div></div>
+      <div class="form-group"><label class="form-label">ファミリーコード</label><div style="display:flex;gap:7px;"><input class="form-input" id="display-bin-id" readonly style="flex:1;color:var(--blue);font-weight:700;"><button class="btn btn-primary" onclick="copyBinId()">コピー</button></div></div>
       <div class="info-note">💡 このコードをLINEで妻に送り、相手も同じコードで接続すれば同期完了です。</div>
       <div class="modal-actions" style="margin-top:0;"><button class="btn btn-danger" onclick="disconnectSync()">同期を解除</button><button class="btn btn-secondary" onclick="closeModal('sync-modal')">閉じる</button></div>
     </div>
     <div id="sync-setup-view">
-      <div class="sync-box">
-        <h3>📋 セットアップ手順（約2分）</h3>
-        <div class="step-list">
-          <div class="step-item"><div class="step-num">1</div><div><a href="https://jsonbin.io" target="_blank">jsonbin.io</a> にアクセスし、無料アカウントを作成</div></div>
-          <div class="step-item"><div class="step-num">2</div><div>ログイン後、右上アイコン →「API Keys」→「+ CREATE ACCESS KEY」でキーをコピー</div></div>
-          <div class="step-item"><div class="step-num">3</div><div>代表者が「新規作成」→ファミリーコードを妻に共有 → 妻が「参加」で接続</div></div>
-        </div>
-      </div>
+      <div class="sync-box"><h3>📋 セットアップ手順（約2分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://jsonbin.io" target="_blank">jsonbin.io</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「API Keys」→「+ CREATE ACCESS KEY」でキーをコピー</div></div><div class="step-item"><div class="step-num">3</div><div>代表者が「新規作成」→ ファミリーコードを妻に共有 → 妻が「参加」で接続</div></div></div></div>
       <div class="divider"></div>
-      <div class="sync-box"><h3>🆕 はじめて設定する（代表者）</h3><div class="form-group" style="margin-bottom:11px;"><label class="form-label">JSONBin APIキー</label><input class="form-input" id="setup-api-key" type="password" placeholder="$2a$10$xxxxxxxx..."></div><button class="btn btn-primary" style="width:100%;" onclick="setupNewSync()">新規作成して接続</button></div>
+      <div class="sync-box"><h3>🆕 はじめて設定する</h3><div class="form-group" style="margin-bottom:10px;"><label class="form-label">JSONBin APIキー</label><input class="form-input" id="setup-api-key" type="password" placeholder="$2a$10$xxxxxxxx..."></div><button class="btn btn-primary" style="width:100%;" onclick="setupNewSync()">新規作成して接続</button></div>
       <div class="divider"></div>
-      <div class="sync-box"><h3>👩 家族として参加する</h3><div class="form-row" style="margin-bottom:11px;"><div class="form-group" style="margin-bottom:0;"><label class="form-label">APIキー</label><input class="form-input" id="join-api-key" type="password" placeholder="$2a$10$xxxxxxxx..."></div><div class="form-group" style="margin-bottom:0;"><label class="form-label">ファミリーコード</label><input class="form-input" id="join-bin-id" placeholder="受け取ったコード"></div></div><button class="btn btn-green" style="width:100%;" onclick="joinSync()">コードで接続</button></div>
-      <div class="modal-actions" style="margin-top:7px;"><button class="btn btn-secondary" onclick="closeModal('sync-modal')">キャンセル</button></div>
+      <div class="sync-box"><h3>👩 家族として参加する</h3><div class="form-row" style="margin-bottom:10px;"><div class="form-group" style="margin-bottom:0;"><label class="form-label">APIキー</label><input class="form-input" id="join-api-key" type="password" placeholder="$2a$10$xxxxxxxx..."></div><div class="form-group" style="margin-bottom:0;"><label class="form-label">ファミリーコード</label><input class="form-input" id="join-bin-id" placeholder="受け取ったコード"></div></div><button class="btn btn-green" style="width:100%;" onclick="joinSync()">コードで接続</button></div>
+      <div class="modal-actions" style="margin-top:6px;"><button class="btn btn-secondary" onclick="closeModal('sync-modal')">キャンセル</button></div>
     </div>
-    <div id="sync-loading" style="display:none;text-align:center;padding:36px 20px;"><div style="font-size:36px;margin-bottom:14px;">⏳</div><div style="font-size:14px;color:var(--text2);font-weight:500;" id="sync-loading-msg">接続中...</div></div>
+    <div id="sync-loading" style="display:none;text-align:center;padding:30px;"><div style="font-size:30px;margin-bottom:12px;">⏳</div><div style="font-size:13px;color:var(--text2);font-weight:500;" id="sync-loading-msg">接続中...</div></div>
   </div>
 </div>
 
-<!-- ★ Notification Modal -->
+<!-- ── Notification Modal ── -->
 <div class="modal-overlay" id="notif-modal">
-  <div class="modal" style="max-width:480px;">
+  <div class="modal" style="max-width:460px;">
     <div class="modal-title">🔔 プッシュ通知設定</div>
-
-    <!-- 未設定時 -->
     <div id="notif-setup-view">
-      <div class="sync-box">
-        <h3>📋 セットアップ手順（約5分）</h3>
-        <div class="step-list">
-          <div class="step-item"><div class="step-num">1</div><div><a href="https://onesignal.com" target="_blank">onesignal.com</a> で無料アカウントを作成</div></div>
-          <div class="step-item"><div class="step-num">2</div><div>「Add a new app」→ アプリ名を入力 →「Web」を選択</div></div>
-          <div class="step-item"><div class="step-num">3</div><div>「Custom Code」を選択し、サイトURL に <strong>https://satoshikonuma666-web.github.io/familycal/</strong> を入力して保存</div></div>
-          <div class="step-item"><div class="step-num">4</div><div>「Settings」→「Keys & IDs」から <strong>App ID</strong> と <strong>REST API Key</strong> をコピー</div></div>
-          <div class="step-item"><div class="step-num">5</div><div>下の欄に入力して「保存して通知を許可」をタップ</div></div>
-        </div>
-      </div>
-      <div class="warn-note">⚠️ iPhoneで通知を受け取るには <strong>iOS 16.4以上</strong> + <strong>ホーム画面に追加済み</strong> であることが必要です。</div>
+      <div class="sync-box"><h3>📋 セットアップ手順（約5分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://onesignal.com" target="_blank">onesignal.com</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「New App」→「Web」→「Custom Code」を選択</div></div><div class="step-item"><div class="step-num">3</div><div>サイトURL: <strong>https://satoshikonuma666-web.github.io/familycal/</strong></div></div><div class="step-item"><div class="step-num">4</div><div>「Settings」→「Keys & IDs」で App ID と REST API Key をコピー</div></div></div></div>
+      <div class="warn-note">⚠️ iPhoneで通知を受け取るには iOS 16.4以上 + ホーム画面に追加済みが必要です。</div>
       <div class="form-group"><label class="form-label">OneSignal App ID</label><input class="form-input" id="notif-app-id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"></div>
-      <div class="form-group"><label class="form-label">OneSignal REST API Key</label><input class="form-input" id="notif-rest-key" type="password" placeholder="REST API Key"></div>
-      <div class="modal-actions">
-        <button class="btn btn-secondary" onclick="closeModal('notif-modal')">キャンセル</button>
-        <button class="btn btn-primary" onclick="saveNotifSettings()">💾 保存して通知を許可</button>
-      </div>
+      <div class="form-group"><label class="form-label">REST API Key</label><input class="form-input" id="notif-rest-key" type="password" placeholder="REST API Key"></div>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('notif-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveNotifSettings()">💾 保存して通知を許可</button></div>
     </div>
-
-    <!-- 設定済み時 -->
     <div id="notif-connected-view" style="display:none;">
-      <div class="success-box"><div style="font-size:26px;">🔔</div><div><div style="font-size:14px;font-weight:700;color:var(--green);font-family:'Nunito',sans-serif;">通知が有効です！</div><div style="font-size:12px;color:var(--text2);margin-top:2px;">予定・タスクが追加・更新されると相手に通知が届きます</div></div></div>
-      <div class="info-note">💡 奥さんのスマホでも同じ手順で「通知を許可」すれば、2人とも通知を受け取れます。</div>
-      <div id="notif-status-msg" style="font-size:12px;color:var(--text2);margin-bottom:14px;"></div>
-      <div class="modal-actions">
-        <button class="btn btn-danger" onclick="clearNotifSettings()">通知を無効にする</button>
-        <button class="btn btn-secondary" onclick="closeModal('notif-modal')">閉じる</button>
-      </div>
+      <div class="success-box"><div style="font-size:22px;">🔔</div><div><div style="font-size:13px;font-weight:700;color:var(--green);">通知が有効です！</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">予定・タスク・買い物追加時に相手に通知が届きます</div></div></div>
+      <div class="info-note">💡 奥さんのスマホでも同じ手順で「通知を許可」すれば2人とも受け取れます。</div>
+      <div class="modal-actions"><button class="btn btn-danger" onclick="clearNotifSettings()">通知を無効にする</button><button class="btn btn-secondary" onclick="closeModal('notif-modal')">閉じる</button></div>
     </div>
   </div>
 </div>
 
 <script>
+// ── 日本の祝日 2024〜2027 ──
+const JP_HOLIDAYS = {
+  '2024-01-01':'元日','2024-01-08':'成人の日','2024-02-11':'建国記念の日','2024-02-12':'振替休日',
+  '2024-02-23':'天皇誕生日','2024-03-20':'春分の日','2024-04-29':'昭和の日','2024-05-03':'憲法記念日',
+  '2024-05-04':'みどりの日','2024-05-05':'こどもの日','2024-05-06':'振替休日','2024-07-15':'海の日',
+  '2024-08-11':'山の日','2024-08-12':'振替休日','2024-09-16':'敬老の日','2024-09-22':'秋分の日',
+  '2024-09-23':'振替休日','2024-10-14':'スポーツの日','2024-11-03':'文化の日','2024-11-04':'振替休日',
+  '2024-11-23':'勤労感謝の日',
+  '2025-01-01':'元日','2025-01-13':'成人の日','2025-02-11':'建国記念の日','2025-02-23':'天皇誕生日',
+  '2025-02-24':'振替休日','2025-03-20':'春分の日','2025-04-29':'昭和の日','2025-05-03':'憲法記念日',
+  '2025-05-04':'みどりの日','2025-05-05':'こどもの日','2025-05-06':'振替休日','2025-07-21':'海の日',
+  '2025-08-11':'山の日','2025-09-15':'敬老の日','2025-09-23':'秋分の日','2025-10-13':'スポーツの日',
+  '2025-11-03':'文化の日','2025-11-23':'勤労感謝の日','2025-11-24':'振替休日',
+  '2026-01-01':'元日','2026-01-12':'成人の日','2026-02-11':'建国記念の日','2026-02-23':'天皇誕生日',
+  '2026-03-20':'春分の日','2026-04-29':'昭和の日','2026-05-03':'憲法記念日','2026-05-04':'みどりの日',
+  '2026-05-05':'こどもの日','2026-05-06':'振替休日','2026-07-20':'海の日','2026-08-11':'山の日',
+  '2026-09-21':'敬老の日','2026-09-23':'秋分の日','2026-10-12':'スポーツの日','2026-11-03':'文化の日',
+  '2026-11-23':'勤労感謝の日',
+  '2027-01-01':'元日','2027-01-11':'成人の日','2027-02-11':'建国記念の日','2027-02-23':'天皇誕生日',
+  '2027-03-21':'春分の日','2027-04-29':'昭和の日','2027-05-03':'憲法記念日','2027-05-04':'みどりの日',
+  '2027-05-05':'こどもの日','2027-07-19':'海の日','2027-08-11':'山の日','2027-09-20':'敬老の日',
+  '2027-09-23':'秋分の日','2027-10-11':'スポーツの日','2027-11-03':'文化の日','2027-11-23':'勤労感謝の日'
+};
+
 const COLORS=['#1e8ef0','#00bcd4','#22c98a','#ff9f1c','#ff5c6a','#a855f7','#ec4899','#f97316','#64748b'];
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
 const DAYS=['日','月','火','水','木','金','土'];
 const MONTHS_JP=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
 const SYNC_INTERVAL_MS=30000;
+const CAT_EMOJI={'食品':'🥬','飲み物':'🥤','日用品':'🧴','子供関係':'👶','ペット用品':'🐾','その他':'📦'};
 
 let state={
   currentYear:TODAY.getFullYear(),currentMonth:TODAY.getMonth(),
   selectedDate:toISO(TODAY),
-  events:[],tasks:[],
+  events:[],tasks:[],shopItems:[],
   taskFilter:'all',
   editingEventId:null,editingTaskId:null,
-  evPerson:'p1',tkPerson:'p1',
+  evPerson:'p1',tkPerson:'p1',shopPerson:'p1',
   p1Name:'自分',p2Name:'家族',
   apiKey:null,binId:null,
   notifAppId:null,notifRestKey:null,
@@ -454,139 +543,81 @@ let state={
 function toISO(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function genId(){return Date.now().toString(36)+Math.random().toString(36).slice(2);}
 
-// Storage
+// ── Storage ──
 function loadLocal(){
-  try{
-    const s=localStorage.getItem('familycal-v1');
-    if(s){const p=JSON.parse(s);state.events=p.events||[];state.tasks=p.tasks||[];state.apiKey=p.apiKey||null;state.binId=p.binId||null;state.p1Name=p.p1Name||'自分';state.p2Name=p.p2Name||'家族';state.notifAppId=p.notifAppId||null;state.notifRestKey=p.notifRestKey||null;}
-  }catch(e){}
+  try{const s=localStorage.getItem('familycal-v1');if(s){const p=JSON.parse(s);state.events=p.events||[];state.tasks=p.tasks||[];state.shopItems=p.shopItems||[];state.apiKey=p.apiKey||null;state.binId=p.binId||null;state.p1Name=p.p1Name||'自分';state.p2Name=p.p2Name||'家族';state.notifAppId=p.notifAppId||null;state.notifRestKey=p.notifRestKey||null;}}catch(e){}
 }
-function saveLocal(){localStorage.setItem('familycal-v1',JSON.stringify({events:state.events,tasks:state.tasks,apiKey:state.apiKey,binId:state.binId,p1Name:state.p1Name,p2Name:state.p2Name,notifAppId:state.notifAppId,notifRestKey:state.notifRestKey}));}
+function saveLocal(){localStorage.setItem('familycal-v1',JSON.stringify({events:state.events,tasks:state.tasks,shopItems:state.shopItems,apiKey:state.apiKey,binId:state.binId,p1Name:state.p1Name,p2Name:state.p2Name,notifAppId:state.notifAppId,notifRestKey:state.notifRestKey}));}
 
-// JSONBin
-async function createBin(data){const res=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'Content-Type':'application/json','X-Master-Key':state.apiKey,'X-Bin-Name':'familycal','X-Bin-Private':'false'},body:JSON.stringify(data)});if(!res.ok){const t=await res.text();throw new Error('作成失敗('+res.status+'): '+t);}return(await res.json()).metadata.id;}
-async function readBin(){const res=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}/latest`,{headers:{'X-Master-Key':state.apiKey}});if(!res.ok)throw new Error('読み込み失敗: '+res.status);return(await res.json()).record;}
-async function writeBin(data){const res=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':state.apiKey},body:JSON.stringify(data)});if(!res.ok)throw new Error('書き込み失敗: '+res.status);}
-function dataHash(e,t){return JSON.stringify({e,t});}
+// ── JSONBin ──
+async function createBin(data){const r=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'Content-Type':'application/json','X-Master-Key':state.apiKey,'X-Bin-Name':'familycal','X-Bin-Private':'false'},body:JSON.stringify(data)});if(!r.ok)throw new Error('作成失敗('+r.status+')');return(await r.json()).metadata.id;}
+async function readBin(){const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}/latest`,{headers:{'X-Master-Key':state.apiKey}});if(!r.ok)throw new Error('読み込み失敗');return(await r.json()).record;}
+async function writeBin(data){const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':state.apiKey},body:JSON.stringify(data)});if(!r.ok)throw new Error('書き込み失敗');}
+function dataHash(e,t,s){return JSON.stringify({e,t,s});}
 
 async function syncPull(){
   if(!state.binId||!state.apiKey)return;
-  try{setSyncStatus('syncing');const r=await readBin();const h=dataHash(r.events||[],r.tasks||[]);if(h!==state.lastSyncHash){state.events=r.events||[];state.tasks=r.tasks||[];state.lastSyncHash=h;saveLocal();render();}setSyncStatus('connected');}catch(e){setSyncStatus('error');}
+  try{setSyncStatus('syncing');const r=await readBin();const h=dataHash(r.events||[],r.tasks||[],r.shopItems||[]);if(h!==state.lastSyncHash){state.events=r.events||[];state.tasks=r.tasks||[];state.shopItems=r.shopItems||[];state.lastSyncHash=h;saveLocal();render();}setSyncStatus('connected');}catch(e){setSyncStatus('error');}
 }
 async function syncPush(){
-  if(!state.binId||!state.apiKey)return;const h=dataHash(state.events,state.tasks);if(h===state.lastSyncHash)return;
-  try{setSyncStatus('syncing');await writeBin({events:state.events,tasks:state.tasks});state.lastSyncHash=h;setSyncStatus('connected');}catch(e){setSyncStatus('error');}
+  if(!state.binId||!state.apiKey)return;const h=dataHash(state.events,state.tasks,state.shopItems);if(h===state.lastSyncHash)return;
+  try{setSyncStatus('syncing');await writeBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});state.lastSyncHash=h;setSyncStatus('connected');}catch(e){setSyncStatus('error');}
 }
 function startSyncTimer(){if(state.syncTimer)clearInterval(state.syncTimer);state.syncTimer=setInterval(syncPull,SYNC_INTERVAL_MS);}
 function setSyncStatus(s){state.syncStatus=s;document.getElementById('sync-badge').className='sync-badge '+s;document.getElementById('sync-label').textContent={disconnected:'同期設定',syncing:'同期中...',connected:'同期中 ✓',error:'同期エラー'}[s]||'同期設定';}
 
 function openSyncModal(){const c=!!(state.apiKey&&state.binId);document.getElementById('sync-connected-view').style.display=c?'':'none';document.getElementById('sync-setup-view').style.display=c?'none':'';document.getElementById('sync-loading').style.display='none';if(c)document.getElementById('display-bin-id').value=state.binId;openModal('sync-modal');}
 function showSyncLoading(msg){['sync-connected-view','sync-setup-view'].forEach(id=>document.getElementById(id).style.display='none');document.getElementById('sync-loading').style.display='';document.getElementById('sync-loading-msg').textContent=msg;}
-async function setupNewSync(){const key=document.getElementById('setup-api-key').value.trim();if(!key){alert('APIキーを入力してください');return;}state.apiKey=key;showSyncLoading('データを作成中...');try{const binId=await createBin({events:state.events,tasks:state.tasks});state.binId=binId;state.lastSyncHash=dataHash(state.events,state.tasks);saveLocal();setSyncStatus('connected');startSyncTimer();document.getElementById('display-bin-id').value=binId;document.getElementById('sync-loading').style.display='none';document.getElementById('sync-connected-view').style.display='';}catch(e){document.getElementById('sync-loading').style.display='none';document.getElementById('sync-setup-view').style.display='';alert('接続に失敗しました。\n\n'+e.message);state.apiKey=null;setSyncStatus('disconnected');}}
-async function joinSync(){const key=document.getElementById('join-api-key').value.trim();const binId=document.getElementById('join-bin-id').value.trim();if(!key||!binId){alert('APIキーとファミリーコードを両方入力してください');return;}state.apiKey=key;state.binId=binId;showSyncLoading('接続・データ取得中...');try{const r=await readBin();state.events=r.events||[];state.tasks=r.tasks||[];state.lastSyncHash=dataHash(state.events,state.tasks);saveLocal();render();setSyncStatus('connected');startSyncTimer();document.getElementById('display-bin-id').value=binId;document.getElementById('sync-loading').style.display='none';document.getElementById('sync-connected-view').style.display='';}catch(e){document.getElementById('sync-loading').style.display='none';document.getElementById('sync-setup-view').style.display='';alert('接続に失敗しました。\n\n'+e.message);state.apiKey=null;state.binId=null;setSyncStatus('disconnected');}}
+async function setupNewSync(){const key=document.getElementById('setup-api-key').value.trim();if(!key){alert('APIキーを入力してください');return;}state.apiKey=key;showSyncLoading('データを作成中...');try{const id=await createBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});state.binId=id;state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);saveLocal();setSyncStatus('connected');startSyncTimer();document.getElementById('display-bin-id').value=id;document.getElementById('sync-loading').style.display='none';document.getElementById('sync-connected-view').style.display='';}catch(e){document.getElementById('sync-loading').style.display='none';document.getElementById('sync-setup-view').style.display='';alert('接続に失敗しました:\n'+e.message);state.apiKey=null;setSyncStatus('disconnected');}}
+async function joinSync(){const key=document.getElementById('join-api-key').value.trim();const binId=document.getElementById('join-bin-id').value.trim();if(!key||!binId){alert('APIキーとファミリーコードを両方入力してください');return;}state.apiKey=key;state.binId=binId;showSyncLoading('接続中...');try{const r=await readBin();state.events=r.events||[];state.tasks=r.tasks||[];state.shopItems=r.shopItems||[];state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);saveLocal();render();setSyncStatus('connected');startSyncTimer();document.getElementById('display-bin-id').value=binId;document.getElementById('sync-loading').style.display='none';document.getElementById('sync-connected-view').style.display='';}catch(e){document.getElementById('sync-loading').style.display='none';document.getElementById('sync-setup-view').style.display='';alert('接続に失敗しました:\n'+e.message);state.apiKey=null;state.binId=null;setSyncStatus('disconnected');}}
 function disconnectSync(){if(!confirm('同期を解除しますか？'))return;if(state.syncTimer)clearInterval(state.syncTimer);state.apiKey=null;state.binId=null;state.lastSyncHash=null;saveLocal();setSyncStatus('disconnected');closeModal('sync-modal');}
-function copyBinId(){navigator.clipboard.writeText(document.getElementById('display-bin-id').value).then(()=>alert('ファミリーコードをコピーしました！'));}
+function copyBinId(){navigator.clipboard.writeText(document.getElementById('display-bin-id').value).then(()=>alert('コピーしました！'));}
 
-// ── OneSignal Notification ──────────────────────────────
-function openNotifModal(){
-  const configured=!!(state.notifAppId&&state.notifRestKey);
-  document.getElementById('notif-setup-view').style.display=configured?'none':'';
-  document.getElementById('notif-connected-view').style.display=configured?'':'none';
-  if(!configured){
-    document.getElementById('notif-app-id').value=state.notifAppId||'';
-    document.getElementById('notif-rest-key').value='';
-  }
-  openModal('notif-modal');
-}
+// ── Notification ──
+function openNotifModal(){const c=!!(state.notifAppId&&state.notifRestKey);document.getElementById('notif-setup-view').style.display=c?'none':'';document.getElementById('notif-connected-view').style.display=c?'':'none';if(!c){document.getElementById('notif-app-id').value=state.notifAppId||'';document.getElementById('notif-rest-key').value='';}openModal('notif-modal');}
+async function saveNotifSettings(){const appId=document.getElementById('notif-app-id').value.trim();const rk=document.getElementById('notif-rest-key').value.trim();if(!appId||!rk){alert('App IDとREST API Keyを両方入力してください');return;}state.notifAppId=appId;state.notifRestKey=rk;saveLocal();await initOneSignal(appId);document.getElementById('notif-setup-view').style.display='none';document.getElementById('notif-connected-view').style.display='';updateNotifBadge();}
+function clearNotifSettings(){if(!confirm('通知を無効にしますか？'))return;state.notifAppId=null;state.notifRestKey=null;saveLocal();updateNotifBadge();closeModal('notif-modal');}
+function updateNotifBadge(){const btn=document.getElementById('notif-btn');const lbl=document.getElementById('notif-label');if(state.notifAppId&&state.notifRestKey){btn.classList.add('active');lbl.textContent='通知ON';}else{btn.classList.remove('active');lbl.textContent='通知設定';}}
+async function initOneSignal(appId){if(typeof OneSignalDeferred==='undefined')return;window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(O){await O.init({appId,notifyButton:{enable:false},welcomeNotification:{disable:true}});await O.Notifications.requestPermission();});}
+async function sendPush(body){if(!state.notifAppId||!state.notifRestKey)return;try{await fetch('https://onesignal.com/api/v1/notifications',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},body:JSON.stringify({app_id:state.notifAppId,included_segments:['All'],headings:{ja:'FamilyCal',en:'FamilyCal'},contents:{ja:body,en:body}})});}catch(e){}}
 
-async function saveNotifSettings(){
-  const appId=document.getElementById('notif-app-id').value.trim();
-  const restKey=document.getElementById('notif-rest-key').value.trim();
-  if(!appId||!restKey){alert('App IDとREST API Keyを両方入力してください');return;}
-  state.notifAppId=appId;
-  state.notifRestKey=restKey;
-  saveLocal();
-  // OneSignal初期化して通知許可を求める
-  await initOneSignal(appId);
-  document.getElementById('notif-setup-view').style.display='none';
-  document.getElementById('notif-connected-view').style.display='';
-  updateNotifBadge();
-}
-
-function clearNotifSettings(){
-  if(!confirm('通知を無効にしますか？'))return;
-  state.notifAppId=null;state.notifRestKey=null;
-  saveLocal();updateNotifBadge();closeModal('notif-modal');
-}
-
-function updateNotifBadge(){
-  const btn=document.getElementById('notif-btn');
-  const lbl=document.getElementById('notif-label');
-  if(state.notifAppId&&state.notifRestKey){btn.classList.add('active');lbl.textContent='通知ON';}
-  else{btn.classList.remove('active');lbl.textContent='通知設定';}
-}
-
-async function initOneSignal(appId){
-  if(typeof OneSignalDeferred==='undefined')return;
-  window.OneSignalDeferred=window.OneSignalDeferred||[];
-  OneSignalDeferred.push(async function(OneSignal){
-    await OneSignal.init({appId:appId,notifyButton:{enable:false},welcomeNotification:{disable:true}});
-    await OneSignal.Notifications.requestPermission();
-  });
-}
-
-// 通知送信（予定・タスク追加・編集時に呼ぶ）
-async function sendPushNotification(title,body){
-  if(!state.notifAppId||!state.notifRestKey)return;
-  try{
-    await fetch('https://onesignal.com/api/v1/notifications',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},
-      body:JSON.stringify({
-        app_id:state.notifAppId,
-        included_segments:['All'],
-        headings:{ja:'FamilyCal 📅',en:'FamilyCal 📅'},
-        contents:{ja:body,en:body},
-        small_icon:'notification_icon'
-      })
-    });
-  }catch(e){console.warn('通知送信失敗:',e);}
-}
-// ────────────────────────────────────────────────────────
-
-// Settings
+// ── Settings ──
 function openSettingsModal(){document.getElementById('settings-p1').value=state.p1Name;document.getElementById('settings-p2').value=state.p2Name;openModal('settings-modal');}
-function saveSettings(){const p1=document.getElementById('settings-p1').value.trim()||'自分';const p2=document.getElementById('settings-p2').value.trim()||'家族';state.p1Name=p1;state.p2Name=p2;saveLocal();updatePersonNames();closeModal('settings-modal');render();}
+function saveSettings(){state.p1Name=document.getElementById('settings-p1').value.trim()||'自分';state.p2Name=document.getElementById('settings-p2').value.trim()||'家族';saveLocal();updatePersonNames();closeModal('settings-modal');render();}
 function updatePersonNames(){
-  document.getElementById('p1-col-name').textContent=state.p1Name;
-  document.getElementById('p2-col-name').textContent=state.p2Name;
-  document.getElementById('ev-p1-label').textContent=state.p1Name;
-  document.getElementById('ev-p2-label').textContent=state.p2Name;
-  document.getElementById('tk-p1-label').textContent=state.p1Name;
-  document.getElementById('tk-p2-label').textContent=state.p2Name;
+  [['p1-col-name','ev-p1-label','tk-p1-label','shop-p1-label'],['p2-col-name','ev-p2-label','tk-p2-label','shop-p2-label']].forEach(([ids,name],i)=>{/* handled below */});
+  ['p1-col-name','ev-p1-label','tk-p1-label','shop-p1-label'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=state.p1Name;});
+  ['p2-col-name','ev-p2-label','tk-p2-label','shop-p2-label'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=state.p2Name;});
 }
 
-function selectPersonEv(val){state.evPerson=val;updatePersonSelector('ev-person-selector',val);}
-function selectPersonTk(val){state.tkPerson=val;updatePersonSelector('tk-person-selector',val);}
-function updatePersonSelector(id,val){
-  document.querySelectorAll(`#${id} .person-option`).forEach(el=>{
-    el.classList.remove('selected-p1','selected-p2','selected-both');
-    if(el.dataset.val===val){if(val==='p1')el.classList.add('selected-p1');else if(val==='p2')el.classList.add('selected-p2');else el.classList.add('selected-both');}
-  });
-}
+// ── Person selectors ──
+function selectPersonEv(v){state.evPerson=v;updatePersonSelector('ev-person-selector',v);}
+function selectPersonTk(v){state.tkPerson=v;updatePersonSelector('tk-person-selector',v);}
+function selectPersonShop(v){state.shopPerson=v;updatePersonSelector('shop-person-selector',v);}
+function updatePersonSelector(id,val){document.querySelectorAll(`#${id} .person-option`).forEach(el=>{el.classList.remove('selected-p1','selected-p2','selected-both');if(el.dataset.val===val)el.classList.add(val==='p1'?'selected-p1':val==='p2'?'selected-p2':'selected-both');});}
 
+// ── Color picker ──
 function renderColorPicker(id,sel){document.getElementById(id).innerHTML=COLORS.map(c=>`<div class="color-option ${c===sel?'selected':''}" style="background:${c}" data-color="${c}" onclick="selectColor('${id}','${c}')"></div>`).join('');}
 function selectColor(id,c){document.querySelectorAll(`#${id} .color-option`).forEach(el=>el.classList.toggle('selected',el.dataset.color===c));}
 function getSelectedColor(id){const el=document.querySelector(`#${id} .color-option.selected`);return el?el.dataset.color:COLORS[0];}
 
-function setTaskDateType(type){
-  const isSingle=type==='single';
-  document.getElementById('tk-date-single').style.display=isSingle?'':'none';
-  document.getElementById('tk-date-range').style.display=isSingle?'none':'';
-  document.getElementById('tk-type-single').classList.toggle('active',isSingle);
-  document.getElementById('tk-type-range').classList.toggle('active',!isSingle);
+function setTaskDateType(t){const s=t==='single';document.getElementById('tk-date-single').style.display=s?'':'none';document.getElementById('tk-date-range').style.display=s?'none':'';document.getElementById('tk-type-single').classList.toggle('active',s);document.getElementById('tk-type-range').classList.toggle('active',!s);}
+
+// ── Tab switching ──
+function switchTab(tab){
+  const colorMap={tasks:'tab-active-green',cal:'tab-active-blue',shop:'tab-active-orange'};
+  Object.keys(colorMap).forEach(t=>{
+    const btn=document.getElementById('tab-'+t);
+    btn.className='tab-btn';
+    document.getElementById('page-'+t).className='tab-content';
+    if(t===tab){btn.classList.add(colorMap[t]);document.getElementById('page-'+t).classList.add('active');}
+  });
+  if(tab==='tasks'){renderTasks();renderTodayTasks();renderTodayEvents();}
+  if(tab==='cal')renderCalendar();
+  if(tab==='shop')renderShop();
 }
 
+// ── Modals ──
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeModal(el.id);}));
@@ -603,7 +634,6 @@ function openEventModal(eventId=null){
   renderColorPicker('ev-color-picker',ev?.color||COLORS[0]);
   openModal('event-modal');
 }
-
 function openTaskModal(taskId=null){
   state.editingTaskId=taskId;const tk=taskId?state.tasks.find(t=>t.id===taskId):null;
   document.getElementById('task-modal-title').textContent=tk?'タスクを編集':'新しいタスク';
@@ -613,7 +643,7 @@ function openTaskModal(taskId=null){
   const person=tk?.person||'p1';state.tkPerson=person;updatePersonSelector('tk-person-selector',person);
   renderColorPicker('tk-color-picker',tk?.color||COLORS[2]);
   if(tk&&tk.startDate&&tk.endDate){setTaskDateType('range');document.getElementById('tk-start').value=tk.startDate;document.getElementById('tk-end').value=tk.endDate;document.getElementById('tk-due').value='';}
-  else{setTaskDateType('single');document.getElementById('tk-due').value=tk?.due||state.selectedDate||'';document.getElementById('tk-start').value='';document.getElementById('tk-end').value='';}
+  else{setTaskDateType('single');document.getElementById('tk-due').value=tk?.due||state.selectedDate||'';}
   openModal('task-modal');
 }
 
@@ -622,84 +652,104 @@ async function saveAndSync(){saveLocal();render();await syncPush();}
 async function saveEvent(){
   const name=document.getElementById('ev-name').value.trim();const date=document.getElementById('ev-date').value;
   if(!name||!date){alert('タイトルと日付を入力してください');return;}
-  const timeStart=document.getElementById('ev-time-start').value;
-  const timeEnd=document.getElementById('ev-time-end').value;
+  const timeStart=document.getElementById('ev-time-start').value,timeEnd=document.getElementById('ev-time-end').value;
   const isNew=!state.editingEventId;
   const ev={id:state.editingEventId||genId(),name,date,timeStart,timeEnd,note:document.getElementById('ev-note').value.trim(),color:getSelectedColor('ev-color-picker'),person:state.evPerson};
   if(state.editingEventId)state.events=state.events.map(e=>e.id===state.editingEventId?ev:e);else state.events.push(ev);
-  closeModal('event-modal');
-  await saveAndSync();
-  // 通知送信
-  const personLabel=state.evPerson==='p1'?state.p1Name:state.evPerson==='p2'?state.p2Name:'2人';
-  const timeLabel=timeStart?` ${timeStart}${timeEnd?'〜'+timeEnd:''}`:'' ;
-  await sendPushNotification('FamilyCal',`${isNew?'📅 予定追加':'✏️ 予定更新'}：${name}（${date}${timeLabel}）【${personLabel}】`);
+  closeModal('event-modal');await saveAndSync();
+  const pn=state.evPerson==='p1'?state.p1Name:state.evPerson==='p2'?state.p2Name:'2人';
+  await sendPush(`${isNew?'📅 予定追加':'✏️ 予定更新'}：${name}（${date}${timeStart?' '+timeStart+(timeEnd?'〜'+timeEnd:''):''}）【${pn}】`);
 }
-
 async function saveTask(){
   const name=document.getElementById('tk-name').value.trim();if(!name){alert('タスク名を入力してください');return;}
   const isRange=document.getElementById('tk-date-range').style.display!=='none';
   let due='',startDate='',endDate='';
-  if(isRange){startDate=document.getElementById('tk-start').value;endDate=document.getElementById('tk-end').value;if(!startDate||!endDate){alert('開始日と終了日を両方入力してください');return;}}
+  if(isRange){startDate=document.getElementById('tk-start').value;endDate=document.getElementById('tk-end').value;if(!startDate||!endDate){alert('開始日と終了日を入力してください');return;}}
   else{due=document.getElementById('tk-due').value;}
   const isNew=!state.editingTaskId;
   const tk={id:state.editingTaskId||genId(),name,due,startDate,endDate,priority:document.getElementById('tk-priority').value,note:document.getElementById('tk-note').value.trim(),color:getSelectedColor('tk-color-picker'),done:state.editingTaskId?(state.tasks.find(t=>t.id===state.editingTaskId)?.done||false):false,person:state.tkPerson};
   if(state.editingTaskId)state.tasks=state.tasks.map(t=>t.id===state.editingTaskId?tk:t);else state.tasks.push(tk);
-  closeModal('task-modal');
-  await saveAndSync();
-  // 通知送信
-  const personLabel=state.tkPerson==='p1'?state.p1Name:state.tkPerson==='p2'?state.p2Name:'2人';
-  const dateLabel=due?due:(startDate&&endDate?`${startDate}〜${endDate}`:'');
-  await sendPushNotification('FamilyCal',`${isNew?'✅ タスク追加':'✏️ タスク更新'}：${name}${dateLabel?'（'+dateLabel+'）':''}【${personLabel}】`);
+  closeModal('task-modal');await saveAndSync();
+  const pn=state.tkPerson==='p1'?state.p1Name:state.tkPerson==='p2'?state.p2Name:'2人';
+  const dl=due?due:(startDate&&endDate?`${startDate}〜${endDate}`:'');
+  await sendPush(`${isNew?'✅ タスク追加':'✏️ タスク更新'}：${name}${dl?'（'+dl+'）':''}【${pn}】`);
 }
-
 async function deleteEvent(id,e){e&&e.stopPropagation();if(!confirm('この予定を削除しますか？'))return;state.events=state.events.filter(ev=>ev.id!==id);await saveAndSync();}
 async function deleteTask(id){if(!confirm('このタスクを削除しますか？'))return;state.tasks=state.tasks.filter(t=>t.id!==id);await saveAndSync();}
 async function toggleTask(id){state.tasks=state.tasks.map(t=>t.id===id?{...t,done:!t.done}:t);await saveAndSync();}
+
+// ── Shopping List ──
+function addShopItem(){
+  const name=document.getElementById('shop-name').value.trim();if(!name){alert('品名を入力してください');return;}
+  const qty=document.getElementById('shop-qty').value.trim();
+  const cat=document.getElementById('shop-cat').value;
+  state.shopItems.push({id:genId(),name,qty,cat,person:state.shopPerson,checked:false});
+  document.getElementById('shop-name').value='';document.getElementById('shop-qty').value='';
+  saveAndSync();
+}
+async function toggleShopItem(id){state.shopItems=state.shopItems.map(s=>s.id===id?{...s,checked:!s.checked}:s);await saveAndSync();}
+async function deleteShopItem(id){state.shopItems=state.shopItems.filter(s=>s.id!==id);await saveAndSync();}
+async function clearCheckedShop(){if(!state.shopItems.some(s=>s.checked)){alert('チェック済みの商品がありません');return;}if(!confirm('チェック済みの商品を削除しますか？'))return;state.shopItems=state.shopItems.filter(s=>!s.checked);await saveAndSync();}
 
 function setTaskFilter(f,btn){state.taskFilter=f;document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderTasks();}
 function changeMonth(dir){state.currentMonth+=dir;if(state.currentMonth<0){state.currentMonth=11;state.currentYear--;}if(state.currentMonth>11){state.currentMonth=0;state.currentYear++;}renderCalendar();}
 function goToday(){state.currentYear=TODAY.getFullYear();state.currentMonth=TODAY.getMonth();state.selectedDate=toISO(TODAY);render();scrollToToday();}
 function selectDate(d){state.selectedDate=d;renderCalendar();}
+function isTaskToday(t,s){if(t.due)return t.due===s;if(t.startDate&&t.endDate)return t.startDate<=s&&t.endDate>=s;return false;}
+const pName=(p)=>p==='p1'?state.p1Name:p==='p2'?state.p2Name:'2人';
+const pClass=(p)=>p==='p1'?'tag-p1':p==='p2'?'tag-p2':'tag-both';
 
-function render(){renderHeader();renderCalendar();renderTasks();renderTodayTasks();updatePersonNames();updateNotifBadge();}
+function render(){renderHeader();renderCalendar();renderTasks();renderTodayTasks();renderTodayEvents();renderShop();updatePersonNames();updateNotifBadge();}
 
 function renderHeader(){
   const d=new Date();
-  document.getElementById('header-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${DAYS[d.getDay()]}）`;
+  const label=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${DAYS[d.getDay()]}）`;
+  document.getElementById('header-date').textContent=label;
+  const tl=document.getElementById('today-date-label');
+  if(tl)tl.textContent=label;
 }
 
 function renderCalendar(){
   document.getElementById('cal-title').textContent=`${state.currentYear}年 ${MONTHS_JP[state.currentMonth]}`;
-  const daysInMonth=new Date(state.currentYear,state.currentMonth+1,0).getDate();
+  const dim=new Date(state.currentYear,state.currentMonth+1,0).getDate();
   const todayStr=toISO(TODAY);
   let html='';
-  for(let day=1;day<=daysInMonth;day++){
-    const dateStr=`${state.currentYear}-${String(state.currentMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-    const d=new Date(dateStr+'T00:00:00');
-    const dow=d.getDay();
-    const isToday=dateStr===todayStr,isSelected=dateStr===state.selectedDate,isSat=dow===6,isSun=dow===0;
-    const dayEvents=state.events.filter(e=>e.date===dateStr).sort((a,b)=>(a.timeStart||a.time||'')<(b.timeStart||b.time||'')?-1:1);
-    const dayTasks=state.tasks.filter(t=>{if(t.due)return t.due===dateStr;if(t.endDate)return t.endDate===dateStr;return false;});
-    const p1Items=[...dayEvents.filter(e=>e.person==='p1'||e.person==='both'),...dayTasks.filter(t=>t.person==='p1'||t.person==='both')];
-    const p2Items=[...dayEvents.filter(e=>e.person==='p2'||e.person==='both'),...dayTasks.filter(t=>t.person==='p2'||t.person==='both')];
-    function buildChips(items,colPerson){
-      if(!items.length)return '';
-      return items.map(item=>{
+  for(let day=1;day<=dim;day++){
+    const ds=`${state.currentYear}-${String(state.currentMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const d=new Date(ds+'T00:00:00'),dow=d.getDay();
+    const isToday=ds===todayStr,isSel=ds===state.selectedDate,isSat=dow===6,isSun=dow===0;
+    const hname=JP_HOLIDAYS[ds]||'';
+    const isHol=!!hname;
+    const dayEvs=state.events.filter(e=>e.date===ds).sort((a,b)=>(a.timeStart||a.time||'')<(b.timeStart||b.time||'')?-1:1);
+    const dayTasks=state.tasks.filter(t=>t.due===ds||(t.endDate&&t.endDate===ds));
+    const p1Items=[...dayEvs.filter(e=>e.person==='p1'||e.person==='both'),...dayTasks.filter(t=>t.person==='p1'||t.person==='both')];
+    const p2Items=[...dayEvs.filter(e=>e.person==='p2'||e.person==='both'),...dayTasks.filter(t=>t.person==='p2'||t.person==='both')];
+
+    function chips(items,col){
+      return items.slice(0,2).map(item=>{
         const isEv=!!state.events.find(e=>e.id===item.id);
         const isDone=item.done||false;
-        let chipClass=item.color&&item.color!==COLORS[0]&&item.color!==COLORS[2]?'chip-custom':(isEv?(colPerson==='p1'?'chip-p1':'chip-p2'):(colPerson==='p1'?'chip-task-p1':'chip-task-p2'));
-        const customStyle=item.color?`background:${item.color}18;color:${item.color};border-color:${item.color}35;`:'';
-        let timeStr='';
-        if(isEv){const ts=item.timeStart||item.time||'';const te=item.timeEnd||'';if(ts)timeStr=`<span class="chip-time">${ts}${te?'〜'+te:''}</span>`;}
-        else if(item.startDate){timeStr=`<span class="chip-time">〜${item.endDate?item.endDate.slice(5).replace('-','/'):''}まで</span>`;}
-        const icon=isEv?'':(isDone?'✓ ':'');
-        return `<div class="cal-event-chip ${chipClass} ${isDone?'chip-done':''}" style="${customStyle}" onclick="event.stopPropagation();${isEv?`openEventModal('${item.id}')`:`openTaskModal('${item.id}')`}" title="${item.name}">${timeStr}<span>${icon}${item.name}</span></div>`;
-      }).join('');
+        let cls=item.color&&item.color!==COLORS[0]&&item.color!==COLORS[2]?'chip-custom':(isEv?(col==='p1'?'chip-p1':'chip-p2'):(col==='p1'?'chip-task-p1':'chip-task-p2'));
+        const sty=item.color?`background:${item.color}18;color:${item.color};border-color:${item.color}35;`:'';
+        let tStr='';
+        if(isEv){const ts=item.timeStart||item.time||'';if(ts)tStr=`<span class="chip-time">${ts}${item.timeEnd?'〜'+item.timeEnd:''} </span>`;}
+        const icon=isDone?'✓':isEv?'':'';
+        return `<div class="cal-event-chip ${cls} ${isDone?'chip-done':''}" style="${sty}" onclick="event.stopPropagation();${isEv?`openEventModal('${item.id}')`:`openTaskModal('${item.id}')`}">${tStr}${icon?icon+' ':''}${item.name}</div>`;
+      }).join('')+(items.length>2?`<div style="font-size:9px;color:var(--text3);padding:1px 4px;">+${items.length-2}件</div>`:'');
     }
-    html+=`<div class="cal-row ${isToday?'today':''} ${isSelected?'selected':''} ${isSat?'weekend-sat':''} ${isSun?'weekend-sun':''}" id="row-${dateStr}">
-      <div class="cal-date-cell" onclick="selectDate('${dateStr}')"><div class="day-num">${day}</div><div class="day-week">${DAYS[dow]}</div></div>
-      <div class="cal-event-cell" onclick="state.selectedDate='${dateStr}';openEventModal()">${buildChips(p1Items,'p1')}${p1Items.length===0?'<div style="height:4px;"></div>':''}</div>
-      <div class="cal-event-cell" onclick="state.selectedDate='${dateStr}';openEventModal()">${buildChips(p2Items,'p2')}${p2Items.length===0?'<div style="height:4px;"></div>':''}</div>
+
+    // 祝日名を短縮（5文字まで）
+    const shortH=hname.length>5?hname.slice(0,4)+'…':hname;
+    const rowCls=[isToday?'today':'',isSel?'selected':'',isSat?'weekend-sat':'',isSun?'weekend-sun':'',isHol?'is-holiday':''].filter(Boolean).join(' ');
+
+    html+=`<div class="cal-row ${rowCls}" id="row-${ds}">
+      <div class="cal-date-cell" onclick="selectDate('${ds}')">
+        <div class="day-num">${day}</div>
+        <div class="day-week">${DAYS[dow]}</div>
+        ${isHol?`<div class="day-holiday-label">${shortH}</div>`:''}
+      </div>
+      <div class="cal-event-cell" onclick="state.selectedDate='${ds}';openEventModal()">${chips(p1Items,'p1')}</div>
+      <div class="cal-event-cell" onclick="state.selectedDate='${ds}';openEventModal()">${chips(p2Items,'p2')}</div>
     </div>`;
   }
   document.getElementById('cal-rows').innerHTML=html;
@@ -707,66 +757,81 @@ function renderCalendar(){
 
 function scrollToToday(){const el=document.getElementById('row-'+toISO(TODAY));if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
 
-function isTaskToday(t,todayStr){
-  if(t.due)return t.due===todayStr;
-  if(t.startDate&&t.endDate)return t.startDate<=todayStr&&t.endDate>=todayStr;
-  return false;
-}
-
 function renderTasks(){
-  const todayStr=toISO(TODAY);
+  const ts=toISO(TODAY);
   let tasks=[...state.tasks];
   if(state.taskFilter==='pending')tasks=tasks.filter(t=>!t.done);
   else if(state.taskFilter==='done')tasks=tasks.filter(t=>t.done);
-  else if(state.taskFilter==='today')tasks=tasks.filter(t=>isTaskToday(t,todayStr));
+  else if(state.taskFilter==='today')tasks=tasks.filter(t=>isTaskToday(t,ts));
   const p={high:0,medium:1,low:2};
-  tasks.sort((a,b)=>{if(a.done!==b.done)return a.done?1:-1;const aD=a.due||a.endDate||'';const bD=b.due||b.endDate||'';if(aD&&bD)return aD<bD?-1:1;if(aD)return -1;if(bD)return 1;return(p[a.priority]||1)-(p[b.priority]||1);});
+  tasks.sort((a,b)=>{if(a.done!==b.done)return a.done?1:-1;const aD=a.due||a.endDate||'',bD=b.due||b.endDate||'';if(aD&&bD)return aD<bD?-1:1;if(aD)return -1;if(bD)return 1;return(p[a.priority]||1)-(p[b.priority]||1);});
   document.getElementById('task-count').textContent=state.tasks.filter(t=>!t.done).length;
-  const personName=(p)=>p==='p1'?state.p1Name:p==='p2'?state.p2Name:'2人';
-  const personTagClass=(p)=>p==='p1'?'tag-p1':p==='p2'?'tag-p2':'tag-both';
   document.getElementById('tasks-list').innerHTML=tasks.length===0?`<div class="empty-state">タスクがありません 🎉</div>`:tasks.map(tk=>{
-    let dueClass='',dueText='';
-    if(tk.due){const d=new Date(tk.due+'T00:00:00');d.setHours(0,0,0,0);if(!tk.done){if(d<TODAY)dueClass='overdue';else if(tk.due===todayStr)dueClass='today-due';}const dd=new Date(tk.due+'T00:00:00');dueText=`${dd.getMonth()+1}/${dd.getDate()}`;if(dueClass==='overdue')dueText+=' 期限切れ';else if(dueClass==='today-due')dueText+=' 今日';}
-    else if(tk.startDate&&tk.endDate){const s=new Date(tk.startDate+'T00:00:00');const e=new Date(tk.endDate+'T00:00:00');dueText=`${s.getMonth()+1}/${s.getDate()}〜${e.getMonth()+1}/${e.getDate()}`;if(!tk.done){if(e<TODAY)dueClass='overdue';else if(isTaskToday(tk,todayStr))dueClass='today-due';}if(dueClass==='overdue')dueText+=' 期限切れ';else if(isTaskToday(tk,todayStr)&&!tk.done)dueText+=' 進行中';}
+    let dC='',dT='';
+    if(tk.due){const d=new Date(tk.due+'T00:00:00');d.setHours(0,0,0,0);if(!tk.done){if(d<TODAY)dC='overdue';else if(tk.due===ts)dC='today-due';}dT=`${d.getMonth()+1}/${d.getDate()}`;if(dC==='overdue')dT+=' 期限切れ';else if(dC==='today-due')dT+=' 今日';}
+    else if(tk.startDate&&tk.endDate){const s=new Date(tk.startDate+'T00:00:00'),e=new Date(tk.endDate+'T00:00:00');dT=`${s.getMonth()+1}/${s.getDate()}〜${e.getMonth()+1}/${e.getDate()}`;if(!tk.done){if(e<TODAY)dC='overdue';else if(isTaskToday(tk,ts))dC='today-due';}if(dC==='overdue')dT+=' 期限切れ';else if(isTaskToday(tk,ts)&&!tk.done)dT+=' 進行中';}
     return `<div class="task-item ${tk.done?'done':''} fade-in">
       <div class="task-priority priority-${tk.priority||'medium'}"></div>
       <div class="task-check ${tk.done?'checked':''}" onclick="toggleTask('${tk.id}')"></div>
-      <div class="task-content"><div class="task-name">${tk.name}</div><div class="task-meta">${dueText?`<div class="task-due ${dueClass}">📅 ${dueText}</div>`:''}<span class="task-person-tag ${personTagClass(tk.person||'p1')}">${personName(tk.person||'p1')}</span></div></div>
+      <div class="task-content"><div class="task-name">${tk.name}</div><div class="task-meta">${dT?`<div class="task-due ${dC}">📅 ${dT}</div>`:''}<span class="task-person-tag ${pClass(tk.person||'p1')}">${pName(tk.person||'p1')}</span></div></div>
       <div class="event-actions"><button class="icon-btn" onclick="openTaskModal('${tk.id}')">✎</button><button class="icon-btn delete" onclick="deleteTask('${tk.id}')">✕</button></div>
     </div>`;
   }).join('');
 }
 
 function renderTodayTasks(){
-  const todayStr=toISO(TODAY);
-  const todayTasks=state.tasks.filter(t=>isTaskToday(t,todayStr));
-  const personName=(p)=>p==='p1'?state.p1Name:p==='p2'?state.p2Name:'2人';
-  const personTagClass=(p)=>p==='p1'?'tag-p1':p==='p2'?'tag-p2':'tag-both';
-  document.getElementById('today-tasks-list').innerHTML=todayTasks.length===0
-    ?`<div style="font-size:12px;color:var(--text3);padding:8px 0;text-align:center;">今日のタスクはありません</div>`
-    :todayTasks.map(t=>`<div class="today-chip ${t.done?'done':''}" onclick="toggleTask('${t.id}')"><div class="task-check ${t.done?'checked':''}" style="flex-shrink:0"></div><span style="flex:1;font-size:12px;font-weight:500;">${t.name}</span><span class="task-person-tag ${personTagClass(t.person||'p1')}" style="flex-shrink:0;">${personName(t.person||'p1')}</span></div>`).join('');
+  const ts=toISO(TODAY);
+  const items=state.tasks.filter(t=>isTaskToday(t,ts));
+  document.getElementById('today-tasks-list').innerHTML=items.length===0
+    ?`<div style="font-size:11px;color:var(--text3);padding:5px 0;text-align:center;">今日のタスクはありません</div>`
+    :items.map(t=>`<div class="today-chip ${t.done?'done':''}" onclick="toggleTask('${t.id}')"><div class="task-check ${t.done?'checked':''}" style="flex-shrink:0;width:15px;height:15px;font-size:9px;"></div><span style="flex:1;font-size:11px;font-weight:500;">${t.name}</span><span class="task-person-tag ${pClass(t.person||'p1')}" style="font-size:9px;">${pName(t.person||'p1')}</span></div>`).join('');
 }
 
-// Init
+function renderTodayEvents(){
+  const ts=toISO(TODAY);
+  const items=state.events.filter(e=>e.date===ts).sort((a,b)=>(a.timeStart||'')<(b.timeStart||'')?-1:1);
+  document.getElementById('today-events-list').innerHTML=items.length===0
+    ?`<div style="font-size:11px;color:var(--text3);padding:5px 0;text-align:center;">今日の予定はありません</div>`
+    :items.map(ev=>{const t=(ev.timeStart||ev.time)?`${ev.timeStart||ev.time}${ev.timeEnd?'〜'+ev.timeEnd:''} `:'';return `<div class="today-chip" onclick="openEventModal('${ev.id}')"><span style="flex:1;font-size:11px;font-weight:500;">${t}${ev.name}</span><span class="task-person-tag ${pClass(ev.person||'p1')}" style="font-size:9px;">${pName(ev.person||'p1')}</span></div>`;}).join('');
+}
+
+function renderShop(){
+  const cats=['食品','飲み物','日用品','子供関係','ペット用品','その他'];
+  const unchecked=state.shopItems.filter(s=>!s.checked).length;
+  document.getElementById('shop-count').textContent=unchecked;
+  let html='';
+  // 未チェック → チェック済みの順
+  cats.forEach(cat=>{
+    const items=state.shopItems.filter(s=>s.cat===cat&&!s.checked);
+    if(!items.length)return;
+    html+=`<div class="shop-section-label">${CAT_EMOJI[cat]} ${cat}</div>`;
+    items.forEach(s=>{html+=shopItemHTML(s);});
+  });
+  const checked=state.shopItems.filter(s=>s.checked);
+  if(checked.length){html+=`<div class="shop-section-label" style="margin-top:14px;">✓ 購入済み</div>`;checked.forEach(s=>{html+=shopItemHTML(s);});}
+  if(!state.shopItems.length)html=`<div class="empty-state" style="padding:28px;">買い物リストは空です 🛒</div>`;
+  document.getElementById('shop-list').innerHTML=html;
+}
+function shopItemHTML(s){
+  return `<div class="shop-item ${s.checked?'shop-checked':''}">
+    <div class="shop-check ${s.checked?'checked':''}" onclick="toggleShopItem('${s.id}')"></div>
+    <span class="shop-item-name">${s.name}</span>
+    ${s.qty?`<span class="shop-item-qty">${s.qty}</span>`:''}
+    <span class="task-person-tag ${pClass(s.person||'p1')}" style="font-size:9px;">${pName(s.person||'p1')}</span>
+    <button class="icon-btn delete" onclick="deleteShopItem('${s.id}')" style="opacity:.45;">✕</button>
+  </div>`;
+}
+
+// ── Init ──
 loadLocal();render();
 if(state.apiKey&&state.binId){setSyncStatus('connected');syncPull();startSyncTimer();}
-// OneSignal再初期化（ページ読み込み時）
-if(state.notifAppId){
-  window.OneSignalDeferred=window.OneSignalDeferred||[];
-  OneSignalDeferred.push(async function(OneSignal){
-    await OneSignal.init({appId:state.notifAppId,notifyButton:{enable:false},welcomeNotification:{disable:true}});
-  });
-}
+if(state.notifAppId){window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(O){await O.init({appId:state.notifAppId,notifyButton:{enable:false},welcomeNotification:{disable:true}});});}
 setTimeout(scrollToToday,100);
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){['event-modal','task-modal','sync-modal','settings-modal','notif-modal'].forEach(closeModal);}});
-
-// Install banner
+document.addEventListener('keydown',e=>{if(e.key==='Escape')['event-modal','task-modal','sync-modal','settings-modal','notif-modal'].forEach(closeModal);});
 (function(){
-  const isIphone=/iPhone|iPad|iPod/.test(navigator.userAgent);
-  const isStandalone=window.navigator.standalone===true;
-  const dismissed=localStorage.getItem('install-banner-dismissed');
-  if(isIphone&&!isStandalone&&!dismissed){document.getElementById('install-banner').style.display='flex';}
-  document.getElementById('install-banner').querySelector('button').addEventListener('click',function(){localStorage.setItem('install-banner-dismissed','1');});
+  const ii=/iPhone|iPad|iPod/.test(navigator.userAgent),ss=window.navigator.standalone===true,dd=localStorage.getItem('install-banner-dismissed');
+  if(ii&&!ss&&!dd){document.getElementById('install-banner').style.display='flex';}
+  document.getElementById('install-banner').querySelector('button').addEventListener('click',()=>localStorage.setItem('install-banner-dismissed','1'));
 })();
 </script>
 </body>
