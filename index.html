@@ -460,16 +460,19 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="modal-title">🔗 家族と同期</div>
     <div id="sync-connected-view" style="display:none;">
       <div class="success-box"><div style="font-size:22px;">🟢</div><div><div style="font-size:13px;font-weight:700;color:var(--green);">同期中！</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">30秒ごとに自動同期されます</div></div></div>
-      <div class="form-group"><label class="form-label">ファミリーコード</label><div style="display:flex;gap:7px;"><input class="form-input" id="display-bin-id" readonly style="flex:1;color:var(--blue);font-weight:700;"><button class="btn btn-primary" onclick="copyBinId()">コピー</button></div></div>
-      <div class="info-note">💡 このコードをLINEで妻に送り、相手も同じコードで接続すれば同期完了です。</div>
-      <div class="modal-actions" style="margin-top:0;"><button class="btn btn-danger" onclick="disconnectSync()">同期を解除</button><button class="btn btn-secondary" onclick="closeModal('sync-modal')">閉じる</button></div>
+      <div class="form-group"><label class="form-label">ファミリーコード（家族に共有してください）</label><div style="display:flex;gap:7px;"><input class="form-input" id="display-bin-id" readonly style="flex:1;color:var(--blue);font-weight:700;font-size:11px;"><button class="btn btn-primary" onclick="copyBinId()">コピー</button></div></div>
+      <div class="info-note">💡 このコードをLINEで送り、家族が「コードで参加」に貼り付けると同期完了です。APIキーも含まれているので安全に保管してください。</div>
+      <div class="modal-actions" style="margin-top:0;justify-content:space-between;">
+        <button class="btn btn-secondary" onclick="manualSync()">🔄 今すぐ同期</button>
+        <div style="display:flex;gap:8px;"><button class="btn btn-danger" onclick="disconnectSync()">同期を解除</button><button class="btn btn-secondary" onclick="closeModal('sync-modal')">閉じる</button></div>
+      </div>
     </div>
     <div id="sync-setup-view">
-      <div class="sync-box"><h3>📋 セットアップ手順（約2分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://jsonbin.io" target="_blank">jsonbin.io</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「API Keys」→「+ CREATE ACCESS KEY」でキーをコピー</div></div><div class="step-item"><div class="step-num">3</div><div>代表者が「新規作成」→ ファミリーコードを妻に共有 → 妻が「参加」で接続</div></div></div></div>
+      <div class="sync-box"><h3>📋 セットアップ手順（約2分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://jsonbin.io" target="_blank">jsonbin.io</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「API Keys」→「+ CREATE ACCESS KEY」でキーをコピー</div></div><div class="step-item"><div class="step-num">3</div><div>代表者が「新規作成」→ 表示されるファミリーコードを家族にLINEで送る</div></div><div class="step-item"><div class="step-num">4</div><div>家族は「コードで参加」にそのコードを貼り付けるだけでOK</div></div></div></div>
       <div class="divider"></div>
-      <div class="sync-box"><h3>🆕 はじめて設定する</h3><div class="form-group" style="margin-bottom:10px;"><label class="form-label">JSONBin APIキー</label><input class="form-input" id="setup-api-key" type="password" placeholder="$2a$10$xxxxxxxx..."></div><button class="btn btn-primary" style="width:100%;" onclick="setupNewSync()">新規作成して接続</button></div>
+      <div class="sync-box"><h3>🆕 はじめて設定する（代表者）</h3><div class="form-group" style="margin-bottom:10px;"><label class="form-label">JSONBin APIキー</label><input class="form-input" id="setup-api-key" type="password" placeholder="$2a$10$xxxxxxxx..."></div><button class="btn btn-primary" style="width:100%;" onclick="setupNewSync()">新規作成してファミリーコードを発行</button></div>
       <div class="divider"></div>
-      <div class="sync-box"><h3>👩 家族として参加する</h3><div class="form-row" style="margin-bottom:10px;"><div class="form-group" style="margin-bottom:0;"><label class="form-label">APIキー</label><input class="form-input" id="join-api-key" type="password" placeholder="$2a$10$xxxxxxxx..."></div><div class="form-group" style="margin-bottom:0;"><label class="form-label">ファミリーコード</label><input class="form-input" id="join-bin-id" placeholder="受け取ったコード"></div></div><button class="btn btn-green" style="width:100%;" onclick="joinSync()">コードで接続</button></div>
+      <div class="sync-box"><h3>👩 コードで参加する（家族）</h3><div class="form-group" style="margin-bottom:10px;"><label class="form-label">ファミリーコード（代表者から受け取ったもの）</label><input class="form-input" id="join-family-code" placeholder="代表者から受け取ったコードを貼り付け"></div><button class="btn btn-green" style="width:100%;" onclick="joinSync()">コードで接続</button></div>
       <div class="modal-actions" style="margin-top:6px;"><button class="btn btn-secondary" onclick="closeModal('sync-modal')">キャンセル</button></div>
     </div>
     <div id="sync-loading" style="display:none;text-align:center;padding:30px;"><div style="font-size:30px;margin-bottom:12px;">⏳</div><div style="font-size:13px;color:var(--text2);font-weight:500;" id="sync-loading-msg">接続中...</div></div>
@@ -481,15 +484,20 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="modal" style="max-width:460px;">
     <div class="modal-title">🔔 プッシュ通知設定</div>
     <div id="notif-setup-view">
-      <div class="sync-box"><h3>📋 セットアップ手順（約5分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://onesignal.com" target="_blank">onesignal.com</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「New App」→「Web」→「Custom Code」を選択</div></div><div class="step-item"><div class="step-num">3</div><div>サイトURL: <strong>https://satoshikonuma666-web.github.io/familycal/</strong></div></div><div class="step-item"><div class="step-num">4</div><div>「Settings」→「Keys & IDs」で App ID と REST API Key をコピー</div></div></div></div>
-      <div class="warn-note">⚠️ iPhoneで通知を受け取るには iOS 16.4以上 + ホーム画面に追加済みが必要です。</div>
+      <div class="sync-box"><h3>📋 セットアップ手順（約5分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://onesignal.com" target="_blank">onesignal.com</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「New App」→「Web」→「Custom Code」を選択</div></div><div class="step-item"><div class="step-num">3</div><div>サイトURL: <strong>https://satoshikonuma666-web.github.io/familycal/</strong></div></div><div class="step-item"><div class="step-num">4</div><div>「Settings」→「Keys & IDs」で <strong>App ID</strong> と <strong>REST API Key</strong>（Keyの値）をコピー</div></div><div class="step-item"><div class="step-num">5</div><div>下に入力 →「保存して通知を許可」→ ポップアップが出たら「許可」</div></div><div class="step-item"><div class="step-num">6</div><div>家族のスマホでも同じ手順を行う（同じApp ID・REST API Keyを入力）</div></div></div></div>
+      <div class="warn-note">⚠️ <strong>iPhoneの場合</strong>：iOS 16.4以上 かつ Safari で<strong>ホーム画面に追加済み</strong>のアプリでないと通知が届きません。ホーム画面から起動した状態で設定してください。</div>
       <div class="form-group"><label class="form-label">OneSignal App ID</label><input class="form-input" id="notif-app-id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"></div>
-      <div class="form-group"><label class="form-label">REST API Key</label><input class="form-input" id="notif-rest-key" type="password" placeholder="REST API Key"></div>
+      <div class="form-group"><label class="form-label">REST API Key（Key IDではなくKeyの値）</label><input class="form-input" id="notif-rest-key" type="password" placeholder="os_v2_app_... または長い英数字の文字列"></div>
       <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('notif-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveNotifSettings()">💾 保存して通知を許可</button></div>
     </div>
     <div id="notif-connected-view" style="display:none;">
-      <div class="success-box"><div style="font-size:22px;">🔔</div><div><div style="font-size:13px;font-weight:700;color:var(--green);">通知が有効です！</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">予定・タスク・買い物追加時に相手に通知が届きます</div></div></div>
-      <div class="info-note">💡 奥さんのスマホでも同じ手順で「通知を許可」すれば2人とも受け取れます。</div>
+      <div class="success-box"><div style="font-size:22px;">🔔</div><div><div style="font-size:13px;font-weight:700;color:var(--green);">通知設定済み</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">予定・タスクの追加時に相手に通知が届きます</div></div></div>
+      <div class="info-note">💡 家族のスマホでも同じApp IDとREST API Keyを入力して「通知を許可」してください。</div>
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:12px;margin-bottom:13px;">
+        <div style="font-size:12px;font-weight:700;margin-bottom:8px;">🧪 通知テスト</div>
+        <button class="btn btn-secondary" onclick="testNotification()" style="width:100%;justify-content:center;margin-bottom:7px;">テスト通知を送る</button>
+        <div id="notif-test-result" style="font-size:11px;color:var(--text2);min-height:16px;text-align:center;"></div>
+      </div>
       <div class="modal-actions"><button class="btn btn-danger" onclick="clearNotifSettings()">通知を無効にする</button><button class="btn btn-secondary" onclick="closeModal('notif-modal')">閉じる</button></div>
     </div>
   </div>
@@ -557,29 +565,181 @@ function dataHash(e,t,s){return JSON.stringify({e,t,s});}
 
 async function syncPull(){
   if(!state.binId||!state.apiKey)return;
-  try{setSyncStatus('syncing');const r=await readBin();const h=dataHash(r.events||[],r.tasks||[],r.shopItems||[]);if(h!==state.lastSyncHash){state.events=r.events||[];state.tasks=r.tasks||[];state.shopItems=r.shopItems||[];state.lastSyncHash=h;saveLocal();render();}setSyncStatus('connected');}catch(e){setSyncStatus('error');}
+  try{
+    setSyncStatus('syncing');
+    const r=await readBin();
+    const h=dataHash(r.events||[],r.tasks||[],r.shopItems||[]);
+    if(h!==state.lastSyncHash){
+      state.events=r.events||[];state.tasks=r.tasks||[];state.shopItems=r.shopItems||[];
+      state.lastSyncHash=h;saveLocal();render();
+    }
+    setSyncStatus('connected');
+  }catch(e){
+    console.error('syncPull error:',e);
+    setSyncStatus('error');
+  }
 }
 async function syncPush(){
-  if(!state.binId||!state.apiKey)return;const h=dataHash(state.events,state.tasks,state.shopItems);if(h===state.lastSyncHash)return;
-  try{setSyncStatus('syncing');await writeBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});state.lastSyncHash=h;setSyncStatus('connected');}catch(e){setSyncStatus('error');}
+  if(!state.binId||!state.apiKey)return;
+  const h=dataHash(state.events,state.tasks,state.shopItems);
+  if(h===state.lastSyncHash)return;
+  try{
+    setSyncStatus('syncing');
+    await writeBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});
+    state.lastSyncHash=h;
+    setSyncStatus('connected');
+  }catch(e){
+    console.error('syncPush error:',e);
+    setSyncStatus('error');
+  }
 }
 function startSyncTimer(){if(state.syncTimer)clearInterval(state.syncTimer);state.syncTimer=setInterval(syncPull,SYNC_INTERVAL_MS);}
-function setSyncStatus(s){state.syncStatus=s;document.getElementById('sync-badge').className='sync-badge '+s;document.getElementById('sync-label').textContent={disconnected:'同期設定',syncing:'同期中...',connected:'同期中 ✓',error:'同期エラー'}[s]||'同期設定';}
+function setSyncStatus(s){
+  state.syncStatus=s;
+  document.getElementById('sync-badge').className='sync-badge '+s;
+  document.getElementById('sync-label').textContent={disconnected:'同期設定',syncing:'同期中...',connected:'同期中 ✓',error:'同期エラー'}[s]||'同期設定';
+}
 
-function openSyncModal(){const c=!!(state.apiKey&&state.binId);document.getElementById('sync-connected-view').style.display=c?'':'none';document.getElementById('sync-setup-view').style.display=c?'none':'';document.getElementById('sync-loading').style.display='none';if(c)document.getElementById('display-bin-id').value=state.binId;openModal('sync-modal');}
+// ファミリーコード = apiKey と binId を両方エンコードしたもの（両者が同じキーで読み書きできるようにするため）
+function encodeFamilyCode(apiKey,binId){return btoa(unescape(encodeURIComponent(apiKey+'|||'+binId)));}
+function decodeFamilyCode(code){try{const dec=decodeURIComponent(escape(atob(code)));const idx=dec.indexOf('|||');if(idx<0)return null;return{apiKey:dec.slice(0,idx),binId:dec.slice(idx+3)};}catch(e){return null;}}
+
+function openSyncModal(){
+  const c=!!(state.apiKey&&state.binId);
+  document.getElementById('sync-connected-view').style.display=c?'':'none';
+  document.getElementById('sync-setup-view').style.display=c?'none':'';
+  document.getElementById('sync-loading').style.display='none';
+  if(c){
+    const code=encodeFamilyCode(state.apiKey,state.binId);
+    document.getElementById('display-bin-id').value=code;
+  }
+  openModal('sync-modal');
+}
 function showSyncLoading(msg){['sync-connected-view','sync-setup-view'].forEach(id=>document.getElementById(id).style.display='none');document.getElementById('sync-loading').style.display='';document.getElementById('sync-loading-msg').textContent=msg;}
-async function setupNewSync(){const key=document.getElementById('setup-api-key').value.trim();if(!key){alert('APIキーを入力してください');return;}state.apiKey=key;showSyncLoading('データを作成中...');try{const id=await createBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});state.binId=id;state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);saveLocal();setSyncStatus('connected');startSyncTimer();document.getElementById('display-bin-id').value=id;document.getElementById('sync-loading').style.display='none';document.getElementById('sync-connected-view').style.display='';}catch(e){document.getElementById('sync-loading').style.display='none';document.getElementById('sync-setup-view').style.display='';alert('接続に失敗しました:\n'+e.message);state.apiKey=null;setSyncStatus('disconnected');}}
-async function joinSync(){const key=document.getElementById('join-api-key').value.trim();const binId=document.getElementById('join-bin-id').value.trim();if(!key||!binId){alert('APIキーとファミリーコードを両方入力してください');return;}state.apiKey=key;state.binId=binId;showSyncLoading('接続中...');try{const r=await readBin();state.events=r.events||[];state.tasks=r.tasks||[];state.shopItems=r.shopItems||[];state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);saveLocal();render();setSyncStatus('connected');startSyncTimer();document.getElementById('display-bin-id').value=binId;document.getElementById('sync-loading').style.display='none';document.getElementById('sync-connected-view').style.display='';}catch(e){document.getElementById('sync-loading').style.display='none';document.getElementById('sync-setup-view').style.display='';alert('接続に失敗しました:\n'+e.message);state.apiKey=null;state.binId=null;setSyncStatus('disconnected');}}
+
+async function setupNewSync(){
+  const key=document.getElementById('setup-api-key').value.trim();
+  if(!key){alert('APIキーを入力してください');return;}
+  state.apiKey=key;
+  showSyncLoading('データを作成中...');
+  try{
+    const id=await createBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});
+    state.binId=id;
+    state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);
+    saveLocal();setSyncStatus('connected');startSyncTimer();
+    document.getElementById('display-bin-id').value=encodeFamilyCode(state.apiKey,id);
+    document.getElementById('sync-loading').style.display='none';
+    document.getElementById('sync-connected-view').style.display='';
+  }catch(e){
+    document.getElementById('sync-loading').style.display='none';
+    document.getElementById('sync-setup-view').style.display='';
+    alert('接続に失敗しました。APIキーを確認してください。\n\n詳細: '+e.message);
+    state.apiKey=null;setSyncStatus('disconnected');
+  }
+}
+
+async function joinSync(){
+  const code=document.getElementById('join-family-code').value.trim();
+  if(!code){alert('ファミリーコードを入力してください');return;}
+  const decoded=decodeFamilyCode(code);
+  if(!decoded){alert('ファミリーコードが正しくありません。もう一度確認してください。');return;}
+  state.apiKey=decoded.apiKey;state.binId=decoded.binId;
+  showSyncLoading('接続・データ取得中...');
+  try{
+    const r=await readBin();
+    state.events=r.events||[];state.tasks=r.tasks||[];state.shopItems=r.shopItems||[];
+    state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);
+    saveLocal();render();setSyncStatus('connected');startSyncTimer();
+    document.getElementById('display-bin-id').value=code;
+    document.getElementById('sync-loading').style.display='none';
+    document.getElementById('sync-connected-view').style.display='';
+  }catch(e){
+    document.getElementById('sync-loading').style.display='none';
+    document.getElementById('sync-setup-view').style.display='';
+    alert('接続に失敗しました。ファミリーコードを確認してください。\n\n詳細: '+e.message);
+    state.apiKey=null;state.binId=null;setSyncStatus('disconnected');
+  }
+}
+
+async function manualSync(){
+  if(!state.binId||!state.apiKey){alert('同期が設定されていません');return;}
+  state.lastSyncHash=null; // 強制的に差分あり扱いにする
+  await syncPush();
+  await syncPull();
+  alert('同期しました！');
+}
+
 function disconnectSync(){if(!confirm('同期を解除しますか？'))return;if(state.syncTimer)clearInterval(state.syncTimer);state.apiKey=null;state.binId=null;state.lastSyncHash=null;saveLocal();setSyncStatus('disconnected');closeModal('sync-modal');}
-function copyBinId(){navigator.clipboard.writeText(document.getElementById('display-bin-id').value).then(()=>alert('コピーしました！'));}
+function copyBinId(){
+  const val=document.getElementById('display-bin-id').value;
+  navigator.clipboard.writeText(val).then(()=>alert('ファミリーコードをコピーしました！\nLINEなどで家族に送ってください。'));
+}
 
 // ── Notification ──
 function openNotifModal(){const c=!!(state.notifAppId&&state.notifRestKey);document.getElementById('notif-setup-view').style.display=c?'none':'';document.getElementById('notif-connected-view').style.display=c?'':'none';if(!c){document.getElementById('notif-app-id').value=state.notifAppId||'';document.getElementById('notif-rest-key').value='';}openModal('notif-modal');}
 async function saveNotifSettings(){const appId=document.getElementById('notif-app-id').value.trim();const rk=document.getElementById('notif-rest-key').value.trim();if(!appId||!rk){alert('App IDとREST API Keyを両方入力してください');return;}state.notifAppId=appId;state.notifRestKey=rk;saveLocal();await initOneSignal(appId);document.getElementById('notif-setup-view').style.display='none';document.getElementById('notif-connected-view').style.display='';updateNotifBadge();}
 function clearNotifSettings(){if(!confirm('通知を無効にしますか？'))return;state.notifAppId=null;state.notifRestKey=null;saveLocal();updateNotifBadge();closeModal('notif-modal');}
 function updateNotifBadge(){const btn=document.getElementById('notif-btn');const lbl=document.getElementById('notif-label');if(state.notifAppId&&state.notifRestKey){btn.classList.add('active');lbl.textContent='通知ON';}else{btn.classList.remove('active');lbl.textContent='通知設定';}}
-async function initOneSignal(appId){if(typeof OneSignalDeferred==='undefined')return;window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(O){await O.init({appId,notifyButton:{enable:false},welcomeNotification:{disable:true}});await O.Notifications.requestPermission();});}
-async function sendPush(body){if(!state.notifAppId||!state.notifRestKey)return;try{await fetch('https://onesignal.com/api/v1/notifications',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},body:JSON.stringify({app_id:state.notifAppId,included_segments:['All'],headings:{ja:'FamilyCal',en:'FamilyCal'},contents:{ja:body,en:body}})});}catch(e){}}
+async function initOneSignal(appId){
+  if(typeof OneSignalDeferred==='undefined'){console.warn('OneSignal SDK not loaded');return;}
+  window.OneSignalDeferred=window.OneSignalDeferred||[];
+  OneSignalDeferred.push(async function(O){
+    await O.init({
+      appId,
+      notifyButton:{enable:false},
+      welcomeNotification:{disable:true},
+      // GitHub Pages サブディレクトリ対応
+      serviceWorkerParam:{scope:'/familycal/'},
+      serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'
+    });
+    const granted=await O.Notifications.requestPermission();
+    if(granted){console.log('通知許可済み');}else{console.warn('通知が拒否されました');}
+  });
+}
+
+async function sendPush(body){
+  if(!state.notifAppId||!state.notifRestKey)return;
+  try{
+    const res=await fetch('https://onesignal.com/api/v1/notifications',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},
+      body:JSON.stringify({
+        app_id:state.notifAppId,
+        included_segments:['All'],
+        headings:{ja:'FamilyCal 📅',en:'FamilyCal 📅'},
+        contents:{ja:body,en:body}
+      })
+    });
+    if(!res.ok){const t=await res.text();console.error('通知送信エラー:',res.status,t);}
+  }catch(e){console.error('通知fetch失敗:',e);}
+}
+
+async function testNotification(){
+  if(!state.notifAppId||!state.notifRestKey){alert('通知設定が完了していません');return;}
+  document.getElementById('notif-test-result').textContent='送信中...';
+  try{
+    const res=await fetch('https://onesignal.com/api/v1/notifications',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},
+      body:JSON.stringify({
+        app_id:state.notifAppId,
+        included_segments:['All'],
+        headings:{ja:'FamilyCal テスト',en:'FamilyCal Test'},
+        contents:{ja:'🔔 通知のテストです！正常に届いていれば設定完了です。',en:'Test notification'}
+      })
+    });
+    if(res.ok){
+      const j=await res.json();
+      if(j.recipients>0){document.getElementById('notif-test-result').textContent='✅ 送信成功！'+j.recipients+'台に届きました';}
+      else{document.getElementById('notif-test-result').textContent='⚠️ 送信しましたが受信端末が0件です。各端末で「通知を許可」してください';}
+    }else{
+      const t=await res.text();
+      document.getElementById('notif-test-result').textContent='❌ エラー: '+res.status+' '+t;
+    }
+  }catch(e){
+    document.getElementById('notif-test-result').textContent='❌ 通信エラー: '+e.message;
+  }
+}
 
 // ── Settings ──
 function openSettingsModal(){document.getElementById('settings-p1').value=state.p1Name;document.getElementById('settings-p2').value=state.p2Name;openModal('settings-modal');}
@@ -825,7 +985,18 @@ function shopItemHTML(s){
 // ── Init ──
 loadLocal();render();
 if(state.apiKey&&state.binId){setSyncStatus('connected');syncPull();startSyncTimer();}
-if(state.notifAppId){window.OneSignalDeferred=window.OneSignalDeferred||[];OneSignalDeferred.push(async function(O){await O.init({appId:state.notifAppId,notifyButton:{enable:false},welcomeNotification:{disable:true}});});}
+if(state.notifAppId){
+  window.OneSignalDeferred=window.OneSignalDeferred||[];
+  OneSignalDeferred.push(async function(O){
+    await O.init({
+      appId:state.notifAppId,
+      notifyButton:{enable:false},
+      welcomeNotification:{disable:true},
+      serviceWorkerParam:{scope:'/familycal/'},
+      serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'
+    });
+  });
+}
 setTimeout(scrollToToday,100);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')['event-modal','task-modal','sync-modal','settings-modal','notif-modal'].forEach(closeModal);});
 (function(){
