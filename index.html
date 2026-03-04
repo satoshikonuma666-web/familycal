@@ -523,16 +523,32 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="modal" style="max-width:460px;">
     <div class="modal-title">🔔 プッシュ通知設定</div>
     <div id="notif-setup-view">
-      <div class="sync-box"><h3>📋 セットアップ手順（約5分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://onesignal.com" target="_blank">onesignal.com</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「New App」→「Web」→「Custom Code」を選択</div></div><div class="step-item"><div class="step-num">3</div><div>サイトURL: <strong>https://satoshikonuma666-web.github.io/familycal/</strong></div></div><div class="step-item"><div class="step-num">4</div><div>「Settings」→「Keys & IDs」で <strong>App ID</strong> と <strong>REST API Key</strong>（Keyの値）をコピー</div></div><div class="step-item"><div class="step-num">5</div><div>下に入力 →「保存して通知を許可」→ ポップアップが出たら「許可」</div></div><div class="step-item"><div class="step-num">6</div><div>家族のスマホでも同じ手順を行う（同じApp ID・REST API Keyを入力）</div></div></div></div>
-      <div class="warn-note">⚠️ <strong>iPhoneの場合</strong>：iOS 16.4以上 かつ Safari で<strong>ホーム画面に追加済み</strong>のアプリでないと通知が届きません。ホーム画面から起動した状態で設定してください。</div>
-      <div class="form-group"><label class="form-label">OneSignal App ID</label><input class="form-input" id="notif-app-id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"></div>
-      <div class="form-group"><label class="form-label">REST API Key（Key IDではなくKeyの値）</label><input class="form-input" id="notif-rest-key" type="password" placeholder="os_v2_app_... または長い英数字の文字列"></div>
+      <!-- 診断パネル -->
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:700;margin-bottom:6px;">🔍 現在の状態</div>
+        <div id="notif-diag"></div>
+      </div>
+      <div id="notif-standalone-warn" style="display:none;" class="warn-note">⚠️ <strong>ホーム画面から起動されていません！</strong><br>Safariでこのページをホーム画面に追加し、ホーム画面のアイコンから起動してから設定してください。</div>
+      <div class="sync-box"><h3>📋 セットアップ手順</h3><div class="step-list">
+        <div class="step-item"><div class="step-num">1</div><div>Safariでこのアプリを開き、共有ボタン→「ホーム画面に追加」</div></div>
+        <div class="step-item"><div class="step-num">2</div><div>ホーム画面に追加したアイコンから起動（重要！）</div></div>
+        <div class="step-item"><div class="step-num">3</div><div><a href="https://onesignal.com" target="_blank">onesignal.com</a>のApp IDとREST API Keyを入力して「保存」</div></div>
+        <div class="step-item"><div class="step-num">4</div><div>「"FamilyCal"からの通知を許可しますか？」→「許可」をタップ</div></div>
+      </div></div>
+      <div class="form-group"><label class="form-label">OneSignal App ID</label><input class="form-input" id="notif-app-id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" autocorrect="off" autocapitalize="off"></div>
+      <div class="form-group"><label class="form-label">REST API Key</label><input class="form-input" id="notif-rest-key" type="password" placeholder="os_v2_app_..."></div>
       <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('notif-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveNotifSettings()">💾 保存して通知を許可</button></div>
     </div>
     <div id="notif-connected-view" style="display:none;">
-      <div class="success-box"><div style="font-size:22px;">🔔</div><div><div style="font-size:13px;font-weight:700;color:var(--green);">通知設定済み</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">予定・タスクの追加時に相手に通知が届きます</div></div></div>
-      <div class="info-note">💡 家族のスマホでも同じApp IDとREST API Keyを入力して「通知を許可」してください。</div>
-      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:12px;margin-bottom:13px;">
+      <!-- 診断パネル -->
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:700;margin-bottom:6px;">🔍 現在の状態</div>
+        <div id="notif-diag2"></div>
+      </div>
+      <div id="notif-standalone-warn2" style="display:none;" class="warn-note">⚠️ <strong>ホーム画面から起動されていません！</strong><br>ホーム画面のアイコンから起動してから「再度許可を求める」を押してください。</div>
+      <div id="notif-perm-status" style="font-size:12px;margin-bottom:12px;padding:8px 10px;background:var(--surface3);border-radius:8px;"></div>
+      <button class="btn btn-primary" onclick="retryNotifPermission()" style="width:100%;justify-content:center;margin-bottom:8px;">🔔 再度許可を求める</button>
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px;">
         <div style="font-size:12px;font-weight:700;margin-bottom:8px;">🧪 通知テスト</div>
         <button class="btn btn-secondary" onclick="testNotification()" style="width:100%;justify-content:center;margin-bottom:7px;">テスト通知を送る</button>
         <div id="notif-test-result" style="font-size:11px;color:var(--text2);min-height:16px;text-align:center;"></div>
@@ -727,25 +743,117 @@ function copyText(id,label){
 function copyBinId(){copyText('display-bin-id','データID');}
 
 // ── Notification ──
-function openNotifModal(){const c=!!(state.notifAppId&&state.notifRestKey);document.getElementById('notif-setup-view').style.display=c?'none':'';document.getElementById('notif-connected-view').style.display=c?'':'none';if(!c){document.getElementById('notif-app-id').value=state.notifAppId||'';document.getElementById('notif-rest-key').value='';}openModal('notif-modal');}
-async function saveNotifSettings(){const appId=document.getElementById('notif-app-id').value.trim();const rk=document.getElementById('notif-rest-key').value.trim();if(!appId||!rk){alert('App IDとREST API Keyを両方入力してください');return;}state.notifAppId=appId;state.notifRestKey=rk;saveLocal();await initOneSignal(appId);document.getElementById('notif-setup-view').style.display='none';document.getElementById('notif-connected-view').style.display='';updateNotifBadge();}
+function openNotifModal(){
+  const c=!!(state.notifAppId&&state.notifRestKey);
+  document.getElementById('notif-setup-view').style.display=c?'none':'';
+  document.getElementById('notif-connected-view').style.display=c?'':'none';
+  if(!c){
+    document.getElementById('notif-app-id').value=state.notifAppId||'';
+    document.getElementById('notif-rest-key').value='';
+  }
+  updateNotifDiag();
+  openModal('notif-modal');
+}
+
+function updateNotifDiag(){
+  const isStandalone=window.navigator.standalone===true;
+  const isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
+  const notifSupport='Notification' in window;
+  const permStatus=notifSupport?Notification.permission:'未対応';
+  const swSupport='serviceWorker' in navigator;
+  const diagHTML=`
+    <div style="font-size:10px;line-height:1.9;color:var(--text2);">
+      <div>📱 ホーム画面から起動: <strong style="color:${isStandalone?'var(--green)':'var(--danger)'}">${isStandalone?'✅ はい（OK）':'❌ いいえ ← ここが問題'}</strong></div>
+      <div>🍎 iOS端末: <strong>${isIOS?'✅ はい':'PCブラウザ'}</strong></div>
+      <div>🔔 通知API: <strong style="color:${notifSupport?'var(--green)':'var(--danger)'}">${notifSupport?'✅ 対応':'❌ 非対応'}</strong></div>
+      <div>🔐 通知許可状態: <strong style="color:${permStatus==='granted'?'var(--green)':permStatus==='denied'?'var(--danger)':'var(--warning)'}">${permStatus==='granted'?'✅ 許可済み':permStatus==='denied'?'❌ 拒否中':'⚠️ 未設定'}</strong></div>
+      <div>⚙️ ServiceWorker: <strong>${swSupport?'✅ 対応':'❌ 非対応'}</strong></div>
+    </div>`;
+  ['notif-diag','notif-diag2'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=diagHTML;});
+  const showWarn=isIOS&&!isStandalone;
+  ['notif-standalone-warn','notif-standalone-warn2'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=showWarn?'':'none';});
+}
+
+async function saveNotifSettings(){
+  const appId=document.getElementById('notif-app-id').value.trim();
+  const rk=document.getElementById('notif-rest-key').value.trim();
+  if(!appId||!rk){alert('App IDとREST API Keyを両方入力してください');return;}
+  state.notifAppId=appId;state.notifRestKey=rk;saveLocal();
+  // 通知許可を直接リクエスト（ユーザー操作中に同期的に呼ぶ）
+  const result=await requestNotifPermission(appId);
+  document.getElementById('notif-setup-view').style.display='none';
+  document.getElementById('notif-connected-view').style.display='';
+  updateNotifBadge();
+  updateNotifDiag();
+  if(result==='granted'){
+    document.getElementById('notif-perm-status').textContent='✅ 通知許可済み！通知が届きます。';
+    document.getElementById('notif-perm-status').style.color='var(--green)';
+  } else if(result==='denied'){
+    document.getElementById('notif-perm-status').textContent='❌ 通知が拒否されています。iPhoneの設定→通知→FamilyCalで許可してください。';
+    document.getElementById('notif-perm-status').style.color='var(--danger)';
+  } else {
+    document.getElementById('notif-perm-status').textContent='⚠️ 許可ダイアログが出なかった場合は「再度許可を求める」を押してください。';
+    document.getElementById('notif-perm-status').style.color='var(--warning)';
+  }
+}
+
+async function requestNotifPermission(appId){
+  try{
+    // まず直接 Notification.requestPermission を呼ぶ（ユーザー操作中）
+    let perm='default';
+    if('Notification' in window){
+      perm=await Notification.requestPermission();
+    }
+    // OneSignal SDK初期化
+    if(window.OneSignal){
+      // すでにロード済みの場合
+      try{
+        await window.OneSignal.init({
+          appId:appId,
+          notifyButton:{enable:false},
+          welcomeNotification:{disable:true},
+          serviceWorkerParam:{scope:'/familycal/'},
+          serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'
+        });
+      }catch(e){console.log('OneSignal init:',e.message);}
+    } else if(window.OneSignalDeferred){
+      window.OneSignalDeferred.push(async function(O){
+        try{
+          await O.init({
+            appId:appId,
+            notifyButton:{enable:false},
+            welcomeNotification:{disable:true},
+            serviceWorkerParam:{scope:'/familycal/'},
+            serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'
+          });
+        }catch(e){console.log('OneSignal deferred init:',e.message);}
+      });
+    }
+    return perm;
+  }catch(e){
+    console.error('requestNotifPermission error:',e);
+    return 'error';
+  }
+}
+
+async function retryNotifPermission(){
+  if(!state.notifAppId){alert('先にApp IDを設定してください');return;}
+  const result=await requestNotifPermission(state.notifAppId);
+  const el=document.getElementById('notif-perm-status');
+  if(result==='granted'){el.textContent='✅ 通知許可済み！';el.style.color='var(--green)';}
+  else if(result==='denied'){el.textContent='❌ 拒否されています。設定アプリ→通知→FamilyCalで許可してください。';el.style.color='var(--danger)';}
+  else{el.textContent='⚠️ ダイアログが出ない場合はホーム画面追加済みのアイコンから起動してください。';el.style.color='var(--warning)';}
+  updateNotifDiag();
+}
+
 function clearNotifSettings(){if(!confirm('通知を無効にしますか？'))return;state.notifAppId=null;state.notifRestKey=null;saveLocal();updateNotifBadge();closeModal('notif-modal');}
-function updateNotifBadge(){const btn=document.getElementById('notif-btn');const lbl=document.getElementById('notif-label');if(state.notifAppId&&state.notifRestKey){btn.classList.add('active');lbl.textContent='通知ON';}else{btn.classList.remove('active');lbl.textContent='通知設定';}}
-async function initOneSignal(appId){
-  if(typeof OneSignalDeferred==='undefined'){console.warn('OneSignal SDK not loaded');return;}
-  window.OneSignalDeferred=window.OneSignalDeferred||[];
-  OneSignalDeferred.push(async function(O){
-    await O.init({
-      appId,
-      notifyButton:{enable:false},
-      welcomeNotification:{disable:true},
-      // GitHub Pages サブディレクトリ対応
-      serviceWorkerParam:{scope:'/familycal/'},
-      serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'
-    });
-    const granted=await O.Notifications.requestPermission();
-    if(granted){console.log('通知許可済み');}else{console.warn('通知が拒否されました');}
-  });
+function updateNotifBadge(){
+  const btn=document.getElementById('notif-btn');const lbl=document.getElementById('notif-label');
+  const ok=!!(state.notifAppId&&state.notifRestKey)&&('Notification' in window)&&Notification.permission==='granted';
+  const set=!!(state.notifAppId&&state.notifRestKey);
+  if(ok){btn.classList.add('active');lbl.textContent='通知ON';}
+  else if(set){btn.classList.add('active');lbl.textContent='通知設定済';}
+  else{btn.classList.remove('active');lbl.textContent='通知設定';}
 }
 
 async function sendPush(body){
