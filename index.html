@@ -460,8 +460,26 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="modal-title">🔗 家族と同期</div>
     <div id="sync-connected-view" style="display:none;">
       <div class="success-box"><div style="font-size:22px;">🟢</div><div><div style="font-size:13px;font-weight:700;color:var(--green);">同期中！</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">30秒ごとに自動同期されます</div></div></div>
-      <div class="form-group"><label class="form-label">ファミリーコード（家族に共有してください）</label><div style="display:flex;gap:7px;"><input class="form-input" id="display-bin-id" readonly style="flex:1;color:var(--blue);font-weight:700;font-size:11px;"><button class="btn btn-primary" onclick="copyBinId()">コピー</button></div></div>
-      <div class="info-note">💡 このコードをLINEで送り、家族が「コードで参加」に貼り付けると同期完了です。APIキーも含まれているので安全に保管してください。</div>
+
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:11px;padding:12px;margin-bottom:12px;">
+        <div style="font-size:12px;font-weight:700;margin-bottom:10px;color:var(--text);">📤 家族への共有情報</div>
+        <div class="form-group" style="margin-bottom:8px;">
+          <label class="form-label">① 共有用APIキー</label>
+          <div style="display:flex;gap:6px;">
+            <input class="form-input" id="display-api-key" readonly style="flex:1;font-size:10px;color:var(--text2);" autocorrect="off" autocapitalize="off">
+            <button class="btn btn-secondary" onclick="copyText('display-api-key','APIキー')" style="font-size:11px;padding:5px 8px;flex-shrink:0;">コピー</button>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label">② データID</label>
+          <div style="display:flex;gap:6px;">
+            <input class="form-input" id="display-bin-id" readonly style="flex:1;color:var(--blue);font-weight:700;font-size:12px;" autocorrect="off" autocapitalize="off">
+            <button class="btn btn-secondary" onclick="copyText('display-bin-id','データID')" style="font-size:11px;padding:5px 8px;flex-shrink:0;">コピー</button>
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--text3);margin-top:8px;line-height:1.6;">① と ② の2つをそれぞれLINEなどで家族に送ってください。<br>家族は「コードで参加する」に両方入力するだけで接続完了です。</div>
+      </div>
+
       <div class="modal-actions" style="margin-top:0;justify-content:space-between;">
         <button class="btn btn-secondary" onclick="manualSync()">🔄 今すぐ同期</button>
         <div style="display:flex;gap:8px;"><button class="btn btn-danger" onclick="disconnectSync()">同期を解除</button><button class="btn btn-secondary" onclick="closeModal('sync-modal')">閉じる</button></div>
@@ -482,7 +500,18 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <button class="btn btn-primary" style="width:100%;" onclick="setupNewSync()">新規作成してファミリーコードを発行</button>
       </div>
       <div class="divider"></div>
-      <div class="sync-box"><h3>👩 コードで参加する（家族）</h3><div class="form-group" style="margin-bottom:10px;"><label class="form-label">ファミリーコード（代表者から受け取ったもの）</label><input class="form-input" id="join-family-code" placeholder="代表者から受け取ったコードを貼り付け"></div><button class="btn btn-green" style="width:100%;" onclick="joinSync()">コードで接続</button></div>
+      <div class="sync-box"><h3>👩 コードで参加する（家族）</h3>
+        <div class="warn-note" style="margin-bottom:10px;">💡 代表者の「同期設定」画面にある<strong>「共有用APIキー」と「データID」</strong>の2つを入力してください</div>
+        <div class="form-group" style="margin-bottom:8px;">
+          <label class="form-label">共有用APIキー（代表者から受け取る）</label>
+          <input class="form-input" id="join-api-key" type="text" placeholder="$2a$10$xxxxxxxx..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="font-size:11px;">
+        </div>
+        <div class="form-group" style="margin-bottom:10px;">
+          <label class="form-label">データID（代表者から受け取る）</label>
+          <input class="form-input" id="join-bin-id" placeholder="6文字〜の英数字" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="font-size:12px;">
+        </div>
+        <button class="btn btn-green" style="width:100%;" onclick="joinSync()">接続する</button>
+      </div>
       <div class="modal-actions" style="margin-top:6px;"><button class="btn btn-secondary" onclick="closeModal('sync-modal')">キャンセル</button></div>
     </div>
     <div id="sync-loading" style="display:none;text-align:center;padding:30px;"><div style="font-size:30px;margin-bottom:12px;">⏳</div><div style="font-size:13px;color:var(--text2);font-weight:500;" id="sync-loading-msg">接続中...</div></div>
@@ -622,18 +651,14 @@ function setSyncStatus(s){
   document.getElementById('sync-label').textContent={disconnected:'同期設定',syncing:'同期中...',connected:'同期中 ✓',error:'同期エラー'}[s]||'同期設定';
 }
 
-// ファミリーコード = apiKey と binId を両方エンコードしたもの（両者が同じキーで読み書きできるようにするため）
-function encodeFamilyCode(apiKey,binId){return btoa(unescape(encodeURIComponent(apiKey+'|||'+binId)));}
-function decodeFamilyCode(code){try{const dec=decodeURIComponent(escape(atob(code)));const idx=dec.indexOf('|||');if(idx<0)return null;return{apiKey:dec.slice(0,idx),binId:dec.slice(idx+3)};}catch(e){return null;}}
-
 function openSyncModal(){
   const c=!!(state.apiKey&&state.binId);
   document.getElementById('sync-connected-view').style.display=c?'':'none';
   document.getElementById('sync-setup-view').style.display=c?'none':'';
   document.getElementById('sync-loading').style.display='none';
   if(c){
-    const code=encodeFamilyCode(state.apiKey,state.binId);
-    document.getElementById('display-bin-id').value=code;
+    document.getElementById('display-api-key').value=state.apiKey;
+    document.getElementById('display-bin-id').value=state.binId;
   }
   openModal('sync-modal');
 }
@@ -649,9 +674,10 @@ async function setupNewSync(){
     state.binId=id;
     state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);
     saveLocal();setSyncStatus('connected');startSyncTimer();
-    document.getElementById('display-bin-id').value=encodeFamilyCode(state.apiKey,id);
     document.getElementById('sync-loading').style.display='none';
     document.getElementById('sync-connected-view').style.display='';
+    document.getElementById('display-api-key').value=state.apiKey;
+    document.getElementById('display-bin-id').value=id;
   }catch(e){
     document.getElementById('sync-loading').style.display='none';
     document.getElementById('sync-setup-view').style.display='';
@@ -661,41 +687,44 @@ async function setupNewSync(){
 }
 
 async function joinSync(){
-  const code=document.getElementById('join-family-code').value.trim();
-  if(!code){alert('ファミリーコードを入力してください');return;}
-  const decoded=decodeFamilyCode(code);
-  if(!decoded){alert('ファミリーコードが正しくありません。もう一度確認してください。');return;}
-  state.apiKey=decoded.apiKey;state.binId=decoded.binId;
+  const key=document.getElementById('join-api-key').value.trim();
+  const binId=document.getElementById('join-bin-id').value.trim();
+  if(!key){alert('共有用APIキーを入力してください');return;}
+  if(!binId){alert('データIDを入力してください');return;}
+  state.apiKey=key;state.binId=binId;
   showSyncLoading('接続・データ取得中...');
   try{
     const r=await readBin();
     state.events=r.events||[];state.tasks=r.tasks||[];state.shopItems=r.shopItems||[];
     state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);
     saveLocal();render();setSyncStatus('connected');startSyncTimer();
-    document.getElementById('display-bin-id').value=code;
     document.getElementById('sync-loading').style.display='none';
     document.getElementById('sync-connected-view').style.display='';
+    document.getElementById('display-api-key').value=state.apiKey;
+    document.getElementById('display-bin-id').value=state.binId;
   }catch(e){
     document.getElementById('sync-loading').style.display='none';
     document.getElementById('sync-setup-view').style.display='';
-    alert('接続に失敗しました。ファミリーコードを確認してください。\n\n詳細: '+e.message);
+    alert('接続に失敗しました。APIキーとデータIDを確認してください。\n\n詳細: '+e.message);
     state.apiKey=null;state.binId=null;setSyncStatus('disconnected');
   }
 }
 
 async function manualSync(){
   if(!state.binId||!state.apiKey){alert('同期が設定されていません');return;}
-  state.lastSyncHash=null; // 強制的に差分あり扱いにする
+  state.lastSyncHash=null;
   await syncPush();
   await syncPull();
   alert('同期しました！');
 }
 
 function disconnectSync(){if(!confirm('同期を解除しますか？'))return;if(state.syncTimer)clearInterval(state.syncTimer);state.apiKey=null;state.binId=null;state.lastSyncHash=null;saveLocal();setSyncStatus('disconnected');closeModal('sync-modal');}
-function copyBinId(){
-  const val=document.getElementById('display-bin-id').value;
-  navigator.clipboard.writeText(val).then(()=>alert('ファミリーコードをコピーしました！\nLINEなどで家族に送ってください。'));
+
+function copyText(id,label){
+  const val=document.getElementById(id).value;
+  navigator.clipboard.writeText(val).then(()=>alert(label+'をコピーしました！'));
 }
+function copyBinId(){copyText('display-bin-id','データID');}
 
 // ── Notification ──
 function openNotifModal(){const c=!!(state.notifAppId&&state.notifRestKey);document.getElementById('notif-setup-view').style.display=c?'none':'';document.getElementById('notif-connected-view').style.display=c?'':'none';if(!c){document.getElementById('notif-app-id').value=state.notifAppId||'';document.getElementById('notif-rest-key').value='';}openModal('notif-modal');}
