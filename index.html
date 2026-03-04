@@ -313,11 +313,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div style="padding:10px 12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;" id="today-combined-grid">
         <div>
           <div style="font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase;font-family:'Nunito',sans-serif;">📅 今日の予定</div>
-          <div class="today-chip-list" id="today-events-list"></div>
+          <div class="today-chip-list" id="top-events-list"></div>
         </div>
         <div>
           <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase;font-family:'Nunito',sans-serif;">✅ 今日のタスク</div>
-          <div class="today-chip-list" id="today-tasks-list"></div>
+          <div class="today-chip-list" id="top-tasks-list"></div>
         </div>
       </div>
     </div>
@@ -753,6 +753,7 @@ async function sendPush(body){
   try{
     const res=await fetch('https://onesignal.com/api/v1/notifications',{
       method:'POST',
+      mode:'cors',
       headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},
       body:JSON.stringify({
         app_id:state.notifAppId,
@@ -767,10 +768,12 @@ async function sendPush(body){
 
 async function testNotification(){
   if(!state.notifAppId||!state.notifRestKey){alert('通知設定が完了していません');return;}
-  document.getElementById('notif-test-result').textContent='送信中...';
+  const el=document.getElementById('notif-test-result');
+  el.textContent='送信中...';
   try{
     const res=await fetch('https://onesignal.com/api/v1/notifications',{
       method:'POST',
+      mode:'cors',
       headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},
       body:JSON.stringify({
         app_id:state.notifAppId,
@@ -781,14 +784,20 @@ async function testNotification(){
     });
     if(res.ok){
       const j=await res.json();
-      if(j.recipients>0){document.getElementById('notif-test-result').textContent='✅ 送信成功！'+j.recipients+'台に届きました';}
-      else{document.getElementById('notif-test-result').textContent='⚠️ 送信しましたが受信端末が0件です。各端末で「通知を許可」してください';}
+      if(j.errors&&j.errors.length>0){
+        el.textContent='⚠️ エラー: '+JSON.stringify(j.errors);
+      } else if(j.recipients>0){
+        el.textContent='✅ 送信成功！'+j.recipients+'台に届きました';
+      } else {
+        el.textContent='⚠️ 送信しましたが受信端末0件です。各端末で「通知を許可」してください（ホーム画面追加済みが必要）';
+      }
     }else{
       const t=await res.text();
-      document.getElementById('notif-test-result').textContent='❌ エラー: '+res.status+' '+t;
+      el.textContent='❌ APIエラー('+res.status+'): REST API Keyが正しいか確認してください\n'+t;
     }
   }catch(e){
-    document.getElementById('notif-test-result').textContent='❌ 通信エラー: '+e.message;
+    // iOSのCORSエラーの場合は別の方法で案内
+    el.innerHTML='⚠️ iOSからの直接送信はできません。<br>通知はアプリ内操作（予定・タスク追加）時に届きます。<br><small style="color:var(--text3);">'+e.message+'</small>';
   }
 }
 
@@ -993,17 +1002,21 @@ function renderTasks(){
 function renderTodayTasks(){
   const ts=toISO(TODAY);
   const items=state.tasks.filter(t=>isTaskToday(t,ts));
-  document.getElementById('today-tasks-list').innerHTML=items.length===0
+  const html=items.length===0
     ?`<div style="font-size:11px;color:var(--text3);padding:5px 0;text-align:center;">今日のタスクはありません</div>`
     :items.map(t=>`<div class="today-chip ${t.done?'done':''}" onclick="toggleTask('${t.id}')"><div class="task-check ${t.done?'checked':''}" style="flex-shrink:0;width:15px;height:15px;font-size:9px;"></div><span style="flex:1;font-size:11px;font-weight:500;">${t.name}</span><span class="task-person-tag ${pClass(t.person||'p1')}" style="font-size:9px;">${pName(t.person||'p1')}</span></div>`).join('');
+  // カレンダーサイドバーとタスクタブ両方を更新
+  ['today-tasks-list','top-tasks-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});
 }
 
 function renderTodayEvents(){
   const ts=toISO(TODAY);
   const items=state.events.filter(e=>e.date===ts).sort((a,b)=>(a.timeStart||'')<(b.timeStart||'')?-1:1);
-  document.getElementById('today-events-list').innerHTML=items.length===0
+  const html=items.length===0
     ?`<div style="font-size:11px;color:var(--text3);padding:5px 0;text-align:center;">今日の予定はありません</div>`
     :items.map(ev=>{const t=(ev.timeStart||ev.time)?`${ev.timeStart||ev.time}${ev.timeEnd?'〜'+ev.timeEnd:''} `:'';return `<div class="today-chip" onclick="openEventModal('${ev.id}')"><span style="flex:1;font-size:11px;font-weight:500;">${t}${ev.name}</span><span class="task-person-tag ${pClass(ev.person||'p1')}" style="font-size:9px;">${pName(ev.person||'p1')}</span></div>`;}).join('');
+  // カレンダーサイドバーとタスクタブ両方を更新
+  ['today-events-list','top-events-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});
 }
 
 function renderShop(){
