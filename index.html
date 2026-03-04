@@ -470,7 +470,17 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div id="sync-setup-view">
       <div class="sync-box"><h3>📋 セットアップ手順（約2分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://jsonbin.io" target="_blank">jsonbin.io</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「API Keys」→「+ CREATE ACCESS KEY」でキーをコピー</div></div><div class="step-item"><div class="step-num">3</div><div>代表者が「新規作成」→ 表示されるファミリーコードを家族にLINEで送る</div></div><div class="step-item"><div class="step-num">4</div><div>家族は「コードで参加」にそのコードを貼り付けるだけでOK</div></div></div></div>
       <div class="divider"></div>
-      <div class="sync-box"><h3>🆕 はじめて設定する（代表者）</h3><div class="form-group" style="margin-bottom:10px;"><label class="form-label">JSONBin APIキー</label><input class="form-input" id="setup-api-key" type="password" placeholder="$2a$10$xxxxxxxx..."></div><button class="btn btn-primary" style="width:100%;" onclick="setupNewSync()">新規作成してファミリーコードを発行</button></div>
+      <div class="sync-box"><h3>🆕 はじめて設定する（代表者）</h3>
+        <div class="form-group" style="margin-bottom:10px;">
+          <label class="form-label">JSONBin X-MASTER-KEY</label>
+          <div style="position:relative;">
+            <input class="form-input" id="setup-api-key" type="text" placeholder="$2a$10$xxxxxxxx..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="padding-right:60px;font-size:11px;letter-spacing:.02em;">
+            <button onclick="document.getElementById('setup-api-key').select();document.execCommand('selectAll')" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--blue-light);border:none;border-radius:6px;color:var(--blue);font-size:10px;font-weight:700;padding:3px 7px;cursor:pointer;">全選択</button>
+          </div>
+          <div style="font-size:10px;color:var(--text3);margin-top:4px;">※ $2a$10$ から始まる文字列です。コピペ後に余分なスペースがないか確認してください</div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;" onclick="setupNewSync()">新規作成してファミリーコードを発行</button>
+      </div>
       <div class="divider"></div>
       <div class="sync-box"><h3>👩 コードで参加する（家族）</h3><div class="form-group" style="margin-bottom:10px;"><label class="form-label">ファミリーコード（代表者から受け取ったもの）</label><input class="form-input" id="join-family-code" placeholder="代表者から受け取ったコードを貼り付け"></div><button class="btn btn-green" style="width:100%;" onclick="joinSync()">コードで接続</button></div>
       <div class="modal-actions" style="margin-top:6px;"><button class="btn btn-secondary" onclick="closeModal('sync-modal')">キャンセル</button></div>
@@ -558,9 +568,21 @@ function loadLocal(){
 function saveLocal(){localStorage.setItem('familycal-v1',JSON.stringify({events:state.events,tasks:state.tasks,shopItems:state.shopItems,apiKey:state.apiKey,binId:state.binId,p1Name:state.p1Name,p2Name:state.p2Name,notifAppId:state.notifAppId,notifRestKey:state.notifRestKey}));}
 
 // ── JSONBin ──
-async function createBin(data){const r=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'Content-Type':'application/json','X-Master-Key':state.apiKey,'X-Bin-Name':'familycal','X-Bin-Private':'false'},body:JSON.stringify(data)});if(!r.ok)throw new Error('作成失敗('+r.status+')');return(await r.json()).metadata.id;}
-async function readBin(){const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}/latest`,{headers:{'X-Master-Key':state.apiKey}});if(!r.ok)throw new Error('読み込み失敗');return(await r.json()).record;}
-async function writeBin(data){const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':state.apiKey},body:JSON.stringify(data)});if(!r.ok)throw new Error('書き込み失敗');}
+function apiKey(){return (state.apiKey||'').trim();}
+async function createBin(data){
+  const r=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'Content-Type':'application/json','X-Master-Key':apiKey(),'X-Bin-Name':'familycal','X-Bin-Private':'false'},body:JSON.stringify(data)});
+  if(!r.ok){const t=await r.text();throw new Error(`作成失敗(${r.status}): ${t}`);}
+  return(await r.json()).metadata.id;
+}
+async function readBin(){
+  const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}/latest`,{headers:{'X-Master-Key':apiKey()}});
+  if(!r.ok){const t=await r.text();throw new Error(`読み込み失敗(${r.status}): ${t}`);}
+  return(await r.json()).record;
+}
+async function writeBin(data){
+  const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':apiKey()},body:JSON.stringify(data)});
+  if(!r.ok){const t=await r.text();throw new Error(`書き込み失敗(${r.status}): ${t}`);}
+}
 function dataHash(e,t,s){return JSON.stringify({e,t,s});}
 
 async function syncPull(){
