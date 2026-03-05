@@ -95,7 +95,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .person-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .p1-dot{background:var(--blue)}.p2-dot{background:var(--green)}
 .cal-scroll{max-height:calc(100vh - 300px);overflow-y:auto}
-.cal-row{display:grid;grid-template-columns:52px 1fr 1fr;border-bottom:1px solid var(--border);min-height:52px;height:52px;overflow:hidden;transition:background .12s}
+.cal-row{display:grid;grid-template-columns:52px 1fr 1fr;border-bottom:1px solid var(--border);min-height:52px;transition:background .12s}
 .cal-row:hover{background:rgba(30,142,240,.03)}
 .cal-row.today{background:rgba(30,142,240,.05)}
 .cal-row.today .cal-date-cell{background:var(--blue-light)}
@@ -104,18 +104,23 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .cal-row.weekend-sat,.cal-row.weekend-sun{background:rgba(0,0,0,.012)}
 .cal-row.is-holiday{background:rgba(255,92,106,.03)}
 .cal-row.selected .cal-date-cell{background:var(--green-light)}
-.cal-date-cell{padding:4px 3px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;cursor:pointer;border-right:1px solid var(--border);transition:all .12s;user-select:none}
+.cal-date-cell{padding:4px 3px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;cursor:pointer;border-right:1px solid var(--border);transition:all .12s;user-select:none;min-height:52px}
 .cal-date-cell:hover{background:var(--blue-light)}
 .day-num{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:var(--text);line-height:1}
 .day-week{font-size:9px;font-weight:700;color:var(--text3);font-family:'Nunito',sans-serif}
 .day-holiday-label{font-size:7px;color:var(--danger);font-weight:700;text-align:center;line-height:1.1;margin-top:1px;width:100%;padding:0 1px;word-break:keep-all}
 .cal-row.today .day-num,.cal-row.today .day-week{color:var(--blue)}
-.cal-event-cell{padding:3px 4px;display:flex;flex-direction:column;gap:2px;border-left:1.5px solid var(--border);cursor:pointer;overflow:hidden;height:52px}
+.cal-event-cell{padding:3px 4px;display:flex;flex-direction:column;gap:2px;border-left:1.5px solid var(--border);overflow:hidden;min-height:52px}
 .cal-event-cell:hover{background:rgba(30,142,240,.04)}
 
 /* Calendar chips – EVENT: solid border, TASK: dashed border */
 .cal-chip{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:2px 5px;border-radius:5px;font-size:10px;font-weight:500;white-space:normal;word-break:break-all;line-height:1.3;max-width:100%;cursor:pointer;transition:opacity .12s}
 .cal-chip:hover{opacity:.8}
+.cal-chip-wrap{display:flex;align-items:center;gap:2px;margin-bottom:2px}
+.cal-chip-wrap .cal-chip{flex:1;margin-bottom:0}
+.cal-chip-del{flex-shrink:0;width:14px;height:14px;background:transparent;border:none;color:var(--text3);cursor:pointer;font-size:9px;border-radius:3px;display:flex;align-items:center;justify-content:center;padding:0;opacity:0;transition:all .15s}
+.cal-chip-wrap:hover .cal-chip-del{opacity:1;color:var(--danger)}
+.cal-chip-del:hover{background:var(--danger-light)!important}
 /* Events: solid */
 .chip-ev-p1{background:var(--p1-light);color:var(--p1);border:1.5px solid rgba(30,142,240,.35)}
 .chip-ev-p2{background:var(--p2-light);color:var(--p2);border:1.5px solid rgba(34,201,138,.35)}
@@ -161,7 +166,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .task-remind-tag{font-size:9px;color:var(--warning)}
 .task-priority{width:4px;height:4px;border-radius:50%;flex-shrink:0;margin-top:4px}
 .priority-high{background:var(--danger)}.priority-medium{background:var(--warning)}.priority-low{background:var(--green)}
-.event-actions{display:flex;gap:3px;opacity:0;transition:opacity .15s;flex-shrink:0}
+.event-actions{display:flex;gap:3px;flex-shrink:0;opacity:.5;transition:opacity .15s}
 .task-item:hover .event-actions{opacity:1}
 .icon-btn{width:21px;height:21px;border:1.5px solid var(--border);background:var(--surface);border-radius:5px;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .15s}
 .icon-btn:hover{color:var(--blue);border-color:var(--blue);background:var(--blue-light)}
@@ -463,6 +468,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <div class="form-group" style="margin-bottom:0;"><label class="form-label">終了日</label><input class="form-input" type="date" id="tk-end"></div>
         </div>
       </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">開始時間</label><input class="form-input" type="time" id="tk-time-start" onchange="onTkStartTimeChange()"></div>
+      <div class="form-group"><label class="form-label">終了時間</label><input class="form-input" type="time" id="tk-time-end"></div>
     </div>
     <div class="form-group" id="tk-repeat-group"><label class="form-label">🔁 繰り返し</label>
       <div class="repeat-selector" id="tk-repeat-selector">
@@ -772,14 +781,24 @@ async function saveNotifSettings(){
   else{el.textContent='⚠️ 「再度許可を求める」を押してください。';el.style.color='var(--warning)';}
 }
 async function requestNotifPermission(appId){
-  try{
-    let perm='default';
-    if('Notification' in window)perm=await Notification.requestPermission();
-    const tryInit=async(O)=>{try{await O.init({appId,notifyButton:{enable:false},welcomeNotification:{disable:true},serviceWorkerParam:{scope:'/familycal/'},serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'});}catch(e){}};
-    if(window.OneSignal){await tryInit(window.OneSignal);}
-    else if(window.OneSignalDeferred){window.OneSignalDeferred.push(tryInit);}
-    return perm;
-  }catch(e){return 'error';}
+  return new Promise((resolve)=>{
+    window.OneSignalDeferred=window.OneSignalDeferred||[];
+    OneSignalDeferred.push(async function(O){
+      try{
+        await O.init({
+          appId,
+          notifyButton:{enable:false},
+          welcomeNotification:{disable:true},
+          path:'/familycal/'
+        });
+        const granted=await O.Notifications.requestPermission();
+        resolve(granted?'granted':'denied');
+      }catch(e){
+        console.error('OneSignal init error:',e);
+        try{resolve(await Notification.requestPermission());}catch(_){resolve('error');}
+      }
+    });
+  });
 }
 async function retryNotifPermission(){
   if(!state.notifAppId){alert('先にApp IDを設定してください');return;}
@@ -821,7 +840,7 @@ async function scheduleReminders(item,isEvent){
   if(!item.reminders||!item.reminders.length)return [];
   if(!state.notifAppId||!state.notifRestKey)return [];
   const dateStr=isEvent?item.date:(item.due||item.endDate);
-  const timeStr=isEvent?(item.timeStart||'09:00'):'09:00';
+  const timeStr=item.timeStart||'09:00';
   if(!dateStr)return [];
   const ids=[];
   for(const r of item.reminders){
@@ -879,6 +898,10 @@ function onEvStartTimeChange(){
   const start=document.getElementById('ev-time-start').value;
   if(start)document.getElementById('ev-time-end').value=addHours(start,1);
 }
+function onTkStartTimeChange(){
+  const start=document.getElementById('tk-time-start').value;
+  if(start)document.getElementById('tk-time-end').value=addHours(start,1);
+}
 
 // ══════════════════════════════════════════════
 // Tab switching
@@ -927,6 +950,8 @@ function openTaskModal(taskId=null){
   document.getElementById('tk-name').value=tk?.name||'';
   document.getElementById('tk-priority').value=tk?.priority||'medium';
   document.getElementById('tk-note').value=tk?.note||'';
+  document.getElementById('tk-time-start').value=tk?.timeStart||'';
+  document.getElementById('tk-time-end').value=tk?.timeEnd||'';
   document.getElementById('tk-remind-1h').checked=tk?.reminders?.includes('1h')||false;
   document.getElementById('tk-remind-1d').checked=tk?.reminders?.includes('1d')||false;
   const person=tk?.person||'p1';state.tkPerson=person;updatePersonSelector('tk-person-selector',person);
@@ -1007,6 +1032,8 @@ async function saveTask(){
     color:getSelectedColor('tk-color-picker'),
     done:state.editingTaskId?(state.tasks.find(t=>t.id===state.editingTaskId)?.done||false):false,
     person:state.tkPerson,reminders,
+    timeStart:document.getElementById('tk-time-start').value,
+    timeEnd:document.getElementById('tk-time-end').value,
     repeat:(!isRange&&state.tkRepeat)?state.tkRepeat:'none',
     repeatUntil:(!isRange&&state.tkRepeat!=='none')?repeatUntil:null
   };
@@ -1081,16 +1108,17 @@ function renderCalendar(){
     const p2Items=[...p2Evs.map(e=>({...e,_isEv:true})),...p2Tasks.map(t=>({...t,_isEv:false}))];
 
     function chips(items,col){
-      return items.slice(0,2).map(item=>{
+      return items.map(item=>{
         const isEv=item._isEv;
         const cls=isEv?(col==='p1'?'chip-ev-p1':'chip-ev-p2'):(col==='p1'?'chip-tk-p1':'chip-tk-p2');
         const sty=item.color?`background:${item.color}18;color:${item.color};border-color:${item.color}55;border-style:${isEv?'solid':'dashed'};`:'';
-        const tStr=isEv&&item.timeStart?`<span class="chip-time">${item.timeStart} </span>`:'';
+        const tStr=item.timeStart?`<span class="chip-time">${item.timeStart} </span>`:'';
         const rpt=item.repeat&&item.repeat!=='none'?'<span class="chip-repeat">🔁</span>':'';
         const rem=item.reminders&&item.reminders.length?'<span class="chip-repeat">⏰</span>':'';
-        const onclick=isEv?`openEventModal('${item.id}')`:`openTaskModal('${item.id}')`;
-        return `<div class="cal-chip ${cls} ${item.done?'chip-done':''}" style="${sty}" onclick="event.stopPropagation();${onclick}">${tStr}${item.name}${rpt}${rem}</div>`;
-      }).join('')+(items.length>2?`<div class="chip-more">+${items.length-2}件</div>`:'');
+        const editFn=isEv?`openEventModal('${item.id}')`:`openTaskModal('${item.id}')`;
+        const delFn=isEv?`deleteEvent('${item.id}',event)`:`deleteTask('${item.id}')`;
+        return `<div class="cal-chip-wrap"><div class="cal-chip ${cls} ${item.done?'chip-done':''}" style="${sty}" onclick="event.stopPropagation();${editFn}">${tStr}${item.name}${rpt}${rem}</div><button class="cal-chip-del" onclick="event.stopPropagation();${delFn}" title="削除">✕</button></div>`;
+      }).join('');
     }
 
     const rowCls=[isToday?'today':'',isSel?'selected':'',dow===6?'weekend-sat':'',dow===0?'weekend-sun':'',isHol?'is-holiday':''].filter(Boolean).join(' ');
@@ -1137,7 +1165,7 @@ function taskItemHTML(tk,ts){
   return `<div class="task-item ${tk.done?'done':''} fade-in">
     <div class="task-priority priority-${tk.priority||'medium'}"></div>
     <div class="task-check ${tk.done?'checked':''}" onclick="toggleTask('${tk.id}')"></div>
-    <div class="task-content"><div class="task-name">${tk.name}</div><div class="task-meta">${dT?`<div class="task-due ${dC}">📅 ${dT}</div>`:''}<span class="task-person-tag ${pClass(tk.person||'p1')}">${pName(tk.person||'p1')}</span>${repeatTag}${remTag}</div></div>
+    <div class="task-content"><div class="task-name">${tk.name}</div><div class="task-meta">${dT?`<div class="task-due ${dC}">📅 ${dT}</div>`:''} ${tk.timeStart?`<span class="task-due" style="color:var(--blue);">🕐 ${tk.timeStart}${tk.timeEnd?'〜'+tk.timeEnd:''}` + `</span>`:'' }<span class="task-person-tag ${pClass(tk.person||'p1')}">${pName(tk.person||'p1')}</span>${repeatTag}${remTag}</div></div>
     <div class="event-actions"><button class="icon-btn" onclick="openTaskModal('${tk.id}')">✎</button><button class="icon-btn delete" onclick="deleteTask('${tk.id}')">✕</button></div>
   </div>`;
 }
@@ -1196,7 +1224,14 @@ if(state.apiKey&&state.binId){setSyncStatus('connected');syncPull();startSyncTim
 if(state.notifAppId){
   window.OneSignalDeferred=window.OneSignalDeferred||[];
   OneSignalDeferred.push(async function(O){
-    try{await O.init({appId:state.notifAppId,notifyButton:{enable:false},welcomeNotification:{disable:true},serviceWorkerParam:{scope:'/familycal/'},serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'});}catch(e){}
+    try{
+      await O.init({
+        appId:state.notifAppId,
+        notifyButton:{enable:false},
+        welcomeNotification:{disable:true},
+        path:'/familycal/'
+      });
+    }catch(e){console.log('OneSignal auto-init:',e.message);}
   });
 }
 setTimeout(scrollToToday,150);
