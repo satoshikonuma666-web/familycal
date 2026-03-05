@@ -787,6 +787,7 @@ async function requestNotifPermission(appId){
       try{
         await O.init({
           appId,
+          safari_web_id:"web.onesignal.auto.10bba952-d3e6-4be7-b269-bd5caae877a4",
           notifyButton:{enable:false},
           welcomeNotification:{disable:true},
           path:'/familycal/'
@@ -1227,6 +1228,7 @@ if(state.notifAppId){
     try{
       await O.init({
         appId:state.notifAppId,
+        safari_web_id:"web.onesignal.auto.10bba952-d3e6-4be7-b269-bd5caae877a4",
         notifyButton:{enable:false},
         welcomeNotification:{disable:true},
         path:'/familycal/'
