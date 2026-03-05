@@ -10,7 +10,6 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1e8ef0">
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWU4ZWYwIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiMwMGJjZDQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyMmM5OGEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiByeT0iNDAiIGZpbGw9InVybCgjYmcpIi8+PHRleHQgeD0iOTAiIHk9IjEwNSIgZm9udC1zaXplPSI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+Ug/wvdGV4dD48L3N2Zz4=">
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -545,22 +544,27 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <!-- ── Notification Modal ── -->
 <div class="modal-overlay" id="notif-modal">
-  <div class="modal" style="max-width:450px;">
-    <div class="modal-title">🔔 プッシュ通知設定</div>
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-title">🔔 通知設定（ntfy）</div>
     <div id="notif-setup-view">
-      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;padding:9px 11px;margin-bottom:11px;"><div style="font-size:11px;font-weight:700;margin-bottom:5px;">🔍 現在の状態</div><div id="notif-diag"></div></div>
-      <div id="notif-standalone-warn" style="display:none;" class="warn-note">⚠️ <strong>ホーム画面から起動が必要です！</strong> ホーム画面アイコンから起動してください。</div>
-      <div class="sync-box"><h3>📋 手順</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div>Safariでホーム画面に追加 → アイコンから起動</div></div><div class="step-item"><div class="step-num">2</div><div><a href="https://onesignal.com" target="_blank">onesignal.com</a> → App ID と REST API Key をコピー</div></div><div class="step-item"><div class="step-num">3</div><div>下に入力 → 「保存して通知を許可」→ ポップアップが出たら「許可」</div></div></div></div>
-      <div class="form-group"><label class="form-label">OneSignal App ID</label><input class="form-input" id="notif-app-id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" autocorrect="off" autocapitalize="off"></div>
-      <div class="form-group"><label class="form-label">REST API Key</label><input class="form-input" id="notif-rest-key" type="password" placeholder="os_v2_app_..."></div>
-      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('notif-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveNotifSettings()">💾 保存して通知を許可</button></div>
+      <div class="sync-box"><h3>📋 セットアップ手順（3分）</h3><div class="step-list">
+        <div class="step-item"><div class="step-num">1</div><div>iPhoneのApp Storeで「<strong>ntfy</strong>」アプリをインストール（無料）</div></div>
+        <div class="step-item"><div class="step-num">2</div><div>下の「トピック名」に好きな名前を入力（例：<code style="background:var(--surface2);padding:1px 5px;border-radius:4px;">familycal-satoshi</code>）</div></div>
+        <div class="step-item"><div class="step-num">3</div><div>「保存」後、ntfyアプリを開き「<strong>+</strong>」→ 同じトピック名を入力して登録</div></div>
+        <div class="step-item"><div class="step-num">4</div><div>家族のスマホでも同じトピック名をntfyアプリに登録すれば両方に通知が届く</div></div>
+      </div></div>
+      <div class="warn-note">⚠️ トピック名は他人と被らないよう、少し長めにしてください（例：familycal-satoshi-2026）</div>
+      <div class="form-group"><label class="form-label">トピック名 *</label><input class="form-input" id="ntfy-topic-input" placeholder="例：familycal-satoshi-2026" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false"></div>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('notif-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveNtfySettings()">💾 保存</button></div>
     </div>
     <div id="notif-connected-view" style="display:none;">
-      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;padding:9px 11px;margin-bottom:11px;"><div style="font-size:11px;font-weight:700;margin-bottom:5px;">🔍 現在の状態</div><div id="notif-diag2"></div></div>
-      <div id="notif-standalone-warn2" style="display:none;" class="warn-note">⚠️ ホーム画面アイコンから起動してから「再度許可を求める」を押してください。</div>
-      <div id="notif-perm-status" style="font-size:12px;margin-bottom:11px;padding:7px 10px;background:var(--surface3);border-radius:7px;"></div>
-      <button class="btn btn-primary" onclick="retryNotifPermission()" style="width:100%;justify-content:center;margin-bottom:8px;">🔔 再度許可を求める</button>
-      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;padding:11px;margin-bottom:11px;"><div style="font-size:12px;font-weight:700;margin-bottom:7px;">🧪 通知テスト</div><button class="btn btn-secondary" onclick="testNotification()" style="width:100%;justify-content:center;margin-bottom:6px;">テスト通知を送る</button><div id="notif-test-result" style="font-size:11px;color:var(--text2);text-align:center;min-height:14px;"></div></div>
+      <div class="success-box"><div style="font-size:22px;">🔔</div><div><div style="font-size:13px;font-weight:700;color:var(--green);">通知設定済み</div><div id="ntfy-topic-display" style="font-size:11px;color:var(--text2);margin-top:2px;"></div></div></div>
+      <div class="info-note">💡 家族のiPhoneでも「ntfy」アプリに同じトピック名を登録してください。</div>
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;padding:11px;margin-bottom:11px;">
+        <div style="font-size:12px;font-weight:700;margin-bottom:7px;">🧪 通知テスト</div>
+        <button class="btn btn-secondary" onclick="testNotification()" style="width:100%;justify-content:center;margin-bottom:6px;">テスト通知を送る</button>
+        <div id="notif-test-result" style="font-size:11px;color:var(--text2);text-align:center;min-height:14px;"></div>
+      </div>
       <div class="modal-actions"><button class="btn btn-danger" onclick="clearNotifSettings()">通知を無効にする</button><button class="btn btn-secondary" onclick="closeModal('notif-modal')">閉じる</button></div>
     </div>
   </div>
@@ -598,7 +602,7 @@ let state={
   evRepeat:'none',tkRepeat:'none',
   p1Name:'自分',p2Name:'家族',
   apiKey:null,binId:null,
-  notifAppId:null,notifRestKey:null,
+  ntfyTopic:null,
   syncTimer:null,lastSyncHash:null,syncStatus:'disconnected',
   historyTarget:null // 'ev'|'tk'|'shop'
 };
@@ -647,7 +651,7 @@ function loadLocal(){
       state.evHistory=p.evHistory||[];state.tkHistory=p.tkHistory||[];state.shopHistory=p.shopHistory||[];
       state.apiKey=p.apiKey||null;state.binId=p.binId||null;
       state.p1Name=p.p1Name||'自分';state.p2Name=p.p2Name||'家族';
-      state.notifAppId=p.notifAppId||null;state.notifRestKey=p.notifRestKey||null;
+      state.ntfyTopic=p.ntfyTopic||null;
     }
   }catch(e){}
 }
@@ -656,7 +660,7 @@ function saveLocal(){
     events:state.events,tasks:state.tasks,shopItems:state.shopItems,
     evHistory:state.evHistory,tkHistory:state.tkHistory,shopHistory:state.shopHistory,
     apiKey:state.apiKey,binId:state.binId,p1Name:state.p1Name,p2Name:state.p2Name,
-    notifAppId:state.notifAppId,notifRestKey:state.notifRestKey
+    ntfyTopic:state.ntfyTopic
   }));
 }
 
@@ -746,143 +750,83 @@ function disconnectSync(){if(!confirm('同期を解除しますか？'))return;i
 function copyText(id,label){navigator.clipboard.writeText(document.getElementById(id).value).then(()=>alert(label+'をコピーしました！'));}
 
 // ══════════════════════════════════════════════
-// Notifications + Reminders
+// Notifications (ntfy.sh)
 // ══════════════════════════════════════════════
 function openNotifModal(){
-  const c=!!(state.notifAppId&&state.notifRestKey);
-  document.getElementById('notif-setup-view').style.display=c?'none':'';
-  document.getElementById('notif-connected-view').style.display=c?'':'none';
-  if(!c){document.getElementById('notif-app-id').value=state.notifAppId||'';document.getElementById('notif-rest-key').value='';}
-  updateNotifDiag();openModal('notif-modal');
+  const connected=!!state.ntfyTopic;
+  document.getElementById('notif-setup-view').style.display=connected?'none':'';
+  document.getElementById('notif-connected-view').style.display=connected?'':'none';
+  if(!connected){document.getElementById('ntfy-topic-input').value='';}
+  else{document.getElementById('ntfy-topic-display').textContent='トピック: '+state.ntfyTopic;}
+  openModal('notif-modal');
 }
-function updateNotifDiag(){
-  const isStandalone=window.navigator.standalone===true,isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
-  const notifSupport='Notification' in window,permStatus=notifSupport?Notification.permission:'未対応',swSupport='serviceWorker' in navigator;
-  const html=`<div style="font-size:10px;line-height:1.9;color:var(--text2);">
-    <div>📱 ホーム画面から起動: <strong style="color:${isStandalone?'var(--green)':'var(--danger)'}">${isStandalone?'✅ OK':'❌ 必須'}</strong></div>
-    <div>🔔 通知API: <strong style="color:${notifSupport?'var(--green)':'var(--danger)'}">${notifSupport?'✅ 対応':'❌ 非対応'}</strong></div>
-    <div>🔐 許可状態: <strong style="color:${permStatus==='granted'?'var(--green)':permStatus==='denied'?'var(--danger)':'var(--warning)'}">${permStatus==='granted'?'✅ 許可済み':permStatus==='denied'?'❌ 拒否中':'⚠️ 未設定'}</strong></div>
-    <div>⚙️ ServiceWorker: <strong>${swSupport?'✅ 対応':'❌ 非対応'}</strong></div>
-  </div>`;
-  ['notif-diag','notif-diag2'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});
-  const showWarn=isIOS&&!isStandalone;
-  ['notif-standalone-warn','notif-standalone-warn2'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=showWarn?'':'none';});
+function saveNtfySettings(){
+  const topic=document.getElementById('ntfy-topic-input').value.trim();
+  if(!topic){alert('トピック名を入力してください');return;}
+  if(topic.length<5){alert('トピック名は5文字以上にしてください');return;}
+  state.ntfyTopic=topic;saveLocal();
+  document.getElementById('notif-setup-view').style.display='none';
+  document.getElementById('notif-connected-view').style.display='';
+  document.getElementById('ntfy-topic-display').textContent='トピック: '+topic;
+  updateNotifBadge();
+  alert('✅ 保存しました！
+ntfyアプリで「'+topic+'」を登録してください。');
 }
-async function saveNotifSettings(){
-  const appId=document.getElementById('notif-app-id').value.trim();const rk=document.getElementById('notif-rest-key').value.trim();
-  if(!appId||!rk){alert('App IDとREST API Keyを両方入力してください');return;}
-  state.notifAppId=appId;state.notifRestKey=rk;saveLocal();
-  const result=await requestNotifPermission(appId);
-  document.getElementById('notif-setup-view').style.display='none';document.getElementById('notif-connected-view').style.display='';
-  updateNotifBadge();updateNotifDiag();
-  const el=document.getElementById('notif-perm-status');
-  if(result==='granted'){el.textContent='✅ 通知許可済み！';el.style.color='var(--green)';}
-  else if(result==='denied'){el.textContent='❌ 拒否されています。設定アプリ→通知→FamilyCalで許可してください。';el.style.color='var(--danger)';}
-  else{el.textContent='⚠️ 「再度許可を求める」を押してください。';el.style.color='var(--warning)';}
+function clearNotifSettings(){
+  if(!confirm('通知を無効にしますか？'))return;
+  state.ntfyTopic=null;saveLocal();updateNotifBadge();closeModal('notif-modal');
 }
-async function requestNotifPermission(appId){
-  return new Promise((resolve)=>{
-    window.OneSignalDeferred=window.OneSignalDeferred||[];
-    OneSignalDeferred.push(async function(O){
-      try{
-        await O.init({
-          appId,
-          safari_web_id:"web.onesignal.auto.054b4fc9-febb-45d1-b366-8fc183da0d9e",
-          notifyButton:{enable:false},
-          welcomeNotification:{disable:true},
-          path:'/familycal/'
-        });
-        // 通知許可を求める
-        const granted=await O.Notifications.requestPermission();
-        console.log('Permission result:',granted);
-        // 許可されたら明示的にoptInして購読登録を完了させる
-        if(granted){
-          try{
-            await O.User.PushSubscription.optIn();
-            console.log('optIn complete. subscribed:',O.User.PushSubscription.subscribed);
-          }catch(optInErr){console.warn('optIn error:',optInErr);}
-        }
-        resolve(granted?'granted':'denied');
-      }catch(e){
-        console.error('OneSignal init error:',e);
-        try{resolve(await Notification.requestPermission());}catch(_){resolve('error');}
-      }
-    });
-  });
-}
-async function retryNotifPermission(){
-  if(!state.notifAppId){alert('先にApp IDを設定してください');return;}
-  // OneSignalが既にロード済みの場合は直接optInを試みる
-  if(window.OneSignal){
-    try{
-      await window.OneSignal.User.PushSubscription.optIn();
-      const subId=window.OneSignal.User.PushSubscription.id;
-      console.log('Direct optIn result, subscriptionId:',subId);
-      const el=document.getElementById('notif-perm-status');
-      if(subId){el.textContent='✅ 購読登録完了！通知が届きます。';el.style.color='var(--green)';updateNotifDiag();return;}
-    }catch(e){console.warn('Direct optIn failed:',e);}
-  }
-  const result=await requestNotifPermission(state.notifAppId);
-  const el=document.getElementById('notif-perm-status');
-  if(result==='granted'){el.textContent='✅ 許可済み！';el.style.color='var(--green)';}
-  else if(result==='denied'){el.textContent='❌ 設定アプリ→通知→FamilyCalで許可してください。';el.style.color='var(--danger)';}
-  else{el.textContent='⚠️ ホーム画面追加済みのアイコンから起動してください。';el.style.color='var(--warning)';}
-  updateNotifDiag();
-}
-function clearNotifSettings(){if(!confirm('通知を無効にしますか？'))return;state.notifAppId=null;state.notifRestKey=null;saveLocal();updateNotifBadge();closeModal('notif-modal');}
 function updateNotifBadge(){
   const btn=document.getElementById('notif-btn'),lbl=document.getElementById('notif-label');
-  const set=!!(state.notifAppId&&state.notifRestKey);
-  const granted='Notification' in window&&Notification.permission==='granted';
-  if(set&&granted){btn.classList.add('active');lbl.textContent='通知ON';}
-  else if(set){btn.classList.add('active');lbl.textContent='通知設定済';}
+  if(state.ntfyTopic){btn.classList.add('active');lbl.textContent='通知ON';}
   else{btn.classList.remove('active');lbl.textContent='通知設定';}
 }
 async function sendPush(body){
-  if(!state.notifAppId||!state.notifRestKey)return;
-  try{await fetch('https://onesignal.com/api/v1/notifications',{method:'POST',mode:'cors',headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},body:JSON.stringify({app_id:state.notifAppId,included_segments:['All'],headings:{ja:'FamilyCal 📅',en:'FamilyCal 📅'},contents:{ja:body,en:body}})});}catch(e){}
+  if(!state.ntfyTopic)return;
+  try{
+    await fetch('https://ntfy.sh/'+encodeURIComponent(state.ntfyTopic),{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8','Title':'FamilyCal 📅','Priority':'default','Tags':'calendar'},
+      body:body
+    });
+  }catch(e){console.warn('ntfy send error:',e);}
 }
 async function testNotification(){
-  if(!state.notifAppId||!state.notifRestKey){alert('通知設定が完了していません');return;}
-  const el=document.getElementById('notif-test-result');el.textContent='送信中...';
-  try{const res=await fetch('https://onesignal.com/api/v1/notifications',{method:'POST',mode:'cors',headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},body:JSON.stringify({app_id:state.notifAppId,included_segments:['All'],headings:{ja:'FamilyCal テスト'},contents:{ja:'🔔 通知テストです！正常に届いています。'}})});
-    if(res.ok){const j=await res.json();el.textContent=j.recipients>0?'✅ 送信成功！'+j.recipients+'台に届きました':'⚠️ 送信しましたが受信端末が0件です。各端末で通知を許可してください';}
-    else{const t=await res.text();el.textContent='❌ APIエラー('+res.status+'): '+t;}
-  }catch(e){el.innerHTML='⚠️ iOSからの直接テストはできません。実際の操作で通知が届くかご確認ください。<br><small>'+e.message+'</small>';}
+  if(!state.ntfyTopic){alert('通知設定が完了していません');return;}
+  const el=document.getElementById('notif-test-result');
+  el.textContent='送信中...';
+  try{
+    const res=await fetch('https://ntfy.sh/'+encodeURIComponent(state.ntfyTopic),{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8','Title':'FamilyCal テスト 🔔','Priority':'default','Tags':'bell'},
+      body:'✅ テスト通知です！ntfyアプリで受信できていれば設定完了です。'
+    });
+    if(res.ok){el.textContent='✅ 送信成功！ntfyアプリを確認してください。';el.style.color='var(--green)';}
+    else{el.textContent='❌ 送信失敗('+res.status+')';el.style.color='var(--danger)';}
+  }catch(e){el.textContent='❌ エラー: '+e.message;el.style.color='var(--danger)';}
 }
 
-// ── Reminder scheduling ──
-function toOneSignalDate(dt){
-  const pad=n=>String(n).padStart(2,'0');
-  return `${dt.getUTCFullYear()}-${pad(dt.getUTCMonth()+1)}-${pad(dt.getUTCDate())} ${pad(dt.getUTCHours())}:${pad(dt.getUTCMinutes())}:00 GMT+0000`;
-}
+// ── Reminder scheduling (ntfy版) ──
 async function scheduleReminders(item,isEvent){
-  if(!item.reminders||!item.reminders.length)return [];
-  if(!state.notifAppId||!state.notifRestKey)return [];
+  // ntfy.shはサーバーサイド予約送信非対応のため、クライアント側タイマーで代替
+  if(!item.reminders||!item.reminders.length||!state.ntfyTopic)return [];
   const dateStr=isEvent?item.date:(item.due||item.endDate);
   const timeStr=item.timeStart||'09:00';
   if(!dateStr)return [];
-  const ids=[];
+  const now=new Date();
   for(const r of item.reminders){
     const mins=r==='1h'?60:r==='1d'?1440:0;if(!mins)continue;
     const dt=new Date(dateStr+'T'+timeStr+':00');
     dt.setMinutes(dt.getMinutes()-mins);
-    if(dt<=new Date())continue;
+    const delay=dt-now;
+    if(delay<=0)continue;
     const label=r==='1h'?'1時間前':'1日前';
-    const body=`⏰ ${label}：${item.name}${isEvent&&item.timeStart?' ('+item.timeStart+'〜'+(item.timeEnd||'')+')'  :''}`;
-    try{
-      const res=await fetch('https://onesignal.com/api/v1/notifications',{method:'POST',mode:'cors',headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},body:JSON.stringify({app_id:state.notifAppId,included_segments:['All'],headings:{ja:'FamilyCal ⏰',en:'FamilyCal ⏰'},contents:{ja:body,en:body},send_after:toOneSignalDate(dt)})});
-      if(res.ok){const j=await res.json();if(j.id)ids.push({id:j.id,type:r});}
-    }catch(e){}
+    const body=`⏰ ${label}：${item.name}${item.timeStart?' ('+item.timeStart+(item.timeEnd?'〜'+item.timeEnd:'')+')'  :''}`;
+    setTimeout(()=>sendPush(body),delay);
   }
-  return ids;
+  return [];
 }
-async function cancelReminders(notifIds){
-  if(!notifIds||!notifIds.length||!state.notifAppId||!state.notifRestKey)return;
-  for(const {id} of notifIds){
-    try{await fetch(`https://onesignal.com/api/v1/notifications/${id}?app_id=${state.notifAppId}`,{method:'DELETE',mode:'cors',headers:{'Authorization':'Basic '+state.notifRestKey}});}catch(e){}
-  }
-}
+async function cancelReminders(notifIds){/* ntfyはタイマー管理のためキャンセル不可 */}
 
 // ══════════════════════════════════════════════
 // Settings
@@ -1241,20 +1185,7 @@ function render(){
 // ══════════════════════════════════════════════
 loadLocal();render();
 if(state.apiKey&&state.binId){setSyncStatus('connected');syncPull();startSyncTimer();}
-if(state.notifAppId){
-  window.OneSignalDeferred=window.OneSignalDeferred||[];
-  OneSignalDeferred.push(async function(O){
-    try{
-      await O.init({
-        appId:state.notifAppId,
-        safari_web_id:"web.onesignal.auto.054b4fc9-febb-45d1-b366-8fc183da0d9e",
-        notifyButton:{enable:false},
-        welcomeNotification:{disable:true},
-        path:'/familycal/'
-      });
-    }catch(e){console.log('OneSignal auto-init:',e.message);}
-  });
-}
+
 setTimeout(scrollToToday,150);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')['event-modal','task-modal','history-modal','sync-modal','settings-modal','notif-modal'].forEach(closeModal);});
 (function(){
