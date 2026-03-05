@@ -783,11 +783,11 @@ function updateNotifBadge(){
 async function sendPush(body){
   if(!state.ntfyTopic)return;
   try{
-    // iOSはカスタムヘッダー不可のためURLパラメータで送信
-    const url='https://ntfy.sh/'+encodeURIComponent(state.ntfyTopic)
-      +'?title='+encodeURIComponent('FamilyCal 📅')
-      +'&priority=default&tags=calendar';
-    await fetch(url,{method:'POST',mode:'no-cors',body:body});
+    // ntfy.shはCORSサポート済み。ヘッダー・URLパラメータなしで最小構成
+    await fetch('https://ntfy.sh/'+state.ntfyTopic,{
+      method:'POST',
+      body:'[FamilyCal] '+body
+    });
   }catch(e){console.warn('ntfy send error:',e);}
 }
 async function testNotification(){
@@ -795,12 +795,17 @@ async function testNotification(){
   const el=document.getElementById('notif-test-result');
   el.textContent='送信中...';
   try{
-    const url='https://ntfy.sh/'+encodeURIComponent(state.ntfyTopic)
-      +'?title='+encodeURIComponent('FamilyCal テスト 🔔')
-      +'&priority=default&tags=bell';
-    await fetch(url,{method:'POST',mode:'no-cors',body:'✅ テスト通知です！ntfyアプリで受信できていれば設定完了です。'});
-    el.textContent='✅ 送信しました！ntfyアプリを確認してください。';
-    el.style.color='var(--green)';
+    const res=await fetch('https://ntfy.sh/'+state.ntfyTopic,{
+      method:'POST',
+      body:'FamilyCal テスト通知です。ntfyアプリで受信できていれば設定完了です。'
+    });
+    if(res.ok){
+      el.textContent='✅ 送信成功！ntfyアプリを確認してください。';
+      el.style.color='var(--green)';
+    }else{
+      el.textContent='送信しました（status:'+res.status+'）ntfyアプリを確認してください。';
+      el.style.color='var(--text2)';
+    }
   }catch(e){
     el.textContent='❌ エラー: '+e.message;
     el.style.color='var(--danger)';
