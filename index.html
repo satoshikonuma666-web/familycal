@@ -13,7 +13,7 @@
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
+:root{
   --bg:#f0fbfa;--surface:#fff;--surface2:#e8f8f5;--surface3:#f4fdfc;--border:#c0e8e0;
   --blue:#1e8ef0;--blue-mid:#3aa3f8;--blue-light:#dff0ff;--blue-lighter:#f0f8ff;
   --cyan:#00bcd4;--green:#22c98a;--green-mid:#3dd9a0;--green-light:#dcf8ef;--green-lighter:#f0fdf8;
@@ -25,209 +25,223 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 5% 5%,rgba(30,142,240,.07) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 95% 95%,rgba(34,201,138,.08) 0%,transparent 60%);pointer-events:none;z-index:0}
-.app{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:14px}
+.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:12px}
 
-/* ── Header ── */
-.header{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;margin-bottom:11px;background:var(--surface);border-radius:16px;box-shadow:var(--shadow);border:1.5px solid var(--border);flex-wrap:wrap;gap:8px}
+/* Header */
+.header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;margin-bottom:10px;background:var(--surface);border-radius:14px;box-shadow:var(--shadow);border:1.5px solid var(--border);flex-wrap:wrap;gap:8px}
 .header-left{display:flex;align-items:center;gap:10px}
-.header-logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 3px 10px rgba(30,142,240,.28);flex-shrink:0}
-.header-left h1{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 50%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 3px 10px rgba(30,142,240,.28);flex-shrink:0}
+.header-left h1{font-family:'Nunito',sans-serif;font-size:19px;font-weight:900;background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 50%,var(--green) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .header-left p{font-size:11px;color:var(--text3);margin-top:1px}
-.header-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.sync-badge,.notif-btn{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:18px;font-size:11px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;transition:all .2s;font-weight:500}
+.header-actions{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.sync-badge,.notif-btn{display:flex;align-items:center;gap:4px;padding:4px 9px;border-radius:16px;font-size:11px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;transition:all .2s;font-weight:500}
 .sync-badge:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
-.notif-btn:hover{border-color:var(--warning);color:var(--warning);background:var(--warning-light)}
-.notif-btn.active{border-color:var(--warning);background:var(--warning-light);color:var(--warning)}
+.notif-btn:hover,.notif-btn.active{border-color:var(--warning);color:var(--warning);background:var(--warning-light)}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0}
 .sync-badge.connected .sync-dot{background:var(--green);box-shadow:0 0 6px var(--green)}
 .sync-badge.syncing .sync-dot{background:var(--warning);animation:blink .8s infinite}
 .sync-badge.error .sync-dot{background:var(--danger)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.btn{padding:6px 13px;border-radius:10px;border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;transition:all .18s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+
+/* Buttons */
+.btn{padding:6px 12px;border-radius:9px;border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;transition:all .18s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
 .btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:white;box-shadow:0 3px 10px rgba(30,142,240,.28)}
 .btn-primary:hover{transform:translateY(-1px)}
 .btn-green{background:linear-gradient(135deg,var(--green),var(--green-mid));color:white;box-shadow:0 3px 10px rgba(34,201,138,.26)}
 .btn-green:hover{transform:translateY(-1px)}
 .btn-secondary{background:var(--surface);color:var(--text2);border:1.5px solid var(--border)}
 .btn-secondary:hover{background:var(--blue-light);color:var(--blue);border-color:var(--blue)}
-.btn-icon{background:var(--surface);border:1.5px solid var(--border);color:var(--text2);padding:5px 9px;border-radius:9px;cursor:pointer;font-size:13px;transition:all .15s;display:flex;align-items:center}
+.btn-icon{background:var(--surface);border:1.5px solid var(--border);color:var(--text2);padding:5px 8px;border-radius:8px;cursor:pointer;font-size:12px;transition:all .15s;display:flex;align-items:center}
 .btn-icon:hover{background:var(--blue-light);color:var(--blue);border-color:var(--blue)}
 .btn-danger{background:var(--danger-light);color:var(--danger);border:1.5px solid rgba(255,92,106,.3)}
 .btn-danger:hover{background:rgba(255,92,106,.2)}
+.btn-warning{background:var(--warning-light);color:var(--warning);border:1.5px solid rgba(255,159,28,.3)}
 
-/* ── Tab Navigation ── */
-.tabs-nav{display:flex;gap:4px;margin-bottom:13px;background:var(--surface);border-radius:14px;padding:5px;box-shadow:var(--shadow);border:1.5px solid var(--border)}
-.tab-btn{flex:1;padding:8px 6px;border-radius:10px;border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;transition:all .2s;background:transparent;color:var(--text3);display:flex;align-items:center;justify-content:center;gap:4px}
-.tab-btn:hover:not(.tab-active){background:var(--surface2);color:var(--text2)}
-.tab-btn.tab-active-blue{background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;box-shadow:0 3px 12px rgba(30,142,240,.28)}
-.tab-btn.tab-active-green{background:linear-gradient(135deg,var(--green),var(--green-mid));color:white;box-shadow:0 3px 12px rgba(34,201,138,.28)}
-.tab-btn.tab-active-orange{background:linear-gradient(135deg,var(--warning),#ffbe55);color:white;box-shadow:0 3px 12px rgba(255,159,28,.28)}
+/* Tabs */
+.tabs-nav{display:flex;gap:4px;margin-bottom:11px;background:var(--surface);border-radius:13px;padding:5px;box-shadow:var(--shadow);border:1.5px solid var(--border)}
+.tab-btn{flex:1;padding:8px 5px;border-radius:9px;border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;transition:all .2s;background:transparent;color:var(--text3);display:flex;align-items:center;justify-content:center;gap:4px}
+.tab-btn:hover:not(.tab-active-blue):not(.tab-active-green):not(.tab-active-orange){background:var(--surface2);color:var(--text2)}
+.tab-btn.tab-active-blue{background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;box-shadow:0 3px 10px rgba(30,142,240,.28)}
+.tab-btn.tab-active-green{background:linear-gradient(135deg,var(--green),var(--green-mid));color:white;box-shadow:0 3px 10px rgba(34,201,138,.26)}
+.tab-btn.tab-active-orange{background:linear-gradient(135deg,var(--warning),#ffbe55);color:white;box-shadow:0 3px 10px rgba(255,159,28,.26)}
 .tab-content{display:none}
 .tab-content.active{display:block}
 
-/* ── Calendar Layout ── */
-.cal-page{display:grid;grid-template-columns:1fr 300px;gap:13px}
-.cal-panel{background:var(--surface);border:1.5px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
-.cal-topbar{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter));border-bottom:1.5px solid var(--border);gap:8px}
-.cal-month-nav{display:flex;align-items:center;gap:6px}
-.cal-month-title{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:var(--text);min-width:120px;text-align:center}
-.nav-btn{width:29px;height:29px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;color:var(--blue);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;transition:all .15s}
+/* Today Panel */
+.today-panel{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;box-shadow:var(--shadow);margin-bottom:11px;overflow:hidden}
+.today-panel-header{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;background:linear-gradient(135deg,#fffde7,var(--green-lighter));border-bottom:1.5px solid var(--border)}
+.today-panel-title{font-size:13px;font-weight:700;color:var(--text);font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:6px}
+.today-panel-date{font-size:11px;color:var(--text3);font-weight:400}
+.today-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0}
+.today-col{padding:9px 12px}
+.today-col+.today-col{border-left:1.5px solid var(--border)}
+.today-col-label{font-size:10px;font-weight:700;letter-spacing:.05em;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.today-chip{display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;font-size:11px;cursor:pointer;transition:all .15s;margin-bottom:3px}
+.today-chip:hover{border-color:var(--blue);background:var(--blue-light)}
+.today-chip.done{opacity:.5;text-decoration:line-through}
+.today-empty{font-size:10px;color:var(--text3);text-align:center;padding:6px 0}
+
+/* Calendar */
+.cal-panel{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.cal-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter));border-bottom:1.5px solid var(--border);gap:8px;flex-wrap:wrap}
+.cal-month-nav{display:flex;align-items:center;gap:5px}
+.cal-month-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;color:var(--text);min-width:115px;text-align:center}
+.nav-btn{width:28px;height:28px;background:var(--surface);border:1.5px solid var(--border);border-radius:7px;color:var(--blue);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;transition:all .15s}
 .nav-btn:hover{background:var(--blue);color:white;border-color:var(--blue)}
-
-/* Calendar person header */
-.cal-person-header{display:grid;grid-template-columns:56px 1fr 1fr;border-bottom:2px solid var(--border);background:var(--surface3)}
-.cal-date-col-head{padding:7px 5px;font-size:10px;color:var(--text3);font-weight:700;letter-spacing:.04em}
-.cal-person-col{padding:7px 10px;font-weight:700;font-size:12px;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:5px;border-left:1.5px solid var(--border)}
+.cal-person-header{display:grid;grid-template-columns:52px 1fr 1fr;border-bottom:2px solid var(--border);background:var(--surface3)}
+.cal-date-col-head{padding:6px 4px;font-size:10px;color:var(--text3);font-weight:700}
+.cal-person-col{padding:6px 9px;font-weight:700;font-size:11px;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:5px;border-left:1.5px solid var(--border)}
 .person-col-1{color:var(--blue)}.person-col-2{color:var(--green)}
-.person-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.person-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .p1-dot{background:var(--blue)}.p2-dot{background:var(--green)}
-
-/* Calendar rows – fixed row height, chips wrap */
-.cal-scroll{max-height:calc(100vh - 230px);overflow-y:auto}
-.cal-row{display:grid;grid-template-columns:56px 1fr 1fr;border-bottom:1px solid var(--border);/* ★ 固定高さ */min-height:56px;height:56px;overflow:hidden;transition:background .12s}
+.cal-scroll{max-height:calc(100vh - 300px);overflow-y:auto}
+.cal-row{display:grid;grid-template-columns:52px 1fr 1fr;border-bottom:1px solid var(--border);min-height:52px;height:52px;overflow:hidden;transition:background .12s}
 .cal-row:hover{background:rgba(30,142,240,.03)}
 .cal-row.today{background:rgba(30,142,240,.05)}
 .cal-row.today .cal-date-cell{background:var(--blue-light)}
 .cal-row.weekend-sat .day-num{color:var(--blue)}
-.cal-row.weekend-sun .day-num{color:var(--danger)}
-.cal-row.is-holiday .day-num{color:var(--danger)}
+.cal-row.weekend-sun .day-num,.cal-row.is-holiday .day-num{color:var(--danger)}
 .cal-row.weekend-sat,.cal-row.weekend-sun{background:rgba(0,0,0,.012)}
 .cal-row.is-holiday{background:rgba(255,92,106,.03)}
-.cal-date-cell{padding:5px 3px 3px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;cursor:pointer;border-right:1px solid var(--border);transition:all .12s;user-select:none}
-.cal-date-cell:hover{background:var(--blue-light)}
 .cal-row.selected .cal-date-cell{background:var(--green-light)}
+.cal-date-cell{padding:4px 3px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;cursor:pointer;border-right:1px solid var(--border);transition:all .12s;user-select:none}
+.cal-date-cell:hover{background:var(--blue-light)}
 .day-num{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:var(--text);line-height:1}
 .day-week{font-size:9px;font-weight:700;color:var(--text3);font-family:'Nunito',sans-serif}
-.day-holiday-label{font-size:7px;color:var(--danger);font-weight:700;text-align:center;line-height:1.2;margin-top:1px;width:100%;word-break:keep-all;padding:0 1px}
+.day-holiday-label{font-size:7px;color:var(--danger);font-weight:700;text-align:center;line-height:1.1;margin-top:1px;width:100%;padding:0 1px;word-break:keep-all}
 .cal-row.today .day-num,.cal-row.today .day-week{color:var(--blue)}
-
-/* Event cells – chips wrap inside fixed height row */
-.cal-event-cell{padding:3px 5px;display:flex;flex-direction:column;gap:2px;border-left:1.5px solid var(--border);cursor:pointer;overflow:hidden;height:56px}
+.cal-event-cell{padding:3px 4px;display:flex;flex-direction:column;gap:2px;border-left:1.5px solid var(--border);cursor:pointer;overflow:hidden;height:52px}
 .cal-event-cell:hover{background:rgba(30,142,240,.04)}
-/* ★ チップは折り返し・2行まで */
-.cal-event-chip{display:flex;align-items:flex-start;gap:3px;padding:2px 6px;border-radius:5px;font-size:10px;font-weight:500;/* 折り返し */white-space:normal;word-break:break-all;line-height:1.3;/* 2行クランプ */display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:100%;cursor:pointer;transition:opacity .12s}
-.cal-event-chip:hover{opacity:.8}
-.chip-p1{background:var(--p1-light);color:var(--p1);border:1px solid rgba(30,142,240,.2)}
-.chip-p2{background:var(--p2-light);color:var(--p2);border:1px solid rgba(34,201,138,.2)}
-.chip-task-p1,.chip-task-p2{background:rgba(255,159,28,.12);color:var(--warning);border:1px solid rgba(255,159,28,.2)}
-.chip-done{opacity:.45;text-decoration:line-through}
-.chip-custom{border-width:1px;border-style:solid}
+
+/* Calendar chips – EVENT: solid border, TASK: dashed border */
+.cal-chip{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:2px 5px;border-radius:5px;font-size:10px;font-weight:500;white-space:normal;word-break:break-all;line-height:1.3;max-width:100%;cursor:pointer;transition:opacity .12s}
+.cal-chip:hover{opacity:.8}
+/* Events: solid */
+.chip-ev-p1{background:var(--p1-light);color:var(--p1);border:1.5px solid rgba(30,142,240,.35)}
+.chip-ev-p2{background:var(--p2-light);color:var(--p2);border:1.5px solid rgba(34,201,138,.35)}
+/* Tasks: dashed */
+.chip-tk-p1{background:var(--warning-light);color:#b36000;border:1.5px dashed rgba(255,159,28,.6)}
+.chip-tk-p2{background:#fff0e8;color:#b36000;border:1.5px dashed rgba(255,159,28,.5)}
+.chip-done{opacity:.4;text-decoration:line-through}
 .chip-time{font-size:9px;opacity:.75;flex-shrink:0;white-space:nowrap}
+.chip-repeat{font-size:8px;opacity:.6;flex-shrink:0}
+.chip-more{font-size:9px;color:var(--text3);padding:1px 4px}
 
-/* ── Sidebar ── */
-.sidebar{display:flex;flex-direction:column;gap:12px}
-.panel{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
-.panel-header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1.5px solid var(--border);background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter))}
+/* Panels */
+.panel{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:11px}
+.panel-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1.5px solid var(--border);background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter))}
 .panel-title{font-size:13px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif}
-.panel-badge{font-size:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;border-radius:9px;padding:2px 7px;font-weight:700}
-.panel-add-btn{width:27px;height:27px;background:linear-gradient(135deg,var(--green),var(--green-mid));border:none;border-radius:8px;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;transition:all .15s;font-weight:700}
+.panel-badge{font-size:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;border-radius:9px;padding:1px 6px;font-weight:700}
+.panel-add-btn{width:26px;height:26px;background:linear-gradient(135deg,var(--green),var(--green-mid));border:none;border-radius:7px;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1;transition:all .15s}
 .panel-add-btn:hover{transform:scale(1.12) rotate(5deg)}
-.today-section{padding:9px}
-.today-chip-list{display:flex;flex-direction:column;gap:4px}
-.today-chip{display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;font-size:11px;cursor:pointer;transition:all .15s}
-.today-chip:hover{border-color:var(--blue);background:var(--blue-light)}
-.today-chip.done{opacity:.5;text-decoration:line-through}
 
-/* ── Tasks Tab ── */
-.tasks-page{max-width:720px;margin:0 auto}
-.filter-tabs{display:flex;gap:4px;padding:9px 10px 0;flex-wrap:wrap}
-.filter-tab{font-size:11px;padding:3px 10px;border-radius:18px;border:1.5px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .15s;font-family:'Noto Sans JP',sans-serif;font-weight:700}
+/* Task list */
+.filter-tabs{display:flex;gap:4px;padding:8px 10px 0;flex-wrap:wrap}
+.filter-tab{font-size:11px;padding:3px 9px;border-radius:16px;border:1.5px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all .15s;font-family:'Noto Sans JP',sans-serif;font-weight:700}
 .filter-tab.active{background:linear-gradient(135deg,var(--blue),var(--cyan));border-color:transparent;color:white}
-.tasks-list{padding:8px;display:flex;flex-direction:column;gap:4px}
-.task-item{display:flex;align-items:flex-start;gap:7px;padding:8px 10px;background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;transition:all .15s}
+.tasks-list{padding:7px;display:flex;flex-direction:column;gap:3px}
+.task-item{display:flex;align-items:flex-start;gap:6px;padding:7px 9px;background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;transition:all .15s}
 .task-item:hover{border-color:var(--green);background:var(--green-light)}
-.task-item.done{opacity:.55}
-.task-check{width:17px;height:17px;border-radius:5px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s;background:white}
-.task-check:hover{border-color:var(--green);background:var(--green-light)}
+.task-item.done{opacity:.5}
+.task-check{width:16px;height:16px;border-radius:5px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s;background:white}
+.task-check:hover{border-color:var(--green)}
 .task-check.checked{background:linear-gradient(135deg,var(--green),var(--green-mid));border-color:transparent}
-.task-check.checked::after{content:'✓';color:white;font-size:10px;font-weight:900}
-.task-content{flex:1}
+.task-check.checked::after{content:'✓';color:white;font-size:9px;font-weight:900}
+.task-content{flex:1;min-width:0}
 .task-name{font-size:12px;font-weight:700;color:var(--text)}
 .task-item.done .task-name{text-decoration:line-through;color:var(--text3)}
-.task-meta{display:flex;align-items:center;gap:5px;margin-top:2px;flex-wrap:wrap}
+.task-meta{display:flex;align-items:center;gap:4px;margin-top:2px;flex-wrap:wrap}
 .task-due{font-size:10px;color:var(--text3);font-weight:500}
 .task-due.overdue{color:var(--danger)}.task-due.today-due{color:var(--warning)}
-.task-person-tag{font-size:9px;padding:1px 6px;border-radius:7px;font-weight:700}
+.task-person-tag{font-size:9px;padding:1px 5px;border-radius:6px;font-weight:700;flex-shrink:0}
 .tag-p1{background:var(--blue-light);color:var(--blue)}
 .tag-p2{background:var(--green-light);color:var(--green)}
 .tag-both{background:linear-gradient(90deg,var(--blue-light),var(--green-light));color:var(--text2)}
-.task-priority{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.task-repeat-tag{font-size:9px;padding:1px 5px;border-radius:6px;background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
+.task-remind-tag{font-size:9px;color:var(--warning)}
+.task-priority{width:4px;height:4px;border-radius:50%;flex-shrink:0;margin-top:4px}
 .priority-high{background:var(--danger)}.priority-medium{background:var(--warning)}.priority-low{background:var(--green)}
-.event-actions{display:flex;gap:3px;opacity:0;transition:opacity .15s}
+.event-actions{display:flex;gap:3px;opacity:0;transition:opacity .15s;flex-shrink:0}
 .task-item:hover .event-actions{opacity:1}
-.icon-btn{width:22px;height:22px;border:1.5px solid var(--border);background:var(--surface);border-radius:5px;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .15s}
+.icon-btn{width:21px;height:21px;border:1.5px solid var(--border);background:var(--surface);border-radius:5px;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .15s}
 .icon-btn:hover{color:var(--blue);border-color:var(--blue);background:var(--blue-light)}
 .icon-btn.delete:hover{color:var(--danger);border-color:var(--danger);background:var(--danger-light)}
-.empty-state{padding:24px;text-align:center;color:var(--text3);font-size:12px}
+.empty-state{padding:20px;text-align:center;color:var(--text3);font-size:12px}
 
-/* ── Shopping Tab ── */
-.shop-page{max-width:720px;margin:0 auto}
-.shop-panel{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
-.shop-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1.5px solid var(--border);background:linear-gradient(135deg,var(--warning-light),#fff8ee)}
-.shop-title{font-size:14px;font-weight:700;color:var(--text);font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:6px}
-.shop-badge{font-size:10px;background:linear-gradient(135deg,var(--warning),#ffbe55);color:white;border-radius:9px;padding:2px 7px;font-weight:700}
-.shop-input-area{padding:12px 14px;border-bottom:1.5px solid var(--border);background:var(--surface3)}
-.shop-input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:8px 12px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;outline:none;transition:all .15s}
-.shop-input:focus{border-color:var(--warning);background:var(--warning-light);box-shadow:0 0 0 3px rgba(255,159,28,.09)}
-.shop-body{padding:12px 14px}
-.shop-section-label{font-size:10px;color:var(--text3);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin:10px 0 5px;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:5px}
-.shop-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;margin-bottom:4px;transition:all .15s}
+/* Shopping */
+.shop-input-area{padding:11px 13px;border-bottom:1.5px solid var(--border);background:var(--surface3)}
+.shop-input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:7px 11px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;outline:none;transition:all .15s}
+.shop-input:focus{border-color:var(--warning);background:var(--warning-light)}
+.shop-item{display:flex;align-items:center;gap:7px;padding:7px 10px;background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;margin-bottom:3px;transition:all .15s}
 .shop-item:hover{border-color:var(--warning);background:var(--warning-light)}
 .shop-item.shop-checked{opacity:.5}
-.shop-check{width:18px;height:18px;border-radius:5px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;background:white}
+.shop-check{width:17px;height:17px;border-radius:5px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;background:white}
 .shop-check:hover{border-color:var(--warning)}
 .shop-check.checked{background:linear-gradient(135deg,var(--warning),#ffbe55);border-color:transparent}
 .shop-check.checked::after{content:'✓';color:white;font-size:10px;font-weight:900}
 .shop-item-name{flex:1;font-size:13px;font-weight:500;color:var(--text)}
 .shop-item.shop-checked .shop-item-name{text-decoration:line-through;color:var(--text3)}
 .shop-item-qty{font-size:10px;color:var(--text3);flex-shrink:0}
-.shop-clear-btn{font-size:11px;padding:4px 10px;border-radius:8px;border:1.5px solid rgba(255,92,106,.3);background:var(--danger-light);color:var(--danger);cursor:pointer;font-weight:700;font-family:'Noto Sans JP',sans-serif;transition:all .15s}
+.shop-clear-btn{font-size:11px;padding:4px 9px;border-radius:7px;border:1.5px solid rgba(255,92,106,.3);background:var(--danger-light);color:var(--danger);cursor:pointer;font-weight:700;font-family:'Noto Sans JP',sans-serif;transition:all .15s}
 .shop-clear-btn:hover{background:rgba(255,92,106,.2)}
 
-/* date type toggle */
-.date-type-toggle{display:flex;gap:5px;margin-bottom:9px}
-.date-type-btn{flex:1;padding:6px 7px;border-radius:8px;border:2px solid var(--border);cursor:pointer;transition:all .15s;text-align:center;font-size:11px;font-weight:700;background:var(--surface3);color:var(--text3);font-family:'Noto Sans JP',sans-serif}
-.date-type-btn.active{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
-
-/* ── Modal ── */
-.modal-overlay{position:fixed;inset:0;background:rgba(24,57,74,.38);backdrop-filter:blur(6px);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .2s}
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(24,57,74,.38);backdrop-filter:blur(6px);z-index:100;display:flex;align-items:center;justify-content:center;padding:14px;opacity:0;pointer-events:none;transition:opacity .2s}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--surface);border:2px solid var(--border);border-radius:20px;padding:22px;width:100%;max-width:460px;transform:translateY(18px) scale(.98);transition:transform .22s;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(30,142,240,.14)}
+.modal{background:var(--surface);border:2px solid var(--border);border-radius:18px;padding:20px;width:100%;max-width:440px;transform:translateY(16px) scale(.98);transition:transform .22s;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(30,142,240,.14)}
 .modal-overlay.open .modal{transform:translateY(0) scale(1)}
-.modal-title{font-family:'Nunito',sans-serif;font-size:19px;font-weight:900;margin-bottom:16px;color:var(--text)}
-.form-group{margin-bottom:12px}
-.form-label{display:block;font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:700;letter-spacing:.04em}
-.form-input,.form-select,.form-textarea{width:100%;background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;padding:8px 12px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;outline:none;transition:all .15s}
+.modal-title{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;margin-bottom:14px;color:var(--text)}
+.form-group{margin-bottom:11px}
+.form-label{display:block;font-size:11px;color:var(--text2);margin-bottom:3px;font-weight:700;letter-spacing:.04em}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--surface3);border:1.5px solid var(--border);border-radius:8px;padding:7px 11px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:13px;outline:none;transition:all .15s}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--blue);background:var(--blue-light);box-shadow:0 0 0 3px rgba(30,142,240,.09)}
-.form-select option{background:white}
-.form-textarea{resize:vertical;min-height:58px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.person-selector{display:flex;gap:6px}
-.person-option{flex:1;padding:7px 6px;border-radius:10px;border:2px solid var(--border);cursor:pointer;transition:all .15s;text-align:center;font-size:11px;font-weight:700;background:var(--surface3);color:var(--text3)}
+.form-textarea{resize:vertical;min-height:54px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.person-selector{display:flex;gap:5px}
+.person-option{flex:1;padding:6px 5px;border-radius:9px;border:2px solid var(--border);cursor:pointer;transition:all .15s;text-align:center;font-size:11px;font-weight:700;background:var(--surface3);color:var(--text3)}
 .person-option.selected-p1{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
 .person-option.selected-p2{border-color:var(--green);background:var(--green-light);color:var(--green)}
 .person-option.selected-both{border-color:var(--cyan);background:linear-gradient(135deg,var(--blue-light),var(--green-light));color:var(--text2)}
-.person-icon{font-size:15px;display:block;margin-bottom:2px}
-.color-picker{display:flex;gap:6px;flex-wrap:wrap}
-.color-option{width:25px;height:25px;border-radius:7px;cursor:pointer;border:3px solid transparent;transition:all .15s}
+.person-icon{font-size:14px;display:block;margin-bottom:1px}
+.color-picker{display:flex;gap:5px;flex-wrap:wrap}
+.color-option{width:24px;height:24px;border-radius:6px;cursor:pointer;border:3px solid transparent;transition:all .15s}
 .color-option:hover{transform:scale(1.15)}
 .color-option.selected{border-color:var(--text);transform:scale(1.1)}
-.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
-.sync-box{background:var(--surface3);border:1.5px solid var(--border);border-radius:11px;padding:13px;margin-bottom:11px}
-.sync-box h3{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text);font-family:'Nunito',sans-serif}
-.step-list{display:flex;flex-direction:column;gap:7px;margin-bottom:11px}
-.step-item{display:flex;gap:7px;font-size:11px;color:var(--text2);align-items:flex-start;line-height:1.6}
-.step-num{width:18px;height:18px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:white;flex-shrink:0;margin-top:1px}
+.modal-actions{display:flex;gap:7px;justify-content:flex-end;margin-top:16px}
+.date-type-toggle{display:flex;gap:5px;margin-bottom:8px}
+.date-type-btn{flex:1;padding:5px 6px;border-radius:7px;border:2px solid var(--border);cursor:pointer;transition:all .15s;text-align:center;font-size:11px;font-weight:700;background:var(--surface3);color:var(--text3);font-family:'Noto Sans JP',sans-serif}
+.date-type-btn.active{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+
+/* Repeat + Reminder */
+.repeat-selector{display:flex;gap:4px;flex-wrap:wrap}
+.repeat-opt{padding:4px 10px;border-radius:16px;border:1.5px solid var(--border);font-size:11px;font-weight:700;cursor:pointer;background:var(--surface3);color:var(--text3);transition:all .15s;font-family:'Noto Sans JP',sans-serif}
+.repeat-opt.active{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+.reminder-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+.reminder-check{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;user-select:none}
+.reminder-check input{width:15px;height:15px;cursor:pointer;accent-color:var(--warning)}
+
+/* History modal */
+.history-item{display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;margin-bottom:4px;cursor:pointer;transition:all .15s;font-size:12px;font-weight:500}
+.history-item:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+.history-empty{text-align:center;color:var(--text3);font-size:12px;padding:20px}
+
+/* Sync/Notif UI */
+.sync-box{background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px}
+.sync-box h3{font-size:12px;font-weight:700;margin-bottom:7px;color:var(--text);font-family:'Nunito',sans-serif}
+.step-list{display:flex;flex-direction:column;gap:6px}
+.step-item{display:flex;gap:6px;font-size:11px;color:var(--text2);align-items:flex-start;line-height:1.6}
+.step-num{width:17px;height:17px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:white;flex-shrink:0;margin-top:1px}
 .step-item a{color:var(--blue);text-decoration:none;font-weight:700}
-.info-note{background:var(--blue-light);border:1.5px solid rgba(30,142,240,.2);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--blue);line-height:1.6;margin-bottom:11px;font-weight:500}
-.warn-note{background:var(--warning-light);border:1.5px solid rgba(255,159,28,.3);border-radius:8px;padding:8px 10px;font-size:11px;color:#b36b00;line-height:1.6;margin-bottom:11px;font-weight:500}
-.divider{height:1.5px;background:var(--border);margin:11px 0;border-radius:2px}
-.success-box{background:var(--green-light);border:1.5px solid rgba(34,201,138,.3);border-radius:11px;padding:11px 13px;margin-bottom:13px;display:flex;align-items:center;gap:10px}
-#install-banner{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter));border:1.5px solid var(--border);border-radius:13px;padding:10px 13px;margin-bottom:11px;box-shadow:var(--shadow)}
+.info-note{background:var(--blue-light);border:1.5px solid rgba(30,142,240,.2);border-radius:7px;padding:7px 10px;font-size:11px;color:var(--blue);line-height:1.6;margin-bottom:10px;font-weight:500}
+.warn-note{background:var(--warning-light);border:1.5px solid rgba(255,159,28,.3);border-radius:7px;padding:7px 10px;font-size:11px;color:#b36b00;line-height:1.6;margin-bottom:10px;font-weight:500}
+.divider{height:1.5px;background:var(--border);margin:10px 0;border-radius:2px}
+.success-box{background:var(--green-light);border:1.5px solid rgba(34,201,138,.3);border-radius:10px;padding:10px 12px;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+
+#install-banner{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue-lighter),var(--green-lighter));border:1.5px solid var(--border);border-radius:12px;padding:9px 12px;margin-bottom:10px;box-shadow:var(--shadow)}
 ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeIn .2s ease forwards}
-@media(max-width:720px){.cal-page{grid-template-columns:1fr}.cal-month-title{font-size:15px;min-width:105px}}
+@media(max-width:600px){.today-grid{grid-template-columns:1fr}.today-col+.today-col{border-left:none;border-top:1.5px solid var(--border)}.form-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -235,8 +249,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <!-- Install Banner -->
 <div id="install-banner" style="display:none;">
-  <div style="display:flex;align-items:center;gap:10px;flex:1;"><div style="font-size:22px;flex-shrink:0;">📲</div><div><div style="font-size:12px;font-weight:700;">ホーム画面に追加できます</div><div style="font-size:10px;color:var(--text2);margin-top:1px;">Safari の共有ボタン → 「ホーム画面に追加」</div></div></div>
-  <button onclick="document.getElementById('install-banner').style.display='none'" style="background:none;border:none;font-size:16px;color:var(--text3);cursor:pointer;padding:4px;">✕</button>
+  <div style="display:flex;align-items:center;gap:10px;flex:1;"><div style="font-size:20px;flex-shrink:0;">📲</div><div><div style="font-size:12px;font-weight:700;">ホーム画面に追加できます</div><div style="font-size:10px;color:var(--text2);margin-top:1px;">Safari 共有ボタン → 「ホーム画面に追加」</div></div></div>
+  <button onclick="document.getElementById('install-banner').style.display='none';localStorage.setItem('install-banner-dismissed','1')" style="background:none;border:none;font-size:16px;color:var(--text3);cursor:pointer;">✕</button>
 </div>
 
 <!-- Header -->
@@ -254,137 +268,123 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <!-- Tabs -->
 <div class="tabs-nav">
-  <button class="tab-btn tab-active-green" id="tab-tasks" onclick="switchTab('tasks')">✅ タスク</button>
-  <button class="tab-btn" id="tab-cal" onclick="switchTab('cal')">📅 カレンダー</button>
+  <button class="tab-btn tab-active-blue" id="tab-cal" onclick="switchTab('cal')">📅 カレンダー</button>
+  <button class="tab-btn" id="tab-tasks" onclick="switchTab('tasks')">✅ タスク</button>
   <button class="tab-btn" id="tab-shop" onclick="switchTab('shop')">🛒 買い物リスト</button>
 </div>
 
-<!-- ═══ Tab: Calendar ═══ -->
-<div class="tab-content" id="page-cal">
-  <div class="cal-page">
-    <!-- Calendar -->
-    <div class="cal-panel">
-      <div class="cal-topbar">
-        <div class="cal-month-nav">
-          <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
-          <div class="cal-month-title" id="cal-title"></div>
-          <button class="nav-btn" onclick="changeMonth(1)">›</button>
-          <button class="nav-btn" onclick="goToday()" style="font-size:10px;font-family:'Nunito';font-weight:900;width:auto;padding:0 8px;">今日</button>
-        </div>
-        <button class="btn btn-secondary" onclick="openEventModal()" style="font-size:11px;padding:5px 10px;">＋ 予定</button>
+<!-- ═══ Calendar Tab ═══ -->
+<div class="tab-content active" id="page-cal">
+
+  <!-- Today Section -->
+  <div class="today-panel">
+    <div class="today-panel-header">
+      <div class="today-panel-title">☀️ 今日のスケジュールとタスク <span class="today-panel-date" id="today-date-label"></span></div>
+      <div style="display:flex;gap:5px;">
+        <button class="btn btn-secondary" onclick="openEventModal()" style="font-size:11px;padding:4px 8px;">＋ 予定</button>
+        <button class="btn btn-green" onclick="openTaskModal()" style="font-size:11px;padding:4px 8px;">＋ タスク</button>
       </div>
-      <div class="cal-person-header">
-        <div class="cal-date-col-head"></div>
-        <div class="cal-person-col person-col-1"><div class="person-dot p1-dot"></div><span id="p1-col-name">自分</span></div>
-        <div class="cal-person-col person-col-2"><div class="person-dot p2-dot"></div><span id="p2-col-name">家族</span></div>
-      </div>
-      <div class="cal-scroll" id="cal-scroll"><div id="cal-rows"></div></div>
     </div>
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">✨ 今日のタスク</div>
-          <button class="panel-add-btn" onclick="openTaskModal()">+</button>
-        </div>
-        <div class="today-section"><div class="today-chip-list" id="today-tasks-list"></div></div>
+    <div class="today-grid">
+      <div class="today-col">
+        <div class="today-col-label" style="color:var(--blue);">📅 今日の予定</div>
+        <div id="top-events-list"></div>
       </div>
-      <div class="panel">
-        <div class="panel-header"><div class="panel-title">📅 今日の予定</div></div>
-        <div class="today-section"><div class="today-chip-list" id="today-events-list"></div></div>
+      <div class="today-col">
+        <div class="today-col-label" style="color:var(--green);">✅ 今日のタスク</div>
+        <div id="top-tasks-list"></div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ═══ Tab: Tasks (デフォルト表示) ═══ -->
-<div class="tab-content active" id="page-tasks">
-  <div class="tasks-page">
-
-    <!-- ★ 今日のスケジュール＆タスク -->
-    <div class="panel" style="margin-bottom:14px;">
-      <div class="panel-header" style="background:linear-gradient(135deg,#fff8e1,var(--green-lighter));">
-        <div class="panel-title" style="font-size:14px;">☀️ 今日のスケジュールとタスク <span id="today-date-label" style="font-size:11px;color:var(--text3);font-weight:400;margin-left:4px;"></span></div>
-        <div style="display:flex;gap:6px;">
-          <button class="btn btn-secondary" onclick="openEventModal()" style="font-size:11px;padding:4px 9px;">＋ 予定</button>
-          <button class="btn btn-green" onclick="openTaskModal()" style="font-size:11px;padding:4px 9px;">＋ タスク</button>
-        </div>
+  <!-- Calendar -->
+  <div class="cal-panel">
+    <div class="cal-topbar">
+      <div class="cal-month-nav">
+        <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
+        <div class="cal-month-title" id="cal-title"></div>
+        <button class="nav-btn" onclick="changeMonth(1)">›</button>
+        <button class="nav-btn" onclick="goToday()" style="font-size:10px;font-family:'Nunito';font-weight:900;width:auto;padding:0 7px;">今日</button>
       </div>
-      <div style="padding:10px 12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;" id="today-combined-grid">
-        <div>
-          <div style="font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase;font-family:'Nunito',sans-serif;">📅 今日の予定</div>
-          <div class="today-chip-list" id="top-events-list"></div>
-        </div>
-        <div>
-          <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase;font-family:'Nunito',sans-serif;">✅ 今日のタスク</div>
-          <div class="today-chip-list" id="top-tasks-list"></div>
-        </div>
-      </div>
+      <button class="btn btn-secondary" onclick="openEventModal()" style="font-size:11px;padding:4px 9px;">＋ 予定</button>
     </div>
-
-    <!-- タスク全件 -->
-    <div class="panel">
-      <div class="panel-header">
-        <div class="panel-title">📋 すべてのタスク <span class="panel-badge" id="task-count">0</span></div>
-        <button class="btn btn-green" onclick="openTaskModal()" style="font-size:11px;padding:5px 11px;">＋ タスク追加</button>
-      </div>
-      <div class="filter-tabs">
-        <button class="filter-tab active" onclick="setTaskFilter('all',this)">すべて</button>
-        <button class="filter-tab" onclick="setTaskFilter('pending',this)">未完了</button>
-        <button class="filter-tab" onclick="setTaskFilter('today',this)">今日</button>
-        <button class="filter-tab" onclick="setTaskFilter('done',this)">完了</button>
-      </div>
-      <div class="tasks-list" id="tasks-list"></div>
+    <div class="cal-person-header">
+      <div class="cal-date-col-head"></div>
+      <div class="cal-person-col person-col-1"><div class="person-dot p1-dot"></div><span id="p1-col-name">自分</span></div>
+      <div class="cal-person-col person-col-2"><div class="person-dot p2-dot"></div><span id="p2-col-name">家族</span></div>
     </div>
+    <div class="cal-scroll"><div id="cal-rows"></div></div>
+  </div>
+
+  <!-- Calendar legend -->
+  <div style="display:flex;gap:12px;padding:6px 4px;font-size:10px;color:var(--text3);align-items:center;flex-wrap:wrap;">
+    <span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:24px;height:10px;border-radius:3px;border:1.5px solid rgba(30,142,240,.4);background:var(--blue-light);"></span>予定（実線）</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:24px;height:10px;border-radius:3px;border:1.5px dashed rgba(255,159,28,.6);background:var(--warning-light);"></span>タスク（点線）</span>
+    <span style="display:flex;align-items:center;gap:4px;">🔁 繰り返し</span>
+    <span style="display:flex;align-items:center;gap:4px;">⏰ リマインド設定済み</span>
   </div>
 </div>
 
-<!-- ═══ Tab: Calendar ═══ -->
+<!-- ═══ Tasks Tab ═══ -->
+<div class="tab-content" id="page-tasks">
+
+  <!-- Today's tasks -->
+  <div class="panel">
+    <div class="panel-header" style="background:linear-gradient(135deg,#fffde7,var(--green-lighter));">
+      <div class="panel-title">☀️ 今日のタスク</div>
+      <button class="btn btn-green" onclick="openTaskModal()" style="font-size:11px;padding:4px 9px;">＋ 追加</button>
+    </div>
+    <div class="tasks-list" id="today-tasks-list-tab"></div>
+  </div>
+
+  <!-- All tasks -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-title">📋 すべてのタスク <span class="panel-badge" id="task-count">0</span></div>
+      <button class="btn btn-green" onclick="openTaskModal()" style="font-size:11px;padding:4px 9px;">＋ タスク</button>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="setTaskFilter('all',this)">すべて</button>
+      <button class="filter-tab" onclick="setTaskFilter('pending',this)">未完了</button>
+      <button class="filter-tab" onclick="setTaskFilter('today',this)">今日</button>
+      <button class="filter-tab" onclick="setTaskFilter('done',this)">完了</button>
+    </div>
+    <div class="tasks-list" id="tasks-list"></div>
+  </div>
+</div>
+
+<!-- ═══ Shopping Tab ═══ -->
 <div class="tab-content" id="page-shop">
-  <div class="shop-page">
-    <div class="shop-panel">
-      <div class="shop-header">
-        <div class="shop-title">🛒 買い物リスト <span class="shop-badge" id="shop-count">0</span></div>
-        <button class="shop-clear-btn" onclick="clearCheckedShop()">✓ 済みを削除</button>
-      </div>
-      <!-- 入力エリア -->
-      <div class="shop-input-area">
-        <div class="form-row" style="margin-bottom:8px;">
-          <div>
-            <label class="form-label">品名 *</label>
-            <input class="shop-input" id="shop-name" placeholder="例：牛乳、卵..." onkeydown="if(event.key==='Enter')addShopItem()">
-          </div>
-          <div>
-            <label class="form-label">数量・メモ</label>
-            <input class="shop-input" id="shop-qty" placeholder="例：2本、特売品">
-          </div>
-        </div>
-        <div class="form-row" style="margin-bottom:8px;">
-          <div>
-            <label class="form-label">カテゴリ</label>
-            <select class="form-input" id="shop-cat" style="padding:7px 10px;font-size:12px;">
-              <option value="食品">🥬 食品</option>
-              <option value="飲み物">🥤 飲み物</option>
-              <option value="日用品">🧴 日用品</option>
-              <option value="子供関係">👶 子供関係</option>
-              <option value="ペット用品">🐾 ペット用品</option>
-              <option value="その他">📦 その他</option>
-            </select>
-          </div>
-          <div>
-            <label class="form-label">担当</label>
-            <div class="person-selector" id="shop-person-selector">
-              <div class="person-option selected-p1" data-val="p1" onclick="selectPersonShop('p1')"><span class="person-icon">👤</span><span id="shop-p1-label">自分</span></div>
-              <div class="person-option" data-val="p2" onclick="selectPersonShop('p2')"><span class="person-icon">👤</span><span id="shop-p2-label">家族</span></div>
-              <div class="person-option" data-val="both" onclick="selectPersonShop('both')"><span class="person-icon">👥</span><span>2人</span></div>
-            </div>
-          </div>
-        </div>
-        <button class="btn btn-primary" onclick="addShopItem()" style="width:100%;justify-content:center;">＋ リストに追加</button>
-      </div>
-      <!-- リスト表示 -->
-      <div class="shop-body" id="shop-list"></div>
+  <div class="panel">
+    <div class="panel-header" style="background:linear-gradient(135deg,var(--warning-light),#fff8ee);">
+      <div class="panel-title" style="font-family:'Nunito',sans-serif;">🛒 買い物リスト <span class="panel-badge" style="background:linear-gradient(135deg,var(--warning),#ffbe55);" id="shop-count">0</span></div>
+      <button class="shop-clear-btn" onclick="clearCheckedShop()">✓ 済みを削除</button>
     </div>
+    <div class="shop-input-area">
+      <div class="form-row" style="margin-bottom:7px;align-items:flex-end;">
+        <div>
+          <label class="form-label">品名 *</label>
+          <div style="display:flex;gap:5px;">
+            <input class="shop-input" id="shop-name" placeholder="例：牛乳、卵..." onkeydown="if(event.key==='Enter')addShopItem()" autocorrect="off" autocapitalize="off" style="flex:1;">
+            <button class="btn btn-secondary" onclick="openHistoryModal('shop')" style="font-size:11px;padding:5px 7px;flex-shrink:0;" title="履歴から選ぶ">📋</button>
+          </div>
+        </div>
+        <div>
+          <label class="form-label">数量・メモ</label>
+          <input class="shop-input" id="shop-qty" placeholder="例：2本">
+        </div>
+      </div>
+      <div style="margin-bottom:7px;">
+        <label class="form-label">担当</label>
+        <div class="person-selector" id="shop-person-selector">
+          <div class="person-option selected-p1" data-val="p1" onclick="selectPersonShop('p1')"><span class="person-icon">👤</span><span id="shop-p1-label">自分</span></div>
+          <div class="person-option" data-val="p2" onclick="selectPersonShop('p2')"><span class="person-icon">👤</span><span id="shop-p2-label">家族</span></div>
+          <div class="person-option" data-val="both" onclick="selectPersonShop('both')"><span class="person-icon">👥</span><span>2人</span></div>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="addShopItem()" style="width:100%;justify-content:center;">＋ リストに追加</button>
+    </div>
+    <div style="padding:8px 11px;" id="shop-list"></div>
   </div>
 </div>
 
@@ -400,11 +400,34 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <div class="person-option" data-val="p2" onclick="selectPersonEv('p2')"><span class="person-icon">👤</span><span id="ev-p2-label">家族</span></div>
         <div class="person-option" data-val="both" onclick="selectPersonEv('both')"><span class="person-icon">👥</span><span>2人とも</span></div>
       </div></div>
-    <div class="form-group"><label class="form-label">タイトル *</label><input class="form-input" id="ev-name" placeholder="予定のタイトル"></div>
+    <div class="form-group"><label class="form-label">タイトル *</label>
+      <div style="display:flex;gap:5px;">
+        <input class="form-input" id="ev-name" placeholder="予定のタイトル" style="flex:1;" autocorrect="off">
+        <button class="btn btn-secondary" onclick="openHistoryModal('ev')" style="font-size:11px;padding:5px 8px;flex-shrink:0;">📋 履歴</button>
+      </div></div>
     <div class="form-group"><label class="form-label">日付 *</label><input class="form-input" type="date" id="ev-date"></div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">開始時間</label><input class="form-input" type="time" id="ev-time-start"></div>
+      <div class="form-group"><label class="form-label">開始時間</label><input class="form-input" type="time" id="ev-time-start" value="12:00" onchange="onEvStartTimeChange()"></div>
       <div class="form-group"><label class="form-label">終了時間</label><input class="form-input" type="time" id="ev-time-end"></div>
+    </div>
+    <div class="form-group"><label class="form-label">🔁 繰り返し</label>
+      <div class="repeat-selector" id="ev-repeat-selector">
+        <div class="repeat-opt active" data-val="none" onclick="selectRepeatEv('none')">なし</div>
+        <div class="repeat-opt" data-val="daily" onclick="selectRepeatEv('daily')">毎日</div>
+        <div class="repeat-opt" data-val="weekly" onclick="selectRepeatEv('weekly')">毎週</div>
+        <div class="repeat-opt" data-val="monthly" onclick="selectRepeatEv('monthly')">毎月</div>
+        <div class="repeat-opt" data-val="yearly" onclick="selectRepeatEv('yearly')">毎年</div>
+      </div>
+      <div id="ev-repeat-until-row" style="display:none;margin-top:6px;">
+        <label class="form-label">繰り返し終了日</label>
+        <input class="form-input" type="date" id="ev-repeat-until">
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">⏰ リマインダー</label>
+      <div class="reminder-row">
+        <label class="reminder-check"><input type="checkbox" id="ev-remind-1h"> 1時間前</label>
+        <label class="reminder-check"><input type="checkbox" id="ev-remind-1d"> 1日前（朝9時）</label>
+      </div>
     </div>
     <div class="form-group"><label class="form-label">メモ</label><textarea class="form-textarea" id="ev-note" placeholder="メモ（任意）"></textarea></div>
     <div class="form-group"><label class="form-label">カラー</label><div class="color-picker" id="ev-color-picker"></div></div>
@@ -422,7 +445,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <div class="person-option" data-val="p2" onclick="selectPersonTk('p2')"><span class="person-icon">👤</span><span id="tk-p2-label">家族</span></div>
         <div class="person-option" data-val="both" onclick="selectPersonTk('both')"><span class="person-icon">👥</span><span>2人とも</span></div>
       </div></div>
-    <div class="form-group"><label class="form-label">タスク名 *</label><input class="form-input" id="tk-name" placeholder="タスクの内容"></div>
+    <div class="form-group"><label class="form-label">タスク名 *</label>
+      <div style="display:flex;gap:5px;">
+        <input class="form-input" id="tk-name" placeholder="タスクの内容" style="flex:1;" autocorrect="off">
+        <button class="btn btn-secondary" onclick="openHistoryModal('tk')" style="font-size:11px;padding:5px 8px;flex-shrink:0;">📋 履歴</button>
+      </div></div>
     <div class="form-group">
       <label class="form-label">日付タイプ</label>
       <div class="date-type-toggle">
@@ -437,6 +464,24 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         </div>
       </div>
     </div>
+    <div class="form-group" id="tk-repeat-group"><label class="form-label">🔁 繰り返し</label>
+      <div class="repeat-selector" id="tk-repeat-selector">
+        <div class="repeat-opt active" data-val="none" onclick="selectRepeatTk('none')">なし</div>
+        <div class="repeat-opt" data-val="weekly" onclick="selectRepeatTk('weekly')">毎週</div>
+        <div class="repeat-opt" data-val="monthly" onclick="selectRepeatTk('monthly')">毎月</div>
+        <div class="repeat-opt" data-val="yearly" onclick="selectRepeatTk('yearly')">毎年</div>
+      </div>
+      <div id="tk-repeat-until-row" style="display:none;margin-top:6px;">
+        <label class="form-label">繰り返し終了日</label>
+        <input class="form-input" type="date" id="tk-repeat-until">
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">⏰ リマインダー（期日の朝9時基準）</label>
+      <div class="reminder-row">
+        <label class="reminder-check"><input type="checkbox" id="tk-remind-1h"> 1時間前</label>
+        <label class="reminder-check"><input type="checkbox" id="tk-remind-1d"> 1日前（朝9時）</label>
+      </div>
+    </div>
     <div class="form-group"><label class="form-label">優先度</label><select class="form-select" id="tk-priority"><option value="medium">中</option><option value="high">高</option><option value="low">低</option></select></div>
     <div class="form-group"><label class="form-label">メモ</label><textarea class="form-textarea" id="tk-note" placeholder="メモ（任意）"></textarea></div>
     <div class="form-group"><label class="form-label">カラー</label><div class="color-picker" id="tk-color-picker"></div></div>
@@ -444,9 +489,18 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
 </div>
 
+<!-- ── History Modal ── -->
+<div class="modal-overlay" id="history-modal">
+  <div class="modal" style="max-width:360px;">
+    <div class="modal-title">📋 履歴から選ぶ</div>
+    <div id="history-list"></div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('history-modal')">閉じる</button></div>
+  </div>
+</div>
+
 <!-- ── Settings Modal ── -->
 <div class="modal-overlay" id="settings-modal">
-  <div class="modal" style="max-width:380px;">
+  <div class="modal" style="max-width:360px;">
     <div class="modal-title">⚙️ メンバー設定</div>
     <div class="form-group"><label class="form-label" style="color:var(--blue);">👤 1人目の名前</label><input class="form-input" id="settings-p1" placeholder="例：自分の名前"></div>
     <div class="form-group"><label class="form-label" style="color:var(--green);">👤 2人目の名前</label><input class="form-input" id="settings-p2" placeholder="例：妻・夫の名前"></div>
@@ -456,178 +510,179 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <!-- ── Sync Modal ── -->
 <div class="modal-overlay" id="sync-modal">
-  <div class="modal" style="max-width:480px;">
+  <div class="modal" style="max-width:470px;">
     <div class="modal-title">🔗 家族と同期</div>
     <div id="sync-connected-view" style="display:none;">
       <div class="success-box"><div style="font-size:22px;">🟢</div><div><div style="font-size:13px;font-weight:700;color:var(--green);">同期中！</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">30秒ごとに自動同期されます</div></div></div>
-
-      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:11px;padding:12px;margin-bottom:12px;">
-        <div style="font-size:12px;font-weight:700;margin-bottom:10px;color:var(--text);">📤 家族への共有情報</div>
-        <div class="form-group" style="margin-bottom:8px;">
-          <label class="form-label">① 共有用APIキー</label>
-          <div style="display:flex;gap:6px;">
-            <input class="form-input" id="display-api-key" readonly style="flex:1;font-size:10px;color:var(--text2);" autocorrect="off" autocapitalize="off">
-            <button class="btn btn-secondary" onclick="copyText('display-api-key','APIキー')" style="font-size:11px;padding:5px 8px;flex-shrink:0;">コピー</button>
-          </div>
-        </div>
-        <div class="form-group" style="margin-bottom:0;">
-          <label class="form-label">② データID</label>
-          <div style="display:flex;gap:6px;">
-            <input class="form-input" id="display-bin-id" readonly style="flex:1;color:var(--blue);font-weight:700;font-size:12px;" autocorrect="off" autocapitalize="off">
-            <button class="btn btn-secondary" onclick="copyText('display-bin-id','データID')" style="font-size:11px;padding:5px 8px;flex-shrink:0;">コピー</button>
-          </div>
-        </div>
-        <div style="font-size:10px;color:var(--text3);margin-top:8px;line-height:1.6;">① と ② の2つをそれぞれLINEなどで家族に送ってください。<br>家族は「コードで参加する」に両方入力するだけで接続完了です。</div>
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px;">
+        <div style="font-size:12px;font-weight:700;margin-bottom:9px;">📤 家族への共有情報</div>
+        <div class="form-group" style="margin-bottom:8px;"><label class="form-label">① 共有用APIキー</label><div style="display:flex;gap:6px;"><input class="form-input" id="display-api-key" readonly style="flex:1;font-size:10px;color:var(--text2);" autocorrect="off"><button class="btn btn-secondary" onclick="copyText('display-api-key','APIキー')" style="font-size:11px;padding:4px 7px;flex-shrink:0;">コピー</button></div></div>
+        <div class="form-group" style="margin-bottom:0;"><label class="form-label">② データID</label><div style="display:flex;gap:6px;"><input class="form-input" id="display-bin-id" readonly style="flex:1;color:var(--blue);font-weight:700;font-size:12px;" autocorrect="off"><button class="btn btn-secondary" onclick="copyText('display-bin-id','データID')" style="font-size:11px;padding:4px 7px;flex-shrink:0;">コピー</button></div></div>
+        <div style="font-size:10px;color:var(--text3);margin-top:8px;line-height:1.6;">① と ② をLINEなどで家族に送り、「コードで参加する」に入力してもらうだけで接続完了です。</div>
       </div>
-
-      <div class="modal-actions" style="margin-top:0;justify-content:space-between;">
-        <button class="btn btn-secondary" onclick="manualSync()">🔄 今すぐ同期</button>
-        <div style="display:flex;gap:8px;"><button class="btn btn-danger" onclick="disconnectSync()">同期を解除</button><button class="btn btn-secondary" onclick="closeModal('sync-modal')">閉じる</button></div>
-      </div>
+      <div class="modal-actions" style="margin-top:0;justify-content:space-between;"><button class="btn btn-secondary" onclick="manualSync()">🔄 今すぐ同期</button><div style="display:flex;gap:7px;"><button class="btn btn-danger" onclick="disconnectSync()">同期を解除</button><button class="btn btn-secondary" onclick="closeModal('sync-modal')">閉じる</button></div></div>
     </div>
     <div id="sync-setup-view">
-      <div class="sync-box"><h3>📋 セットアップ手順（約2分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://jsonbin.io" target="_blank">jsonbin.io</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「API Keys」→「+ CREATE ACCESS KEY」でキーをコピー</div></div><div class="step-item"><div class="step-num">3</div><div>代表者が「新規作成」→ 表示されるファミリーコードを家族にLINEで送る</div></div><div class="step-item"><div class="step-num">4</div><div>家族は「コードで参加」にそのコードを貼り付けるだけでOK</div></div></div></div>
+      <div class="sync-box"><h3>📋 セットアップ手順（約2分）</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div><a href="https://jsonbin.io" target="_blank">jsonbin.io</a> で無料アカウントを作成</div></div><div class="step-item"><div class="step-num">2</div><div>「API Keys」→ X-MASTER-KEY をコピー</div></div><div class="step-item"><div class="step-num">3</div><div>代表者が「新規作成」→ ① ② を家族に送る → 家族が「参加」で接続</div></div></div></div>
       <div class="divider"></div>
-      <div class="sync-box"><h3>🆕 はじめて設定する（代表者）</h3>
-        <div class="form-group" style="margin-bottom:10px;">
-          <label class="form-label">JSONBin X-MASTER-KEY</label>
-          <div style="position:relative;">
-            <input class="form-input" id="setup-api-key" type="text" placeholder="$2a$10$xxxxxxxx..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="padding-right:60px;font-size:11px;letter-spacing:.02em;">
-            <button onclick="document.getElementById('setup-api-key').select();document.execCommand('selectAll')" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--blue-light);border:none;border-radius:6px;color:var(--blue);font-size:10px;font-weight:700;padding:3px 7px;cursor:pointer;">全選択</button>
-          </div>
-          <div style="font-size:10px;color:var(--text3);margin-top:4px;">※ $2a$10$ から始まる文字列です。コピペ後に余分なスペースがないか確認してください</div>
-        </div>
-        <button class="btn btn-primary" style="width:100%;" onclick="setupNewSync()">新規作成してファミリーコードを発行</button>
-      </div>
+      <div class="sync-box"><h3>🆕 はじめて設定する（代表者）</h3><div class="form-group" style="margin-bottom:9px;"><label class="form-label">JSONBin X-MASTER-KEY</label><input class="form-input" id="setup-api-key" type="text" placeholder="$2a$10$xxxxxxxx..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="font-size:11px;"><div style="font-size:10px;color:var(--text3);margin-top:3px;">$2a$10$ から始まる文字列</div></div><button class="btn btn-primary" style="width:100%;" onclick="setupNewSync()">新規作成してコードを発行</button></div>
       <div class="divider"></div>
-      <div class="sync-box"><h3>👩 コードで参加する（家族）</h3>
-        <div class="warn-note" style="margin-bottom:10px;">💡 代表者の「同期設定」画面にある<strong>「共有用APIキー」と「データID」</strong>の2つを入力してください</div>
-        <div class="form-group" style="margin-bottom:8px;">
-          <label class="form-label">共有用APIキー（代表者から受け取る）</label>
-          <input class="form-input" id="join-api-key" type="text" placeholder="$2a$10$xxxxxxxx..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="font-size:11px;">
-        </div>
-        <div class="form-group" style="margin-bottom:10px;">
-          <label class="form-label">データID（代表者から受け取る）</label>
-          <input class="form-input" id="join-bin-id" placeholder="6文字〜の英数字" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="font-size:12px;">
-        </div>
-        <button class="btn btn-green" style="width:100%;" onclick="joinSync()">接続する</button>
-      </div>
-      <div class="modal-actions" style="margin-top:6px;"><button class="btn btn-secondary" onclick="closeModal('sync-modal')">キャンセル</button></div>
+      <div class="sync-box"><h3>👩 コードで参加する（家族）</h3><div class="form-group" style="margin-bottom:7px;"><label class="form-label">① 共有用APIキー</label><input class="form-input" id="join-api-key" type="text" placeholder="$2a$10$xxxxxxxx..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" style="font-size:11px;"></div><div class="form-group" style="margin-bottom:9px;"><label class="form-label">② データID</label><input class="form-input" id="join-bin-id" placeholder="英数字のID" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false"></div><button class="btn btn-green" style="width:100%;" onclick="joinSync()">接続する</button></div>
+      <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('sync-modal')">キャンセル</button></div>
     </div>
-    <div id="sync-loading" style="display:none;text-align:center;padding:30px;"><div style="font-size:30px;margin-bottom:12px;">⏳</div><div style="font-size:13px;color:var(--text2);font-weight:500;" id="sync-loading-msg">接続中...</div></div>
+    <div id="sync-loading" style="display:none;text-align:center;padding:28px;"><div style="font-size:28px;margin-bottom:10px;">⏳</div><div style="font-size:13px;color:var(--text2);font-weight:500;" id="sync-loading-msg">接続中...</div></div>
   </div>
 </div>
 
 <!-- ── Notification Modal ── -->
 <div class="modal-overlay" id="notif-modal">
-  <div class="modal" style="max-width:460px;">
+  <div class="modal" style="max-width:450px;">
     <div class="modal-title">🔔 プッシュ通知設定</div>
     <div id="notif-setup-view">
-      <!-- 診断パネル -->
-      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:12px;">
-        <div style="font-size:11px;font-weight:700;margin-bottom:6px;">🔍 現在の状態</div>
-        <div id="notif-diag"></div>
-      </div>
-      <div id="notif-standalone-warn" style="display:none;" class="warn-note">⚠️ <strong>ホーム画面から起動されていません！</strong><br>Safariでこのページをホーム画面に追加し、ホーム画面のアイコンから起動してから設定してください。</div>
-      <div class="sync-box"><h3>📋 セットアップ手順</h3><div class="step-list">
-        <div class="step-item"><div class="step-num">1</div><div>Safariでこのアプリを開き、共有ボタン→「ホーム画面に追加」</div></div>
-        <div class="step-item"><div class="step-num">2</div><div>ホーム画面に追加したアイコンから起動（重要！）</div></div>
-        <div class="step-item"><div class="step-num">3</div><div><a href="https://onesignal.com" target="_blank">onesignal.com</a>のApp IDとREST API Keyを入力して「保存」</div></div>
-        <div class="step-item"><div class="step-num">4</div><div>「"FamilyCal"からの通知を許可しますか？」→「許可」をタップ</div></div>
-      </div></div>
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;padding:9px 11px;margin-bottom:11px;"><div style="font-size:11px;font-weight:700;margin-bottom:5px;">🔍 現在の状態</div><div id="notif-diag"></div></div>
+      <div id="notif-standalone-warn" style="display:none;" class="warn-note">⚠️ <strong>ホーム画面から起動が必要です！</strong> ホーム画面アイコンから起動してください。</div>
+      <div class="sync-box"><h3>📋 手順</h3><div class="step-list"><div class="step-item"><div class="step-num">1</div><div>Safariでホーム画面に追加 → アイコンから起動</div></div><div class="step-item"><div class="step-num">2</div><div><a href="https://onesignal.com" target="_blank">onesignal.com</a> → App ID と REST API Key をコピー</div></div><div class="step-item"><div class="step-num">3</div><div>下に入力 → 「保存して通知を許可」→ ポップアップが出たら「許可」</div></div></div></div>
       <div class="form-group"><label class="form-label">OneSignal App ID</label><input class="form-input" id="notif-app-id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" autocorrect="off" autocapitalize="off"></div>
       <div class="form-group"><label class="form-label">REST API Key</label><input class="form-input" id="notif-rest-key" type="password" placeholder="os_v2_app_..."></div>
       <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('notif-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveNotifSettings()">💾 保存して通知を許可</button></div>
     </div>
     <div id="notif-connected-view" style="display:none;">
-      <!-- 診断パネル -->
-      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:12px;">
-        <div style="font-size:11px;font-weight:700;margin-bottom:6px;">🔍 現在の状態</div>
-        <div id="notif-diag2"></div>
-      </div>
-      <div id="notif-standalone-warn2" style="display:none;" class="warn-note">⚠️ <strong>ホーム画面から起動されていません！</strong><br>ホーム画面のアイコンから起動してから「再度許可を求める」を押してください。</div>
-      <div id="notif-perm-status" style="font-size:12px;margin-bottom:12px;padding:8px 10px;background:var(--surface3);border-radius:8px;"></div>
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;padding:9px 11px;margin-bottom:11px;"><div style="font-size:11px;font-weight:700;margin-bottom:5px;">🔍 現在の状態</div><div id="notif-diag2"></div></div>
+      <div id="notif-standalone-warn2" style="display:none;" class="warn-note">⚠️ ホーム画面アイコンから起動してから「再度許可を求める」を押してください。</div>
+      <div id="notif-perm-status" style="font-size:12px;margin-bottom:11px;padding:7px 10px;background:var(--surface3);border-radius:7px;"></div>
       <button class="btn btn-primary" onclick="retryNotifPermission()" style="width:100%;justify-content:center;margin-bottom:8px;">🔔 再度許可を求める</button>
-      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px;">
-        <div style="font-size:12px;font-weight:700;margin-bottom:8px;">🧪 通知テスト</div>
-        <button class="btn btn-secondary" onclick="testNotification()" style="width:100%;justify-content:center;margin-bottom:7px;">テスト通知を送る</button>
-        <div id="notif-test-result" style="font-size:11px;color:var(--text2);min-height:16px;text-align:center;"></div>
-      </div>
+      <div style="background:var(--surface3);border:1.5px solid var(--border);border-radius:9px;padding:11px;margin-bottom:11px;"><div style="font-size:12px;font-weight:700;margin-bottom:7px;">🧪 通知テスト</div><button class="btn btn-secondary" onclick="testNotification()" style="width:100%;justify-content:center;margin-bottom:6px;">テスト通知を送る</button><div id="notif-test-result" style="font-size:11px;color:var(--text2);text-align:center;min-height:14px;"></div></div>
       <div class="modal-actions"><button class="btn btn-danger" onclick="clearNotifSettings()">通知を無効にする</button><button class="btn btn-secondary" onclick="closeModal('notif-modal')">閉じる</button></div>
     </div>
   </div>
 </div>
 
 <script>
-// ── 日本の祝日 2024〜2027 ──
-const JP_HOLIDAYS = {
-  '2024-01-01':'元日','2024-01-08':'成人の日','2024-02-11':'建国記念の日','2024-02-12':'振替休日',
-  '2024-02-23':'天皇誕生日','2024-03-20':'春分の日','2024-04-29':'昭和の日','2024-05-03':'憲法記念日',
-  '2024-05-04':'みどりの日','2024-05-05':'こどもの日','2024-05-06':'振替休日','2024-07-15':'海の日',
-  '2024-08-11':'山の日','2024-08-12':'振替休日','2024-09-16':'敬老の日','2024-09-22':'秋分の日',
-  '2024-09-23':'振替休日','2024-10-14':'スポーツの日','2024-11-03':'文化の日','2024-11-04':'振替休日',
-  '2024-11-23':'勤労感謝の日',
-  '2025-01-01':'元日','2025-01-13':'成人の日','2025-02-11':'建国記念の日','2025-02-23':'天皇誕生日',
-  '2025-02-24':'振替休日','2025-03-20':'春分の日','2025-04-29':'昭和の日','2025-05-03':'憲法記念日',
-  '2025-05-04':'みどりの日','2025-05-05':'こどもの日','2025-05-06':'振替休日','2025-07-21':'海の日',
-  '2025-08-11':'山の日','2025-09-15':'敬老の日','2025-09-23':'秋分の日','2025-10-13':'スポーツの日',
-  '2025-11-03':'文化の日','2025-11-23':'勤労感謝の日','2025-11-24':'振替休日',
-  '2026-01-01':'元日','2026-01-12':'成人の日','2026-02-11':'建国記念の日','2026-02-23':'天皇誕生日',
-  '2026-03-20':'春分の日','2026-04-29':'昭和の日','2026-05-03':'憲法記念日','2026-05-04':'みどりの日',
-  '2026-05-05':'こどもの日','2026-05-06':'振替休日','2026-07-20':'海の日','2026-08-11':'山の日',
-  '2026-09-21':'敬老の日','2026-09-23':'秋分の日','2026-10-12':'スポーツの日','2026-11-03':'文化の日',
-  '2026-11-23':'勤労感謝の日',
-  '2027-01-01':'元日','2027-01-11':'成人の日','2027-02-11':'建国記念の日','2027-02-23':'天皇誕生日',
-  '2027-03-21':'春分の日','2027-04-29':'昭和の日','2027-05-03':'憲法記念日','2027-05-04':'みどりの日',
-  '2027-05-05':'こどもの日','2027-07-19':'海の日','2027-08-11':'山の日','2027-09-20':'敬老の日',
-  '2027-09-23':'秋分の日','2027-10-11':'スポーツの日','2027-11-03':'文化の日','2027-11-23':'勤労感謝の日'
+// ══════════════════════════════════════════════
+// Constants
+// ══════════════════════════════════════════════
+const JP_HOLIDAYS={
+  '2024-01-01':'元日','2024-01-08':'成人の日','2024-02-11':'建国記念の日','2024-02-12':'振替休日','2024-02-23':'天皇誕生日','2024-03-20':'春分の日','2024-04-29':'昭和の日','2024-05-03':'憲法記念日','2024-05-04':'みどりの日','2024-05-05':'こどもの日','2024-05-06':'振替休日','2024-07-15':'海の日','2024-08-11':'山の日','2024-08-12':'振替休日','2024-09-16':'敬老の日','2024-09-22':'秋分の日','2024-09-23':'振替休日','2024-10-14':'スポーツの日','2024-11-03':'文化の日','2024-11-04':'振替休日','2024-11-23':'勤労感謝の日',
+  '2025-01-01':'元日','2025-01-13':'成人の日','2025-02-11':'建国記念の日','2025-02-23':'天皇誕生日','2025-02-24':'振替休日','2025-03-20':'春分の日','2025-04-29':'昭和の日','2025-05-03':'憲法記念日','2025-05-04':'みどりの日','2025-05-05':'こどもの日','2025-05-06':'振替休日','2025-07-21':'海の日','2025-08-11':'山の日','2025-09-15':'敬老の日','2025-09-23':'秋分の日','2025-10-13':'スポーツの日','2025-11-03':'文化の日','2025-11-23':'勤労感謝の日','2025-11-24':'振替休日',
+  '2026-01-01':'元日','2026-01-12':'成人の日','2026-02-11':'建国記念の日','2026-02-23':'天皇誕生日','2026-03-20':'春分の日','2026-04-29':'昭和の日','2026-05-03':'憲法記念日','2026-05-04':'みどりの日','2026-05-05':'こどもの日','2026-05-06':'振替休日','2026-07-20':'海の日','2026-08-11':'山の日','2026-09-21':'敬老の日','2026-09-23':'秋分の日','2026-10-12':'スポーツの日','2026-11-03':'文化の日','2026-11-23':'勤労感謝の日',
+  '2027-01-01':'元日','2027-01-11':'成人の日','2027-02-11':'建国記念の日','2027-02-23':'天皇誕生日','2027-03-21':'春分の日','2027-04-29':'昭和の日','2027-05-03':'憲法記念日','2027-05-04':'みどりの日','2027-05-05':'こどもの日','2027-07-19':'海の日','2027-08-11':'山の日','2027-09-20':'敬老の日','2027-09-23':'秋分の日','2027-10-11':'スポーツの日','2027-11-03':'文化の日','2027-11-23':'勤労感謝の日'
 };
-
 const COLORS=['#1e8ef0','#00bcd4','#22c98a','#ff9f1c','#ff5c6a','#a855f7','#ec4899','#f97316','#64748b'];
-const TODAY=new Date();TODAY.setHours(0,0,0,0);
 const DAYS=['日','月','火','水','木','金','土'];
 const MONTHS_JP=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+const REPEAT_LABELS={none:'',daily:'毎日',weekly:'毎週',monthly:'毎月',yearly:'毎年'};
 const SYNC_INTERVAL_MS=30000;
-const CAT_EMOJI={'食品':'🥬','飲み物':'🥤','日用品':'🧴','子供関係':'👶','ペット用品':'🐾','その他':'📦'};
+const TODAY=new Date();TODAY.setHours(0,0,0,0);
+const MAX_HISTORY=20;
 
+// ══════════════════════════════════════════════
+// State
+// ══════════════════════════════════════════════
 let state={
   currentYear:TODAY.getFullYear(),currentMonth:TODAY.getMonth(),
   selectedDate:toISO(TODAY),
   events:[],tasks:[],shopItems:[],
+  evHistory:[],tkHistory:[],shopHistory:[],
   taskFilter:'all',
   editingEventId:null,editingTaskId:null,
   evPerson:'p1',tkPerson:'p1',shopPerson:'p1',
+  evRepeat:'none',tkRepeat:'none',
   p1Name:'自分',p2Name:'家族',
   apiKey:null,binId:null,
   notifAppId:null,notifRestKey:null,
-  syncTimer:null,lastSyncHash:null,syncStatus:'disconnected'
+  syncTimer:null,lastSyncHash:null,syncStatus:'disconnected',
+  historyTarget:null // 'ev'|'tk'|'shop'
 };
 
+// ══════════════════════════════════════════════
+// Helpers
+// ══════════════════════════════════════════════
 function toISO(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function genId(){return Date.now().toString(36)+Math.random().toString(36).slice(2);}
+function pName(p){return p==='p1'?state.p1Name:p==='p2'?state.p2Name:'2人';}
+function pClass(p){return p==='p1'?'tag-p1':p==='p2'?'tag-p2':'tag-both';}
+function addHours(timeStr,h){const[hh,mm]=timeStr.split(':').map(Number);const t=hh*60+mm+h*60;return `${String(Math.floor(t/60)%24).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`;}
 
-// ── Storage ──
+// ── Recurring event helpers ──
+function occursOnDate(item,dateStr){
+  const baseStr=item.date||item.due;
+  if(!baseStr)return false;
+  if(baseStr===dateStr)return true;
+  if(!item.repeat||item.repeat==='none')return false;
+  if(item.repeatUntil&&dateStr>item.repeatUntil)return false;
+  const base=new Date(baseStr+'T00:00:00');
+  const target=new Date(dateStr+'T00:00:00');
+  if(target<=base)return false;
+  const diffDays=Math.round((target-base)/86400000);
+  if(item.repeat==='daily')return true;
+  if(item.repeat==='weekly')return diffDays%7===0;
+  if(item.repeat==='monthly')return base.getDate()===target.getDate();
+  if(item.repeat==='yearly')return base.getMonth()===target.getMonth()&&base.getDate()===target.getDate();
+  return false;
+}
+function isTaskOnDate(t,ds){
+  if(t.due)return occursOnDate(t,ds);
+  if(t.startDate&&t.endDate)return t.startDate<=ds&&t.endDate>=ds;
+  return false;
+}
+
+// ══════════════════════════════════════════════
+// LocalStorage
+// ══════════════════════════════════════════════
 function loadLocal(){
-  try{const s=localStorage.getItem('familycal-v1');if(s){const p=JSON.parse(s);state.events=p.events||[];state.tasks=p.tasks||[];state.shopItems=p.shopItems||[];state.apiKey=p.apiKey||null;state.binId=p.binId||null;state.p1Name=p.p1Name||'自分';state.p2Name=p.p2Name||'家族';state.notifAppId=p.notifAppId||null;state.notifRestKey=p.notifRestKey||null;}}catch(e){}
+  try{
+    const s=localStorage.getItem('familycal-v2');
+    if(s){
+      const p=JSON.parse(s);
+      state.events=p.events||[];state.tasks=p.tasks||[];state.shopItems=p.shopItems||[];
+      state.evHistory=p.evHistory||[];state.tkHistory=p.tkHistory||[];state.shopHistory=p.shopHistory||[];
+      state.apiKey=p.apiKey||null;state.binId=p.binId||null;
+      state.p1Name=p.p1Name||'自分';state.p2Name=p.p2Name||'家族';
+      state.notifAppId=p.notifAppId||null;state.notifRestKey=p.notifRestKey||null;
+    }
+  }catch(e){}
 }
-function saveLocal(){localStorage.setItem('familycal-v1',JSON.stringify({events:state.events,tasks:state.tasks,shopItems:state.shopItems,apiKey:state.apiKey,binId:state.binId,p1Name:state.p1Name,p2Name:state.p2Name,notifAppId:state.notifAppId,notifRestKey:state.notifRestKey}));}
+function saveLocal(){
+  localStorage.setItem('familycal-v2',JSON.stringify({
+    events:state.events,tasks:state.tasks,shopItems:state.shopItems,
+    evHistory:state.evHistory,tkHistory:state.tkHistory,shopHistory:state.shopHistory,
+    apiKey:state.apiKey,binId:state.binId,p1Name:state.p1Name,p2Name:state.p2Name,
+    notifAppId:state.notifAppId,notifRestKey:state.notifRestKey
+  }));
+}
 
-// ── JSONBin ──
-function apiKey(){return (state.apiKey||'').trim();}
-async function createBin(data){
-  const r=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'Content-Type':'application/json','X-Master-Key':apiKey(),'X-Bin-Name':'familycal','X-Bin-Private':'false'},body:JSON.stringify(data)});
-  if(!r.ok){const t=await r.text();throw new Error(`作成失敗(${r.status}): ${t}`);}
-  return(await r.json()).metadata.id;
+// ── History management ──
+function addToHistory(type,name){
+  if(!name||!name.trim())return;
+  const key=type==='ev'?'evHistory':type==='tk'?'tkHistory':'shopHistory';
+  state[key]=state[key].filter(h=>h!==name);
+  state[key].unshift(name);
+  if(state[key].length>MAX_HISTORY)state[key].pop();
 }
-async function readBin(){
-  const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}/latest`,{headers:{'X-Master-Key':apiKey()}});
-  if(!r.ok){const t=await r.text();throw new Error(`読み込み失敗(${r.status}): ${t}`);}
-  return(await r.json()).record;
+function openHistoryModal(type){
+  state.historyTarget=type;
+  const key=type==='ev'?'evHistory':type==='tk'?'tkHistory':'shopHistory';
+  const hist=state[key];
+  const el=document.getElementById('history-list');
+  if(!hist.length){el.innerHTML='<div class="history-empty">履歴がありません</div>';openModal('history-modal');return;}
+  el.innerHTML=hist.map(h=>`<div class="history-item" onclick="selectHistory('${h.replace(/'/g,"\\'")}')">📌 ${h}</div>`).join('');
+  openModal('history-modal');
 }
-async function writeBin(data){
-  const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':apiKey()},body:JSON.stringify(data)});
-  if(!r.ok){const t=await r.text();throw new Error(`書き込み失敗(${r.status}): ${t}`);}
+function selectHistory(name){
+  const t=state.historyTarget;
+  if(t==='ev')document.getElementById('ev-name').value=name;
+  else if(t==='tk')document.getElementById('tk-name').value=name;
+  else if(t==='shop')document.getElementById('shop-name').value=name;
+  closeModal('history-modal');
 }
+
+// ══════════════════════════════════════════════
+// JSONBin Sync
+// ══════════════════════════════════════════════
+function apiKey(){return(state.apiKey||'').trim();}
+async function createBin(data){const r=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'Content-Type':'application/json','X-Master-Key':apiKey(),'X-Bin-Name':'familycal','X-Bin-Private':'false'},body:JSON.stringify(data)});if(!r.ok){const t=await r.text();throw new Error(`作成失敗(${r.status}): ${t}`);}return(await r.json()).metadata.id;}
+async function readBin(){const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}/latest`,{headers:{'X-Master-Key':apiKey()}});if(!r.ok){const t=await r.text();throw new Error(`読み込み失敗(${r.status}): ${t}`);}return(await r.json()).record;}
+async function writeBin(data){const r=await fetch(`https://api.jsonbin.io/v3/b/${state.binId}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':apiKey()},body:JSON.stringify(data)});if(!r.ok){const t=await r.text();throw new Error(`書き込み失敗(${r.status}): ${t}`);}}
 function dataHash(e,t,s){return JSON.stringify({e,t,s});}
 
 async function syncPull(){
@@ -641,400 +696,367 @@ async function syncPull(){
       state.lastSyncHash=h;saveLocal();render();
     }
     setSyncStatus('connected');
-  }catch(e){
-    console.error('syncPull error:',e);
-    setSyncStatus('error');
-  }
+  }catch(e){setSyncStatus('error');}
 }
 async function syncPush(){
   if(!state.binId||!state.apiKey)return;
   const h=dataHash(state.events,state.tasks,state.shopItems);
   if(h===state.lastSyncHash)return;
-  try{
-    setSyncStatus('syncing');
-    await writeBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});
-    state.lastSyncHash=h;
-    setSyncStatus('connected');
-  }catch(e){
-    console.error('syncPush error:',e);
-    setSyncStatus('error');
-  }
+  try{setSyncStatus('syncing');await writeBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});state.lastSyncHash=h;setSyncStatus('connected');}
+  catch(e){setSyncStatus('error');}
 }
 function startSyncTimer(){if(state.syncTimer)clearInterval(state.syncTimer);state.syncTimer=setInterval(syncPull,SYNC_INTERVAL_MS);}
-function setSyncStatus(s){
-  state.syncStatus=s;
-  document.getElementById('sync-badge').className='sync-badge '+s;
-  document.getElementById('sync-label').textContent={disconnected:'同期設定',syncing:'同期中...',connected:'同期中 ✓',error:'同期エラー'}[s]||'同期設定';
-}
+function setSyncStatus(s){state.syncStatus=s;document.getElementById('sync-badge').className='sync-badge '+s;document.getElementById('sync-label').textContent={disconnected:'同期設定',syncing:'同期中...',connected:'同期中 ✓',error:'同期エラー'}[s]||'同期設定';}
+async function saveAndSync(){saveLocal();render();await syncPush();}
 
 function openSyncModal(){
   const c=!!(state.apiKey&&state.binId);
   document.getElementById('sync-connected-view').style.display=c?'':'none';
   document.getElementById('sync-setup-view').style.display=c?'none':'';
   document.getElementById('sync-loading').style.display='none';
-  if(c){
-    document.getElementById('display-api-key').value=state.apiKey;
-    document.getElementById('display-bin-id').value=state.binId;
-  }
+  if(c){document.getElementById('display-api-key').value=state.apiKey;document.getElementById('display-bin-id').value=state.binId;}
   openModal('sync-modal');
 }
 function showSyncLoading(msg){['sync-connected-view','sync-setup-view'].forEach(id=>document.getElementById(id).style.display='none');document.getElementById('sync-loading').style.display='';document.getElementById('sync-loading-msg').textContent=msg;}
-
 async function setupNewSync(){
   const key=document.getElementById('setup-api-key').value.trim();
   if(!key){alert('APIキーを入力してください');return;}
-  state.apiKey=key;
-  showSyncLoading('データを作成中...');
-  try{
-    const id=await createBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});
-    state.binId=id;
-    state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);
-    saveLocal();setSyncStatus('connected');startSyncTimer();
-    document.getElementById('sync-loading').style.display='none';
-    document.getElementById('sync-connected-view').style.display='';
-    document.getElementById('display-api-key').value=state.apiKey;
-    document.getElementById('display-bin-id').value=id;
-  }catch(e){
-    document.getElementById('sync-loading').style.display='none';
-    document.getElementById('sync-setup-view').style.display='';
-    alert('接続に失敗しました。APIキーを確認してください。\n\n詳細: '+e.message);
-    state.apiKey=null;setSyncStatus('disconnected');
-  }
+  state.apiKey=key;showSyncLoading('データを作成中...');
+  try{const id=await createBin({events:state.events,tasks:state.tasks,shopItems:state.shopItems});state.binId=id;state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);saveLocal();setSyncStatus('connected');startSyncTimer();document.getElementById('sync-loading').style.display='none';document.getElementById('sync-connected-view').style.display='';document.getElementById('display-api-key').value=state.apiKey;document.getElementById('display-bin-id').value=id;}
+  catch(e){document.getElementById('sync-loading').style.display='none';document.getElementById('sync-setup-view').style.display='';alert('接続失敗:\n'+e.message);state.apiKey=null;setSyncStatus('disconnected');}
 }
-
 async function joinSync(){
-  const key=document.getElementById('join-api-key').value.trim();
-  const binId=document.getElementById('join-bin-id').value.trim();
-  if(!key){alert('共有用APIキーを入力してください');return;}
-  if(!binId){alert('データIDを入力してください');return;}
-  state.apiKey=key;state.binId=binId;
-  showSyncLoading('接続・データ取得中...');
-  try{
-    const r=await readBin();
-    state.events=r.events||[];state.tasks=r.tasks||[];state.shopItems=r.shopItems||[];
-    state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);
-    saveLocal();render();setSyncStatus('connected');startSyncTimer();
-    document.getElementById('sync-loading').style.display='none';
-    document.getElementById('sync-connected-view').style.display='';
-    document.getElementById('display-api-key').value=state.apiKey;
-    document.getElementById('display-bin-id').value=state.binId;
-  }catch(e){
-    document.getElementById('sync-loading').style.display='none';
-    document.getElementById('sync-setup-view').style.display='';
-    alert('接続に失敗しました。APIキーとデータIDを確認してください。\n\n詳細: '+e.message);
-    state.apiKey=null;state.binId=null;setSyncStatus('disconnected');
-  }
+  const key=document.getElementById('join-api-key').value.trim();const binId=document.getElementById('join-bin-id').value.trim();
+  if(!key||!binId){alert('APIキーとデータIDを両方入力してください');return;}
+  state.apiKey=key;state.binId=binId;showSyncLoading('接続・データ取得中...');
+  try{const r=await readBin();state.events=r.events||[];state.tasks=r.tasks||[];state.shopItems=r.shopItems||[];state.lastSyncHash=dataHash(state.events,state.tasks,state.shopItems);saveLocal();render();setSyncStatus('connected');startSyncTimer();document.getElementById('sync-loading').style.display='none';document.getElementById('sync-connected-view').style.display='';document.getElementById('display-api-key').value=state.apiKey;document.getElementById('display-bin-id').value=state.binId;}
+  catch(e){document.getElementById('sync-loading').style.display='none';document.getElementById('sync-setup-view').style.display='';alert('接続失敗:\n'+e.message);state.apiKey=null;state.binId=null;setSyncStatus('disconnected');}
 }
-
-async function manualSync(){
-  if(!state.binId||!state.apiKey){alert('同期が設定されていません');return;}
-  state.lastSyncHash=null;
-  await syncPush();
-  await syncPull();
-  alert('同期しました！');
-}
-
+async function manualSync(){if(!state.binId||!state.apiKey){alert('同期が設定されていません');return;}state.lastSyncHash=null;await syncPush();await syncPull();alert('同期しました！');}
 function disconnectSync(){if(!confirm('同期を解除しますか？'))return;if(state.syncTimer)clearInterval(state.syncTimer);state.apiKey=null;state.binId=null;state.lastSyncHash=null;saveLocal();setSyncStatus('disconnected');closeModal('sync-modal');}
+function copyText(id,label){navigator.clipboard.writeText(document.getElementById(id).value).then(()=>alert(label+'をコピーしました！'));}
 
-function copyText(id,label){
-  const val=document.getElementById(id).value;
-  navigator.clipboard.writeText(val).then(()=>alert(label+'をコピーしました！'));
-}
-function copyBinId(){copyText('display-bin-id','データID');}
-
-// ── Notification ──
+// ══════════════════════════════════════════════
+// Notifications + Reminders
+// ══════════════════════════════════════════════
 function openNotifModal(){
   const c=!!(state.notifAppId&&state.notifRestKey);
   document.getElementById('notif-setup-view').style.display=c?'none':'';
   document.getElementById('notif-connected-view').style.display=c?'':'none';
-  if(!c){
-    document.getElementById('notif-app-id').value=state.notifAppId||'';
-    document.getElementById('notif-rest-key').value='';
-  }
-  updateNotifDiag();
-  openModal('notif-modal');
+  if(!c){document.getElementById('notif-app-id').value=state.notifAppId||'';document.getElementById('notif-rest-key').value='';}
+  updateNotifDiag();openModal('notif-modal');
 }
-
 function updateNotifDiag(){
-  const isStandalone=window.navigator.standalone===true;
-  const isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
-  const notifSupport='Notification' in window;
-  const permStatus=notifSupport?Notification.permission:'未対応';
-  const swSupport='serviceWorker' in navigator;
-  const diagHTML=`
-    <div style="font-size:10px;line-height:1.9;color:var(--text2);">
-      <div>📱 ホーム画面から起動: <strong style="color:${isStandalone?'var(--green)':'var(--danger)'}">${isStandalone?'✅ はい（OK）':'❌ いいえ ← ここが問題'}</strong></div>
-      <div>🍎 iOS端末: <strong>${isIOS?'✅ はい':'PCブラウザ'}</strong></div>
-      <div>🔔 通知API: <strong style="color:${notifSupport?'var(--green)':'var(--danger)'}">${notifSupport?'✅ 対応':'❌ 非対応'}</strong></div>
-      <div>🔐 通知許可状態: <strong style="color:${permStatus==='granted'?'var(--green)':permStatus==='denied'?'var(--danger)':'var(--warning)'}">${permStatus==='granted'?'✅ 許可済み':permStatus==='denied'?'❌ 拒否中':'⚠️ 未設定'}</strong></div>
-      <div>⚙️ ServiceWorker: <strong>${swSupport?'✅ 対応':'❌ 非対応'}</strong></div>
-    </div>`;
-  ['notif-diag','notif-diag2'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=diagHTML;});
+  const isStandalone=window.navigator.standalone===true,isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
+  const notifSupport='Notification' in window,permStatus=notifSupport?Notification.permission:'未対応',swSupport='serviceWorker' in navigator;
+  const html=`<div style="font-size:10px;line-height:1.9;color:var(--text2);">
+    <div>📱 ホーム画面から起動: <strong style="color:${isStandalone?'var(--green)':'var(--danger)'}">${isStandalone?'✅ OK':'❌ 必須'}</strong></div>
+    <div>🔔 通知API: <strong style="color:${notifSupport?'var(--green)':'var(--danger)'}">${notifSupport?'✅ 対応':'❌ 非対応'}</strong></div>
+    <div>🔐 許可状態: <strong style="color:${permStatus==='granted'?'var(--green)':permStatus==='denied'?'var(--danger)':'var(--warning)'}">${permStatus==='granted'?'✅ 許可済み':permStatus==='denied'?'❌ 拒否中':'⚠️ 未設定'}</strong></div>
+    <div>⚙️ ServiceWorker: <strong>${swSupport?'✅ 対応':'❌ 非対応'}</strong></div>
+  </div>`;
+  ['notif-diag','notif-diag2'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});
   const showWarn=isIOS&&!isStandalone;
   ['notif-standalone-warn','notif-standalone-warn2'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=showWarn?'':'none';});
 }
-
 async function saveNotifSettings(){
-  const appId=document.getElementById('notif-app-id').value.trim();
-  const rk=document.getElementById('notif-rest-key').value.trim();
+  const appId=document.getElementById('notif-app-id').value.trim();const rk=document.getElementById('notif-rest-key').value.trim();
   if(!appId||!rk){alert('App IDとREST API Keyを両方入力してください');return;}
   state.notifAppId=appId;state.notifRestKey=rk;saveLocal();
-  // 通知許可を直接リクエスト（ユーザー操作中に同期的に呼ぶ）
   const result=await requestNotifPermission(appId);
-  document.getElementById('notif-setup-view').style.display='none';
-  document.getElementById('notif-connected-view').style.display='';
-  updateNotifBadge();
-  updateNotifDiag();
-  if(result==='granted'){
-    document.getElementById('notif-perm-status').textContent='✅ 通知許可済み！通知が届きます。';
-    document.getElementById('notif-perm-status').style.color='var(--green)';
-  } else if(result==='denied'){
-    document.getElementById('notif-perm-status').textContent='❌ 通知が拒否されています。iPhoneの設定→通知→FamilyCalで許可してください。';
-    document.getElementById('notif-perm-status').style.color='var(--danger)';
-  } else {
-    document.getElementById('notif-perm-status').textContent='⚠️ 許可ダイアログが出なかった場合は「再度許可を求める」を押してください。';
-    document.getElementById('notif-perm-status').style.color='var(--warning)';
-  }
+  document.getElementById('notif-setup-view').style.display='none';document.getElementById('notif-connected-view').style.display='';
+  updateNotifBadge();updateNotifDiag();
+  const el=document.getElementById('notif-perm-status');
+  if(result==='granted'){el.textContent='✅ 通知許可済み！';el.style.color='var(--green)';}
+  else if(result==='denied'){el.textContent='❌ 拒否されています。設定アプリ→通知→FamilyCalで許可してください。';el.style.color='var(--danger)';}
+  else{el.textContent='⚠️ 「再度許可を求める」を押してください。';el.style.color='var(--warning)';}
 }
-
 async function requestNotifPermission(appId){
   try{
-    // まず直接 Notification.requestPermission を呼ぶ（ユーザー操作中）
     let perm='default';
-    if('Notification' in window){
-      perm=await Notification.requestPermission();
-    }
-    // OneSignal SDK初期化
-    if(window.OneSignal){
-      // すでにロード済みの場合
-      try{
-        await window.OneSignal.init({
-          appId:appId,
-          notifyButton:{enable:false},
-          welcomeNotification:{disable:true},
-          serviceWorkerParam:{scope:'/familycal/'},
-          serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'
-        });
-      }catch(e){console.log('OneSignal init:',e.message);}
-    } else if(window.OneSignalDeferred){
-      window.OneSignalDeferred.push(async function(O){
-        try{
-          await O.init({
-            appId:appId,
-            notifyButton:{enable:false},
-            welcomeNotification:{disable:true},
-            serviceWorkerParam:{scope:'/familycal/'},
-            serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'
-          });
-        }catch(e){console.log('OneSignal deferred init:',e.message);}
-      });
-    }
+    if('Notification' in window)perm=await Notification.requestPermission();
+    const tryInit=async(O)=>{try{await O.init({appId,notifyButton:{enable:false},welcomeNotification:{disable:true},serviceWorkerParam:{scope:'/familycal/'},serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'});}catch(e){}};
+    if(window.OneSignal){await tryInit(window.OneSignal);}
+    else if(window.OneSignalDeferred){window.OneSignalDeferred.push(tryInit);}
     return perm;
-  }catch(e){
-    console.error('requestNotifPermission error:',e);
-    return 'error';
-  }
+  }catch(e){return 'error';}
 }
-
 async function retryNotifPermission(){
   if(!state.notifAppId){alert('先にApp IDを設定してください');return;}
   const result=await requestNotifPermission(state.notifAppId);
   const el=document.getElementById('notif-perm-status');
-  if(result==='granted'){el.textContent='✅ 通知許可済み！';el.style.color='var(--green)';}
-  else if(result==='denied'){el.textContent='❌ 拒否されています。設定アプリ→通知→FamilyCalで許可してください。';el.style.color='var(--danger)';}
-  else{el.textContent='⚠️ ダイアログが出ない場合はホーム画面追加済みのアイコンから起動してください。';el.style.color='var(--warning)';}
+  if(result==='granted'){el.textContent='✅ 許可済み！';el.style.color='var(--green)';}
+  else if(result==='denied'){el.textContent='❌ 設定アプリ→通知→FamilyCalで許可してください。';el.style.color='var(--danger)';}
+  else{el.textContent='⚠️ ホーム画面追加済みのアイコンから起動してください。';el.style.color='var(--warning)';}
   updateNotifDiag();
 }
-
 function clearNotifSettings(){if(!confirm('通知を無効にしますか？'))return;state.notifAppId=null;state.notifRestKey=null;saveLocal();updateNotifBadge();closeModal('notif-modal');}
 function updateNotifBadge(){
-  const btn=document.getElementById('notif-btn');const lbl=document.getElementById('notif-label');
-  const ok=!!(state.notifAppId&&state.notifRestKey)&&('Notification' in window)&&Notification.permission==='granted';
+  const btn=document.getElementById('notif-btn'),lbl=document.getElementById('notif-label');
   const set=!!(state.notifAppId&&state.notifRestKey);
-  if(ok){btn.classList.add('active');lbl.textContent='通知ON';}
+  const granted='Notification' in window&&Notification.permission==='granted';
+  if(set&&granted){btn.classList.add('active');lbl.textContent='通知ON';}
   else if(set){btn.classList.add('active');lbl.textContent='通知設定済';}
   else{btn.classList.remove('active');lbl.textContent='通知設定';}
 }
-
 async function sendPush(body){
   if(!state.notifAppId||!state.notifRestKey)return;
-  try{
-    const res=await fetch('https://onesignal.com/api/v1/notifications',{
-      method:'POST',
-      mode:'cors',
-      headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},
-      body:JSON.stringify({
-        app_id:state.notifAppId,
-        included_segments:['All'],
-        headings:{ja:'FamilyCal 📅',en:'FamilyCal 📅'},
-        contents:{ja:body,en:body}
-      })
-    });
-    if(!res.ok){const t=await res.text();console.error('通知送信エラー:',res.status,t);}
-  }catch(e){console.error('通知fetch失敗:',e);}
+  try{await fetch('https://onesignal.com/api/v1/notifications',{method:'POST',mode:'cors',headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},body:JSON.stringify({app_id:state.notifAppId,included_segments:['All'],headings:{ja:'FamilyCal 📅',en:'FamilyCal 📅'},contents:{ja:body,en:body}})});}catch(e){}
 }
-
 async function testNotification(){
   if(!state.notifAppId||!state.notifRestKey){alert('通知設定が完了していません');return;}
-  const el=document.getElementById('notif-test-result');
-  el.textContent='送信中...';
-  try{
-    const res=await fetch('https://onesignal.com/api/v1/notifications',{
-      method:'POST',
-      mode:'cors',
-      headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},
-      body:JSON.stringify({
-        app_id:state.notifAppId,
-        included_segments:['All'],
-        headings:{ja:'FamilyCal テスト',en:'FamilyCal Test'},
-        contents:{ja:'🔔 通知のテストです！正常に届いていれば設定完了です。',en:'Test notification'}
-      })
-    });
-    if(res.ok){
-      const j=await res.json();
-      if(j.errors&&j.errors.length>0){
-        el.textContent='⚠️ エラー: '+JSON.stringify(j.errors);
-      } else if(j.recipients>0){
-        el.textContent='✅ 送信成功！'+j.recipients+'台に届きました';
-      } else {
-        el.textContent='⚠️ 送信しましたが受信端末0件です。各端末で「通知を許可」してください（ホーム画面追加済みが必要）';
-      }
-    }else{
-      const t=await res.text();
-      el.textContent='❌ APIエラー('+res.status+'): REST API Keyが正しいか確認してください\n'+t;
-    }
-  }catch(e){
-    // iOSのCORSエラーの場合は別の方法で案内
-    el.innerHTML='⚠️ iOSからの直接送信はできません。<br>通知はアプリ内操作（予定・タスク追加）時に届きます。<br><small style="color:var(--text3);">'+e.message+'</small>';
+  const el=document.getElementById('notif-test-result');el.textContent='送信中...';
+  try{const res=await fetch('https://onesignal.com/api/v1/notifications',{method:'POST',mode:'cors',headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},body:JSON.stringify({app_id:state.notifAppId,included_segments:['All'],headings:{ja:'FamilyCal テスト'},contents:{ja:'🔔 通知テストです！正常に届いています。'}})});
+    if(res.ok){const j=await res.json();el.textContent=j.recipients>0?'✅ 送信成功！'+j.recipients+'台に届きました':'⚠️ 送信しましたが受信端末が0件です。各端末で通知を許可してください';}
+    else{const t=await res.text();el.textContent='❌ APIエラー('+res.status+'): '+t;}
+  }catch(e){el.innerHTML='⚠️ iOSからの直接テストはできません。実際の操作で通知が届くかご確認ください。<br><small>'+e.message+'</small>';}
+}
+
+// ── Reminder scheduling ──
+function toOneSignalDate(dt){
+  const pad=n=>String(n).padStart(2,'0');
+  return `${dt.getUTCFullYear()}-${pad(dt.getUTCMonth()+1)}-${pad(dt.getUTCDate())} ${pad(dt.getUTCHours())}:${pad(dt.getUTCMinutes())}:00 GMT+0000`;
+}
+async function scheduleReminders(item,isEvent){
+  if(!item.reminders||!item.reminders.length)return [];
+  if(!state.notifAppId||!state.notifRestKey)return [];
+  const dateStr=isEvent?item.date:(item.due||item.endDate);
+  const timeStr=isEvent?(item.timeStart||'09:00'):'09:00';
+  if(!dateStr)return [];
+  const ids=[];
+  for(const r of item.reminders){
+    const mins=r==='1h'?60:r==='1d'?1440:0;if(!mins)continue;
+    const dt=new Date(dateStr+'T'+timeStr+':00');
+    dt.setMinutes(dt.getMinutes()-mins);
+    if(dt<=new Date())continue;
+    const label=r==='1h'?'1時間前':'1日前';
+    const body=`⏰ ${label}：${item.name}${isEvent&&item.timeStart?' ('+item.timeStart+'〜'+(item.timeEnd||'')+')'  :''}`;
+    try{
+      const res=await fetch('https://onesignal.com/api/v1/notifications',{method:'POST',mode:'cors',headers:{'Content-Type':'application/json','Authorization':'Basic '+state.notifRestKey},body:JSON.stringify({app_id:state.notifAppId,included_segments:['All'],headings:{ja:'FamilyCal ⏰',en:'FamilyCal ⏰'},contents:{ja:body,en:body},send_after:toOneSignalDate(dt)})});
+      if(res.ok){const j=await res.json();if(j.id)ids.push({id:j.id,type:r});}
+    }catch(e){}
+  }
+  return ids;
+}
+async function cancelReminders(notifIds){
+  if(!notifIds||!notifIds.length||!state.notifAppId||!state.notifRestKey)return;
+  for(const {id} of notifIds){
+    try{await fetch(`https://onesignal.com/api/v1/notifications/${id}?app_id=${state.notifAppId}`,{method:'DELETE',mode:'cors',headers:{'Authorization':'Basic '+state.notifRestKey}});}catch(e){}
   }
 }
 
-// ── Settings ──
+// ══════════════════════════════════════════════
+// Settings
+// ══════════════════════════════════════════════
 function openSettingsModal(){document.getElementById('settings-p1').value=state.p1Name;document.getElementById('settings-p2').value=state.p2Name;openModal('settings-modal');}
 function saveSettings(){state.p1Name=document.getElementById('settings-p1').value.trim()||'自分';state.p2Name=document.getElementById('settings-p2').value.trim()||'家族';saveLocal();updatePersonNames();closeModal('settings-modal');render();}
 function updatePersonNames(){
-  [['p1-col-name','ev-p1-label','tk-p1-label','shop-p1-label'],['p2-col-name','ev-p2-label','tk-p2-label','shop-p2-label']].forEach(([ids,name],i)=>{/* handled below */});
   ['p1-col-name','ev-p1-label','tk-p1-label','shop-p1-label'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=state.p1Name;});
   ['p2-col-name','ev-p2-label','tk-p2-label','shop-p2-label'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=state.p2Name;});
 }
 
-// ── Person selectors ──
+// ══════════════════════════════════════════════
+// UI helpers
+// ══════════════════════════════════════════════
 function selectPersonEv(v){state.evPerson=v;updatePersonSelector('ev-person-selector',v);}
 function selectPersonTk(v){state.tkPerson=v;updatePersonSelector('tk-person-selector',v);}
 function selectPersonShop(v){state.shopPerson=v;updatePersonSelector('shop-person-selector',v);}
 function updatePersonSelector(id,val){document.querySelectorAll(`#${id} .person-option`).forEach(el=>{el.classList.remove('selected-p1','selected-p2','selected-both');if(el.dataset.val===val)el.classList.add(val==='p1'?'selected-p1':val==='p2'?'selected-p2':'selected-both');});}
-
-// ── Color picker ──
 function renderColorPicker(id,sel){document.getElementById(id).innerHTML=COLORS.map(c=>`<div class="color-option ${c===sel?'selected':''}" style="background:${c}" data-color="${c}" onclick="selectColor('${id}','${c}')"></div>`).join('');}
 function selectColor(id,c){document.querySelectorAll(`#${id} .color-option`).forEach(el=>el.classList.toggle('selected',el.dataset.color===c));}
 function getSelectedColor(id){const el=document.querySelector(`#${id} .color-option.selected`);return el?el.dataset.color:COLORS[0];}
+function setTaskDateType(t){
+  const s=t==='single';
+  document.getElementById('tk-date-single').style.display=s?'':'none';
+  document.getElementById('tk-date-range').style.display=s?'none':'';
+  document.getElementById('tk-type-single').classList.toggle('active',s);
+  document.getElementById('tk-type-range').classList.toggle('active',!s);
+  document.getElementById('tk-repeat-group').style.display=s?'':'none';
+}
+function selectRepeatEv(v){state.evRepeat=v;document.querySelectorAll('#ev-repeat-selector .repeat-opt').forEach(el=>el.classList.toggle('active',el.dataset.val===v));document.getElementById('ev-repeat-until-row').style.display=v==='none'?'none':'';}
+function selectRepeatTk(v){state.tkRepeat=v;document.querySelectorAll('#tk-repeat-selector .repeat-opt').forEach(el=>el.classList.toggle('active',el.dataset.val===v));document.getElementById('tk-repeat-until-row').style.display=v==='none'?'none':'';}
+function onEvStartTimeChange(){
+  const start=document.getElementById('ev-time-start').value;
+  if(start)document.getElementById('ev-time-end').value=addHours(start,1);
+}
 
-function setTaskDateType(t){const s=t==='single';document.getElementById('tk-date-single').style.display=s?'':'none';document.getElementById('tk-date-range').style.display=s?'none':'';document.getElementById('tk-type-single').classList.toggle('active',s);document.getElementById('tk-type-range').classList.toggle('active',!s);}
-
-// ── Tab switching ──
+// ══════════════════════════════════════════════
+// Tab switching
+// ══════════════════════════════════════════════
 function switchTab(tab){
-  const colorMap={tasks:'tab-active-green',cal:'tab-active-blue',shop:'tab-active-orange'};
+  const colorMap={cal:'tab-active-blue',tasks:'tab-active-green',shop:'tab-active-orange'};
   Object.keys(colorMap).forEach(t=>{
-    const btn=document.getElementById('tab-'+t);
-    btn.className='tab-btn';
+    document.getElementById('tab-'+t).className='tab-btn';
     document.getElementById('page-'+t).className='tab-content';
-    if(t===tab){btn.classList.add(colorMap[t]);document.getElementById('page-'+t).classList.add('active');}
+    if(t===tab){document.getElementById('tab-'+t).classList.add(colorMap[t]);document.getElementById('page-'+t).classList.add('active');}
   });
-  if(tab==='tasks'){renderTasks();renderTodayTasks();renderTodayEvents();}
   if(tab==='cal')renderCalendar();
+  if(tab==='tasks'){renderTasks();renderTodayTasks();}
   if(tab==='shop')renderShop();
 }
 
-// ── Modals ──
+// ══════════════════════════════════════════════
+// Modals
+// ══════════════════════════════════════════════
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeModal(el.id);}));
 
 function openEventModal(eventId=null){
-  state.editingEventId=eventId;const ev=eventId?state.events.find(e=>e.id===eventId):null;
+  state.editingEventId=eventId;
+  const ev=eventId?state.events.find(e=>e.id===eventId):null;
   document.getElementById('event-modal-title').textContent=ev?'予定を編集':'新しい予定';
   document.getElementById('ev-name').value=ev?.name||'';
   document.getElementById('ev-date').value=ev?.date||state.selectedDate;
-  document.getElementById('ev-time-start').value=ev?.timeStart||ev?.time||'';
-  document.getElementById('ev-time-end').value=ev?.timeEnd||'';
+  document.getElementById('ev-time-start').value=ev?.timeStart||'12:00';
+  document.getElementById('ev-time-end').value=ev?.timeEnd||(ev?.timeStart?addHours(ev.timeStart,1):'13:00');
   document.getElementById('ev-note').value=ev?.note||'';
+  document.getElementById('ev-remind-1h').checked=ev?.reminders?.includes('1h')||false;
+  document.getElementById('ev-remind-1d').checked=ev?.reminders?.includes('1d')||false;
   const person=ev?.person||'p1';state.evPerson=person;updatePersonSelector('ev-person-selector',person);
+  const repeat=ev?.repeat||'none';state.evRepeat=repeat;selectRepeatEv(repeat);
+  document.getElementById('ev-repeat-until').value=ev?.repeatUntil||'';
   renderColorPicker('ev-color-picker',ev?.color||COLORS[0]);
   openModal('event-modal');
 }
+
 function openTaskModal(taskId=null){
-  state.editingTaskId=taskId;const tk=taskId?state.tasks.find(t=>t.id===taskId):null;
+  state.editingTaskId=taskId;
+  const tk=taskId?state.tasks.find(t=>t.id===taskId):null;
   document.getElementById('task-modal-title').textContent=tk?'タスクを編集':'新しいタスク';
   document.getElementById('tk-name').value=tk?.name||'';
   document.getElementById('tk-priority').value=tk?.priority||'medium';
   document.getElementById('tk-note').value=tk?.note||'';
+  document.getElementById('tk-remind-1h').checked=tk?.reminders?.includes('1h')||false;
+  document.getElementById('tk-remind-1d').checked=tk?.reminders?.includes('1d')||false;
   const person=tk?.person||'p1';state.tkPerson=person;updatePersonSelector('tk-person-selector',person);
   renderColorPicker('tk-color-picker',tk?.color||COLORS[2]);
+  const repeat=tk?.repeat||'none';state.tkRepeat=repeat;selectRepeatTk(repeat);
+  document.getElementById('tk-repeat-until').value=tk?.repeatUntil||'';
   if(tk&&tk.startDate&&tk.endDate){setTaskDateType('range');document.getElementById('tk-start').value=tk.startDate;document.getElementById('tk-end').value=tk.endDate;document.getElementById('tk-due').value='';}
   else{setTaskDateType('single');document.getElementById('tk-due').value=tk?.due||state.selectedDate||'';}
   openModal('task-modal');
 }
 
-async function saveAndSync(){saveLocal();render();await syncPush();}
-
+// ══════════════════════════════════════════════
+// CRUD - Events
+// ══════════════════════════════════════════════
 async function saveEvent(){
   const name=document.getElementById('ev-name').value.trim();const date=document.getElementById('ev-date').value;
   if(!name||!date){alert('タイトルと日付を入力してください');return;}
-  const timeStart=document.getElementById('ev-time-start').value,timeEnd=document.getElementById('ev-time-end').value;
+  const reminders=[];
+  if(document.getElementById('ev-remind-1h').checked)reminders.push('1h');
+  if(document.getElementById('ev-remind-1d').checked)reminders.push('1d');
+  const repeatUntil=document.getElementById('ev-repeat-until').value||null;
   const isNew=!state.editingEventId;
-  const ev={id:state.editingEventId||genId(),name,date,timeStart,timeEnd,note:document.getElementById('ev-note').value.trim(),color:getSelectedColor('ev-color-picker'),person:state.evPerson};
+  const existingEv=state.editingEventId?state.events.find(e=>e.id===state.editingEventId):null;
+  // Cancel old reminders if editing
+  if(existingEv?.reminderIds)await cancelReminders(existingEv.reminderIds);
+  const ev={
+    id:state.editingEventId||genId(),name,date,
+    timeStart:document.getElementById('ev-time-start').value,
+    timeEnd:document.getElementById('ev-time-end').value,
+    note:document.getElementById('ev-note').value.trim(),
+    color:getSelectedColor('ev-color-picker'),
+    person:state.evPerson,reminders,
+    repeat:state.evRepeat||'none',
+    repeatUntil:state.evRepeat==='none'?null:repeatUntil
+  };
   if(state.editingEventId)state.events=state.events.map(e=>e.id===state.editingEventId?ev:e);else state.events.push(ev);
+  addToHistory('ev',name);
   closeModal('event-modal');await saveAndSync();
-  const pn=state.evPerson==='p1'?state.p1Name:state.evPerson==='p2'?state.p2Name:'2人';
-  await sendPush(`${isNew?'📅 予定追加':'✏️ 予定更新'}：${name}（${date}${timeStart?' '+timeStart+(timeEnd?'〜'+timeEnd:''):''}）【${pn}】`);
+  // Schedule reminders
+  const reminderIds=await scheduleReminders(ev,true);
+  if(reminderIds.length){ev.reminderIds=reminderIds;state.events=state.events.map(e=>e.id===ev.id?ev:e);saveLocal();}
+  const pn=pName(state.evPerson);const repeatLabel=ev.repeat!=='none'?` 🔁${REPEAT_LABELS[ev.repeat]}`:'';
+  const remLabel=reminders.length?` ⏰${reminders.map(r=>r==='1h'?'1h前':'1d前').join('/')}`:'';
+  await sendPush(`${isNew?'📅 予定追加':'✏️ 予定更新'}：${name}（${date}${ev.timeStart?' '+ev.timeStart:''}）【${pn}】${repeatLabel}${remLabel}`);
 }
+
+async function deleteEvent(id,e){
+  e&&e.stopPropagation();
+  const ev=state.events.find(x=>x.id===id);
+  if(!ev)return;
+  const msg=ev.repeat&&ev.repeat!=='none'?`「${ev.name}」を削除します（繰り返し設定も含めてすべて削除）。よろしいですか？`:`「${ev.name}」を削除しますか？`;
+  if(!confirm(msg))return;
+  if(ev.reminderIds)await cancelReminders(ev.reminderIds);
+  state.events=state.events.filter(x=>x.id!==id);
+  await saveAndSync();
+}
+
+// ══════════════════════════════════════════════
+// CRUD - Tasks
+// ══════════════════════════════════════════════
 async function saveTask(){
   const name=document.getElementById('tk-name').value.trim();if(!name){alert('タスク名を入力してください');return;}
   const isRange=document.getElementById('tk-date-range').style.display!=='none';
   let due='',startDate='',endDate='';
   if(isRange){startDate=document.getElementById('tk-start').value;endDate=document.getElementById('tk-end').value;if(!startDate||!endDate){alert('開始日と終了日を入力してください');return;}}
   else{due=document.getElementById('tk-due').value;}
+  const reminders=[];
+  if(document.getElementById('tk-remind-1h').checked)reminders.push('1h');
+  if(document.getElementById('tk-remind-1d').checked)reminders.push('1d');
+  const repeatUntil=document.getElementById('tk-repeat-until').value||null;
   const isNew=!state.editingTaskId;
-  const tk={id:state.editingTaskId||genId(),name,due,startDate,endDate,priority:document.getElementById('tk-priority').value,note:document.getElementById('tk-note').value.trim(),color:getSelectedColor('tk-color-picker'),done:state.editingTaskId?(state.tasks.find(t=>t.id===state.editingTaskId)?.done||false):false,person:state.tkPerson};
+  const existingTk=state.editingTaskId?state.tasks.find(t=>t.id===state.editingTaskId):null;
+  if(existingTk?.reminderIds)await cancelReminders(existingTk.reminderIds);
+  const tk={
+    id:state.editingTaskId||genId(),name,due,startDate,endDate,
+    priority:document.getElementById('tk-priority').value,
+    note:document.getElementById('tk-note').value.trim(),
+    color:getSelectedColor('tk-color-picker'),
+    done:state.editingTaskId?(state.tasks.find(t=>t.id===state.editingTaskId)?.done||false):false,
+    person:state.tkPerson,reminders,
+    repeat:(!isRange&&state.tkRepeat)?state.tkRepeat:'none',
+    repeatUntil:(!isRange&&state.tkRepeat!=='none')?repeatUntil:null
+  };
   if(state.editingTaskId)state.tasks=state.tasks.map(t=>t.id===state.editingTaskId?tk:t);else state.tasks.push(tk);
+  addToHistory('tk',name);
   closeModal('task-modal');await saveAndSync();
-  const pn=state.tkPerson==='p1'?state.p1Name:state.tkPerson==='p2'?state.p2Name:'2人';
-  const dl=due?due:(startDate&&endDate?`${startDate}〜${endDate}`:'');
-  await sendPush(`${isNew?'✅ タスク追加':'✏️ タスク更新'}：${name}${dl?'（'+dl+'）':''}【${pn}】`);
+  const reminderIds=await scheduleReminders(tk,false);
+  if(reminderIds.length){tk.reminderIds=reminderIds;state.tasks=state.tasks.map(t=>t.id===tk.id?tk:t);saveLocal();}
+  const pn=pName(state.tkPerson);const dl=due?due:(startDate&&endDate?`${startDate}〜${endDate}`:'');
+  const repeatLabel=tk.repeat!=='none'?` 🔁${REPEAT_LABELS[tk.repeat]}`:'';
+  await sendPush(`${isNew?'✅ タスク追加':'✏️ タスク更新'}：${name}${dl?'（'+dl+'）':''}【${pn}】${repeatLabel}`);
 }
-async function deleteEvent(id,e){e&&e.stopPropagation();if(!confirm('この予定を削除しますか？'))return;state.events=state.events.filter(ev=>ev.id!==id);await saveAndSync();}
-async function deleteTask(id){if(!confirm('このタスクを削除しますか？'))return;state.tasks=state.tasks.filter(t=>t.id!==id);await saveAndSync();}
+
+async function deleteTask(id){
+  const tk=state.tasks.find(t=>t.id===id);if(!tk)return;
+  const msg=tk.repeat&&tk.repeat!=='none'?`「${tk.name}」を削除します（繰り返し設定も含めてすべて削除）。よろしいですか？`:`「${tk.name}」を削除しますか？`;
+  if(!confirm(msg))return;
+  if(tk.reminderIds)await cancelReminders(tk.reminderIds);
+  state.tasks=state.tasks.filter(t=>t.id!==id);await saveAndSync();
+}
+
 async function toggleTask(id){state.tasks=state.tasks.map(t=>t.id===id?{...t,done:!t.done}:t);await saveAndSync();}
 
-// ── Shopping List ──
+// ══════════════════════════════════════════════
+// CRUD - Shopping
+// ══════════════════════════════════════════════
 function addShopItem(){
   const name=document.getElementById('shop-name').value.trim();if(!name){alert('品名を入力してください');return;}
   const qty=document.getElementById('shop-qty').value.trim();
-  const cat=document.getElementById('shop-cat').value;
-  state.shopItems.push({id:genId(),name,qty,cat,person:state.shopPerson,checked:false});
+  state.shopItems.push({id:genId(),name,qty,person:state.shopPerson,checked:false});
   document.getElementById('shop-name').value='';document.getElementById('shop-qty').value='';
+  addToHistory('shop',name);
   saveAndSync();
 }
 async function toggleShopItem(id){state.shopItems=state.shopItems.map(s=>s.id===id?{...s,checked:!s.checked}:s);await saveAndSync();}
 async function deleteShopItem(id){state.shopItems=state.shopItems.filter(s=>s.id!==id);await saveAndSync();}
 async function clearCheckedShop(){if(!state.shopItems.some(s=>s.checked)){alert('チェック済みの商品がありません');return;}if(!confirm('チェック済みの商品を削除しますか？'))return;state.shopItems=state.shopItems.filter(s=>!s.checked);await saveAndSync();}
-
 function setTaskFilter(f,btn){state.taskFilter=f;document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderTasks();}
+
+// ══════════════════════════════════════════════
+// Rendering
+// ══════════════════════════════════════════════
 function changeMonth(dir){state.currentMonth+=dir;if(state.currentMonth<0){state.currentMonth=11;state.currentYear--;}if(state.currentMonth>11){state.currentMonth=0;state.currentYear++;}renderCalendar();}
 function goToday(){state.currentYear=TODAY.getFullYear();state.currentMonth=TODAY.getMonth();state.selectedDate=toISO(TODAY);render();scrollToToday();}
 function selectDate(d){state.selectedDate=d;renderCalendar();}
-function isTaskToday(t,s){if(t.due)return t.due===s;if(t.startDate&&t.endDate)return t.startDate<=s&&t.endDate>=s;return false;}
-const pName=(p)=>p==='p1'?state.p1Name:p==='p2'?state.p2Name:'2人';
-const pClass=(p)=>p==='p1'?'tag-p1':p==='p2'?'tag-p2':'tag-both';
-
-function render(){renderHeader();renderCalendar();renderTasks();renderTodayTasks();renderTodayEvents();renderShop();updatePersonNames();updateNotifBadge();}
 
 function renderHeader(){
-  const d=new Date();
-  const label=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${DAYS[d.getDay()]}）`;
+  const d=new Date();const label=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${DAYS[d.getDay()]}）`;
   document.getElementById('header-date').textContent=label;
-  const tl=document.getElementById('today-date-label');
-  if(tl)tl.textContent=label;
+  ['today-date-label'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=label;});
 }
 
 function renderCalendar(){
@@ -1045,31 +1067,33 @@ function renderCalendar(){
   for(let day=1;day<=dim;day++){
     const ds=`${state.currentYear}-${String(state.currentMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     const d=new Date(ds+'T00:00:00'),dow=d.getDay();
-    const isToday=ds===todayStr,isSel=ds===state.selectedDate,isSat=dow===6,isSun=dow===0;
-    const hname=JP_HOLIDAYS[ds]||'';
-    const isHol=!!hname;
-    const dayEvs=state.events.filter(e=>e.date===ds).sort((a,b)=>(a.timeStart||a.time||'')<(b.timeStart||b.time||'')?-1:1);
-    const dayTasks=state.tasks.filter(t=>t.due===ds||(t.endDate&&t.endDate===ds));
-    const p1Items=[...dayEvs.filter(e=>e.person==='p1'||e.person==='both'),...dayTasks.filter(t=>t.person==='p1'||t.person==='both')];
-    const p2Items=[...dayEvs.filter(e=>e.person==='p2'||e.person==='both'),...dayTasks.filter(t=>t.person==='p2'||t.person==='both')];
+    const isToday=ds===todayStr,isSel=ds===state.selectedDate;
+    const hname=JP_HOLIDAYS[ds]||'',isHol=!!hname;
+    const shortH=hname.length>5?hname.slice(0,4)+'…':hname;
+    // Get events and tasks for this date (including recurring)
+    const dayEvs=state.events.filter(ev=>occursOnDate(ev,ds)).sort((a,b)=>(a.timeStart||'')<(b.timeStart||'')?-1:1);
+    const dayTasks=state.tasks.filter(tk=>isTaskOnDate(tk,ds));
+    const p1Evs=dayEvs.filter(e=>e.person==='p1'||e.person==='both');
+    const p2Evs=dayEvs.filter(e=>e.person==='p2'||e.person==='both');
+    const p1Tasks=dayTasks.filter(t=>t.person==='p1'||t.person==='both');
+    const p2Tasks=dayTasks.filter(t=>t.person==='p2'||t.person==='both');
+    const p1Items=[...p1Evs.map(e=>({...e,_isEv:true})),...p1Tasks.map(t=>({...t,_isEv:false}))];
+    const p2Items=[...p2Evs.map(e=>({...e,_isEv:true})),...p2Tasks.map(t=>({...t,_isEv:false}))];
 
     function chips(items,col){
       return items.slice(0,2).map(item=>{
-        const isEv=!!state.events.find(e=>e.id===item.id);
-        const isDone=item.done||false;
-        let cls=item.color&&item.color!==COLORS[0]&&item.color!==COLORS[2]?'chip-custom':(isEv?(col==='p1'?'chip-p1':'chip-p2'):(col==='p1'?'chip-task-p1':'chip-task-p2'));
-        const sty=item.color?`background:${item.color}18;color:${item.color};border-color:${item.color}35;`:'';
-        let tStr='';
-        if(isEv){const ts=item.timeStart||item.time||'';if(ts)tStr=`<span class="chip-time">${ts}${item.timeEnd?'〜'+item.timeEnd:''} </span>`;}
-        const icon=isDone?'✓':isEv?'':'';
-        return `<div class="cal-event-chip ${cls} ${isDone?'chip-done':''}" style="${sty}" onclick="event.stopPropagation();${isEv?`openEventModal('${item.id}')`:`openTaskModal('${item.id}')`}">${tStr}${icon?icon+' ':''}${item.name}</div>`;
-      }).join('')+(items.length>2?`<div style="font-size:9px;color:var(--text3);padding:1px 4px;">+${items.length-2}件</div>`:'');
+        const isEv=item._isEv;
+        const cls=isEv?(col==='p1'?'chip-ev-p1':'chip-ev-p2'):(col==='p1'?'chip-tk-p1':'chip-tk-p2');
+        const sty=item.color?`background:${item.color}18;color:${item.color};border-color:${item.color}55;border-style:${isEv?'solid':'dashed'};`:'';
+        const tStr=isEv&&item.timeStart?`<span class="chip-time">${item.timeStart} </span>`:'';
+        const rpt=item.repeat&&item.repeat!=='none'?'<span class="chip-repeat">🔁</span>':'';
+        const rem=item.reminders&&item.reminders.length?'<span class="chip-repeat">⏰</span>':'';
+        const onclick=isEv?`openEventModal('${item.id}')`:`openTaskModal('${item.id}')`;
+        return `<div class="cal-chip ${cls} ${item.done?'chip-done':''}" style="${sty}" onclick="event.stopPropagation();${onclick}">${tStr}${item.name}${rpt}${rem}</div>`;
+      }).join('')+(items.length>2?`<div class="chip-more">+${items.length-2}件</div>`:'');
     }
 
-    // 祝日名を短縮（5文字まで）
-    const shortH=hname.length>5?hname.slice(0,4)+'…':hname;
-    const rowCls=[isToday?'today':'',isSel?'selected':'',isSat?'weekend-sat':'',isSun?'weekend-sun':'',isHol?'is-holiday':''].filter(Boolean).join(' ');
-
+    const rowCls=[isToday?'today':'',isSel?'selected':'',dow===6?'weekend-sat':'',dow===0?'weekend-sun':'',isHol?'is-holiday':''].filter(Boolean).join(' ');
     html+=`<div class="cal-row ${rowCls}" id="row-${ds}">
       <div class="cal-date-cell" onclick="selectDate('${ds}')">
         <div class="day-num">${day}</div>
@@ -1090,58 +1114,57 @@ function renderTasks(){
   let tasks=[...state.tasks];
   if(state.taskFilter==='pending')tasks=tasks.filter(t=>!t.done);
   else if(state.taskFilter==='done')tasks=tasks.filter(t=>t.done);
-  else if(state.taskFilter==='today')tasks=tasks.filter(t=>isTaskToday(t,ts));
+  else if(state.taskFilter==='today')tasks=tasks.filter(t=>isTaskOnDate(t,ts));
   const p={high:0,medium:1,low:2};
   tasks.sort((a,b)=>{if(a.done!==b.done)return a.done?1:-1;const aD=a.due||a.endDate||'',bD=b.due||b.endDate||'';if(aD&&bD)return aD<bD?-1:1;if(aD)return -1;if(bD)return 1;return(p[a.priority]||1)-(p[b.priority]||1);});
   document.getElementById('task-count').textContent=state.tasks.filter(t=>!t.done).length;
-  document.getElementById('tasks-list').innerHTML=tasks.length===0?`<div class="empty-state">タスクがありません 🎉</div>`:tasks.map(tk=>{
-    let dC='',dT='';
-    if(tk.due){const d=new Date(tk.due+'T00:00:00');d.setHours(0,0,0,0);if(!tk.done){if(d<TODAY)dC='overdue';else if(tk.due===ts)dC='today-due';}dT=`${d.getMonth()+1}/${d.getDate()}`;if(dC==='overdue')dT+=' 期限切れ';else if(dC==='today-due')dT+=' 今日';}
-    else if(tk.startDate&&tk.endDate){const s=new Date(tk.startDate+'T00:00:00'),e=new Date(tk.endDate+'T00:00:00');dT=`${s.getMonth()+1}/${s.getDate()}〜${e.getMonth()+1}/${e.getDate()}`;if(!tk.done){if(e<TODAY)dC='overdue';else if(isTaskToday(tk,ts))dC='today-due';}if(dC==='overdue')dT+=' 期限切れ';else if(isTaskToday(tk,ts)&&!tk.done)dT+=' 進行中';}
-    return `<div class="task-item ${tk.done?'done':''} fade-in">
-      <div class="task-priority priority-${tk.priority||'medium'}"></div>
-      <div class="task-check ${tk.done?'checked':''}" onclick="toggleTask('${tk.id}')"></div>
-      <div class="task-content"><div class="task-name">${tk.name}</div><div class="task-meta">${dT?`<div class="task-due ${dC}">📅 ${dT}</div>`:''}<span class="task-person-tag ${pClass(tk.person||'p1')}">${pName(tk.person||'p1')}</span></div></div>
-      <div class="event-actions"><button class="icon-btn" onclick="openTaskModal('${tk.id}')">✎</button><button class="icon-btn delete" onclick="deleteTask('${tk.id}')">✕</button></div>
-    </div>`;
-  }).join('');
+  document.getElementById('tasks-list').innerHTML=tasks.length===0?`<div class="empty-state">タスクがありません 🎉</div>`:tasks.map(tk=>taskItemHTML(tk,ts)).join('');
 }
 
 function renderTodayTasks(){
   const ts=toISO(TODAY);
-  const items=state.tasks.filter(t=>isTaskToday(t,ts));
-  const html=items.length===0
-    ?`<div style="font-size:11px;color:var(--text3);padding:5px 0;text-align:center;">今日のタスクはありません</div>`
-    :items.map(t=>`<div class="today-chip ${t.done?'done':''}" onclick="toggleTask('${t.id}')"><div class="task-check ${t.done?'checked':''}" style="flex-shrink:0;width:15px;height:15px;font-size:9px;"></div><span style="flex:1;font-size:11px;font-weight:500;">${t.name}</span><span class="task-person-tag ${pClass(t.person||'p1')}" style="font-size:9px;">${pName(t.person||'p1')}</span></div>`).join('');
-  // カレンダーサイドバーとタスクタブ両方を更新
-  ['today-tasks-list','top-tasks-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});
+  const todayTasks=state.tasks.filter(t=>isTaskOnDate(t,ts));
+  const html=todayTasks.length===0?`<div class="empty-state">今日のタスクはありません</div>`:todayTasks.map(tk=>taskItemHTML(tk,ts)).join('');
+  const el=document.getElementById('today-tasks-list-tab');if(el)el.innerHTML=html;
 }
 
-function renderTodayEvents(){
+function taskItemHTML(tk,ts){
+  let dC='',dT='';
+  if(tk.due){const d=new Date(tk.due+'T00:00:00');d.setHours(0,0,0,0);if(!tk.done){if(d<TODAY)dC='overdue';else if(tk.due===ts)dC='today-due';}dT=`${d.getMonth()+1}/${d.getDate()}`;if(dC==='overdue')dT+=' 期限切れ';else if(dC==='today-due')dT+=' 今日';}
+  else if(tk.startDate&&tk.endDate){const s=new Date(tk.startDate+'T00:00:00'),e=new Date(tk.endDate+'T00:00:00');dT=`${s.getMonth()+1}/${s.getDate()}〜${e.getMonth()+1}/${e.getDate()}`;if(!tk.done){if(e<TODAY)dC='overdue';else if(isTaskOnDate(tk,ts))dC='today-due';}if(dC==='overdue')dT+=' 期限切れ';}
+  const repeatTag=tk.repeat&&tk.repeat!=='none'?`<span class="task-repeat-tag">🔁${REPEAT_LABELS[tk.repeat]}</span>`:'';
+  const remTag=tk.reminders&&tk.reminders.length?`<span class="task-remind-tag">⏰${tk.reminders.map(r=>r==='1h'?'1h':'1d').join('/')}</span>`:'';
+  return `<div class="task-item ${tk.done?'done':''} fade-in">
+    <div class="task-priority priority-${tk.priority||'medium'}"></div>
+    <div class="task-check ${tk.done?'checked':''}" onclick="toggleTask('${tk.id}')"></div>
+    <div class="task-content"><div class="task-name">${tk.name}</div><div class="task-meta">${dT?`<div class="task-due ${dC}">📅 ${dT}</div>`:''}<span class="task-person-tag ${pClass(tk.person||'p1')}">${pName(tk.person||'p1')}</span>${repeatTag}${remTag}</div></div>
+    <div class="event-actions"><button class="icon-btn" onclick="openTaskModal('${tk.id}')">✎</button><button class="icon-btn delete" onclick="deleteTask('${tk.id}')">✕</button></div>
+  </div>`;
+}
+
+function renderTodaySection(){
   const ts=toISO(TODAY);
-  const items=state.events.filter(e=>e.date===ts).sort((a,b)=>(a.timeStart||'')<(b.timeStart||'')?-1:1);
-  const html=items.length===0
-    ?`<div style="font-size:11px;color:var(--text3);padding:5px 0;text-align:center;">今日の予定はありません</div>`
-    :items.map(ev=>{const t=(ev.timeStart||ev.time)?`${ev.timeStart||ev.time}${ev.timeEnd?'〜'+ev.timeEnd:''} `:'';return `<div class="today-chip" onclick="openEventModal('${ev.id}')"><span style="flex:1;font-size:11px;font-weight:500;">${t}${ev.name}</span><span class="task-person-tag ${pClass(ev.person||'p1')}" style="font-size:9px;">${pName(ev.person||'p1')}</span></div>`;}).join('');
-  // カレンダーサイドバーとタスクタブ両方を更新
-  ['today-events-list','top-events-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});
+  // Events today (including recurring)
+  const todayEvs=state.events.filter(ev=>occursOnDate(ev,ts)).sort((a,b)=>(a.timeStart||'')<(b.timeStart||'')?-1:1);
+  // Tasks today (including recurring)
+  const todayTasks=state.tasks.filter(t=>isTaskOnDate(t,ts));
+  const evHTML=todayEvs.length===0?`<div class="today-empty">今日の予定はありません</div>`:todayEvs.map(ev=>{const t=ev.timeStart?`${ev.timeStart}${ev.timeEnd?'〜'+ev.timeEnd:''} `:'';return `<div class="today-chip" onclick="openEventModal('${ev.id}')"><span style="flex:1;font-size:11px;">${t}${ev.name}${ev.repeat&&ev.repeat!=='none'?' 🔁':''}</span><span class="task-person-tag ${pClass(ev.person||'p1')}" style="font-size:9px;">${pName(ev.person||'p1')}</span></div>`;}).join('');
+  const tkHTML=todayTasks.length===0?`<div class="today-empty">今日のタスクはありません</div>`:todayTasks.map(t=>`<div class="today-chip ${t.done?'done':''}" onclick="toggleTask('${t.id}')"><div class="task-check ${t.done?'checked':''}" style="flex-shrink:0;width:14px;height:14px;font-size:8px;"></div><span style="flex:1;font-size:11px;">${t.name}${t.repeat&&t.repeat!=='none'?' 🔁':''}</span><span class="task-person-tag ${pClass(t.person||'p1')}" style="font-size:9px;">${pName(t.person||'p1')}</span></div>`).join('');
+  ['top-events-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=evHTML;});
+  ['top-tasks-list'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=tkHTML;});
 }
 
 function renderShop(){
-  const cats=['食品','飲み物','日用品','子供関係','ペット用品','その他'];
   const unchecked=state.shopItems.filter(s=>!s.checked).length;
   document.getElementById('shop-count').textContent=unchecked;
   let html='';
-  // 未チェック → チェック済みの順
-  cats.forEach(cat=>{
-    const items=state.shopItems.filter(s=>s.cat===cat&&!s.checked);
-    if(!items.length)return;
-    html+=`<div class="shop-section-label">${CAT_EMOJI[cat]} ${cat}</div>`;
-    items.forEach(s=>{html+=shopItemHTML(s);});
-  });
-  const checked=state.shopItems.filter(s=>s.checked);
-  if(checked.length){html+=`<div class="shop-section-label" style="margin-top:14px;">✓ 購入済み</div>`;checked.forEach(s=>{html+=shopItemHTML(s);});}
-  if(!state.shopItems.length)html=`<div class="empty-state" style="padding:28px;">買い物リストは空です 🛒</div>`;
+  const active=state.shopItems.filter(s=>!s.checked);
+  const done=state.shopItems.filter(s=>s.checked);
+  if(!active.length&&!done.length){html='<div class="empty-state" style="padding:24px;">買い物リストは空です 🛒</div>';}
+  else{
+    active.forEach(s=>{html+=shopItemHTML(s);});
+    if(done.length){html+=`<div style="font-size:10px;color:var(--text3);font-weight:700;margin:10px 0 5px;letter-spacing:.04em;">✓ 購入済み</div>`;done.forEach(s=>{html+=shopItemHTML(s);});}
+  }
   document.getElementById('shop-list').innerHTML=html;
 }
 function shopItemHTML(s){
@@ -1150,31 +1173,38 @@ function shopItemHTML(s){
     <span class="shop-item-name">${s.name}</span>
     ${s.qty?`<span class="shop-item-qty">${s.qty}</span>`:''}
     <span class="task-person-tag ${pClass(s.person||'p1')}" style="font-size:9px;">${pName(s.person||'p1')}</span>
-    <button class="icon-btn delete" onclick="deleteShopItem('${s.id}')" style="opacity:.45;">✕</button>
+    <button class="icon-btn delete" onclick="deleteShopItem('${s.id}')" style="opacity:.5;">✕</button>
   </div>`;
 }
 
-// ── Init ──
+function render(){
+  renderHeader();
+  renderCalendar();
+  renderTodaySection();
+  renderTasks();
+  renderTodayTasks();
+  renderShop();
+  updatePersonNames();
+  updateNotifBadge();
+}
+
+// ══════════════════════════════════════════════
+// Init
+// ══════════════════════════════════════════════
 loadLocal();render();
 if(state.apiKey&&state.binId){setSyncStatus('connected');syncPull();startSyncTimer();}
 if(state.notifAppId){
   window.OneSignalDeferred=window.OneSignalDeferred||[];
   OneSignalDeferred.push(async function(O){
-    await O.init({
-      appId:state.notifAppId,
-      notifyButton:{enable:false},
-      welcomeNotification:{disable:true},
-      serviceWorkerParam:{scope:'/familycal/'},
-      serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'
-    });
+    try{await O.init({appId:state.notifAppId,notifyButton:{enable:false},welcomeNotification:{disable:true},serviceWorkerParam:{scope:'/familycal/'},serviceWorkerPath:'/familycal/OneSignalSDKWorker.js'});}catch(e){}
   });
 }
-setTimeout(scrollToToday,100);
-document.addEventListener('keydown',e=>{if(e.key==='Escape')['event-modal','task-modal','sync-modal','settings-modal','notif-modal'].forEach(closeModal);});
+setTimeout(scrollToToday,150);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')['event-modal','task-modal','history-modal','sync-modal','settings-modal','notif-modal'].forEach(closeModal);});
 (function(){
-  const ii=/iPhone|iPad|iPod/.test(navigator.userAgent),ss=window.navigator.standalone===true,dd=localStorage.getItem('install-banner-dismissed');
-  if(ii&&!ss&&!dd){document.getElementById('install-banner').style.display='flex';}
-  document.getElementById('install-banner').querySelector('button').addEventListener('click',()=>localStorage.setItem('install-banner-dismissed','1'));
+  if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&window.navigator.standalone!==true&&!localStorage.getItem('install-banner-dismissed')){
+    document.getElementById('install-banner').style.display='flex';
+  }
 })();
 </script>
 </body>
