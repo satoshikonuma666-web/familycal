@@ -792,7 +792,16 @@ async function requestNotifPermission(appId){
           welcomeNotification:{disable:true},
           path:'/familycal/'
         });
+        // 通知許可を求める
         const granted=await O.Notifications.requestPermission();
+        console.log('Permission result:',granted);
+        // 許可されたら明示的にoptInして購読登録を完了させる
+        if(granted){
+          try{
+            await O.User.PushSubscription.optIn();
+            console.log('optIn complete. subscribed:',O.User.PushSubscription.subscribed);
+          }catch(optInErr){console.warn('optIn error:',optInErr);}
+        }
         resolve(granted?'granted':'denied');
       }catch(e){
         console.error('OneSignal init error:',e);
@@ -803,6 +812,16 @@ async function requestNotifPermission(appId){
 }
 async function retryNotifPermission(){
   if(!state.notifAppId){alert('先にApp IDを設定してください');return;}
+  // OneSignalが既にロード済みの場合は直接optInを試みる
+  if(window.OneSignal){
+    try{
+      await window.OneSignal.User.PushSubscription.optIn();
+      const subId=window.OneSignal.User.PushSubscription.id;
+      console.log('Direct optIn result, subscriptionId:',subId);
+      const el=document.getElementById('notif-perm-status');
+      if(subId){el.textContent='✅ 購読登録完了！通知が届きます。';el.style.color='var(--green)';updateNotifDiag();return;}
+    }catch(e){console.warn('Direct optIn failed:',e);}
+  }
   const result=await requestNotifPermission(state.notifAppId);
   const el=document.getElementById('notif-perm-status');
   if(result==='granted'){el.textContent='✅ 許可済み！';el.style.color='var(--green)';}
