@@ -836,7 +836,7 @@ async function scheduleReminders(item,isEvent){
     const unixTs=Math.floor(dt.getTime()/1000);
     const label=r==='1h'?'1時間前':'1日前';
     const timeInfo=item.timeStart?' ('+item.timeStart+(item.timeEnd?'~'+item.timeEnd:'')+')'  :'';
-    const body='[FamilyCal リマインダー] '+label+'：'+item.name+timeInfo;
+    const body='[FamilyCal リマインダー] '+label+':'+item.name+timeInfo;
     try{
       // ?at=Unixタイムスタンプ でntfyサーバーが指定時刻に送信
       const res=await fetch(
@@ -1001,7 +1001,7 @@ async function saveEvent(){
   if(reminderIds.length){ev.reminderIds=reminderIds;state.events=state.events.map(e=>e.id===ev.id?ev:e);saveLocal();}
   const pn=pName(state.evPerson);const repeatLabel=ev.repeat!=='none'?` 🔁${REPEAT_LABELS[ev.repeat]}`:'';
   const remLabel=reminders.length?` ⏰${reminders.map(r=>r==='1h'?'1h前':'1d前').join('/')}`:'';
-  await sendPush(`${isNew?'📅 予定追加':'✏️ 予定更新'}：${name}（${date}${ev.timeStart?' '+ev.timeStart:''}）【${pn}】${repeatLabel}${remLabel}`);
+  await sendPush((isNew?'[予定追加]':'[予定更新]')+'：'+name+'（'+date+(ev.timeStart?' '+ev.timeStart:'')+'）【'+pn+'】'+repeatLabel+remLabel);
 }
 
 async function deleteEventFromModal(id){
@@ -1054,7 +1054,7 @@ async function saveTask(){
   if(reminderIds.length){tk.reminderIds=reminderIds;state.tasks=state.tasks.map(t=>t.id===tk.id?tk:t);saveLocal();}
   const pn=pName(state.tkPerson);const dl=due?due:(startDate&&endDate?`${startDate}〜${endDate}`:'');
   const repeatLabel=tk.repeat!=='none'?` 🔁${REPEAT_LABELS[tk.repeat]}`:'';
-  await sendPush(`${isNew?'✅ タスク追加':'✏️ タスク更新'}：${name}${dl?'（'+dl+'）':''}【${pn}】${repeatLabel}`);
+  await sendPush((isNew?'[タスク追加]':'[タスク更新]')+'：'+name+(dl?'（'+dl+'）':'')+'【'+pn+'】'+repeatLabel);
 }
 
 async function deleteTaskFromModal(id){
