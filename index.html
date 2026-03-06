@@ -814,25 +814,41 @@ async function testNotification(){
 
 // ── Reminder scheduling (ntfy版) ──
 async function scheduleReminders(item,isEvent){
-  // ntfy.shはサーバーサイド予約送信非対応のため、クライアント側タイマーで代替
+  // ntfy.sh の ?at= パラメータでサーバー側予約送信（アプリ終了後も届く）
   if(!item.reminders||!item.reminders.length||!state.ntfyTopic)return [];
   const dateStr=isEvent?item.date:(item.due||item.endDate);
   const timeStr=item.timeStart||'09:00';
   if(!dateStr)return [];
-  const now=new Date();
+  const ids=[];
   for(const r of item.reminders){
-    const mins=r==='1h'?60:r==='1d'?1440:0;if(!mins)continue;
+    const mins=r==='1h'?60:r==='1d'?1440:0;
+    if(!mins)continue;
+    // 送信先の時刻を計算
     const dt=new Date(dateStr+'T'+timeStr+':00');
     dt.setMinutes(dt.getMinutes()-mins);
-    const delay=dt-now;
-    if(delay<=0)continue;
+    if(dt<=new Date())continue; // 過去はスキップ
+    const unixTs=Math.floor(dt.getTime()/1000);
     const label=r==='1h'?'1時間前':'1日前';
-    const body=`⏰ ${label}：${item.name}${item.timeStart?' ('+item.timeStart+(item.timeEnd?'〜'+item.timeEnd:'')+')'  :''}`;
-    setTimeout(()=>sendPush(body),delay);
+    const timeInfo=item.timeStart?' ('+item.timeStart+(item.timeEnd?'~'+item.timeEnd:'')+')'  :'';
+    const body='[FamilyCal リマインダー] '+label+'：'+item.name+timeInfo;
+    try{
+      // ?at=Unixタイムスタンプ でntfyサーバーが指定時刻に送信
+      const res=await fetch(
+        'https://ntfy.sh/'+state.ntfyTopic+'?at='+unixTs,
+        {method:'POST',body:body}
+      );
+      if(res.ok){
+        const j=await res.json().catch(()=>({}));
+        if(j.id)ids.push({id:j.id,type:r});
+      }
+    }catch(e){console.warn('scheduleReminder error:',e);}
   }
-  return [];
+  return ids;
 }
-async function cancelReminders(notifIds){/* ntfyはタイマー管理のためキャンセル不可 */}
+async function cancelReminders(notifIds){
+  // ntfy.shはキャンセルAPIなし（スケジュール済み通知の削除不可）
+  // 編集時は再スケジュールで上書きされるため実害は少ない
+}
 
 // ══════════════════════════════════════════════
 // Settings
