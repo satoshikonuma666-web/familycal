@@ -435,7 +435,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <div class="form-group"><label class="form-label">メモ</label><textarea class="form-textarea" id="ev-note" placeholder="メモ（任意）"></textarea></div>
     <div class="form-group"><label class="form-label">カラー</label><div class="color-picker" id="ev-color-picker"></div></div>
-    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('event-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveEvent()">保存</button></div>
+    <div class="modal-actions" style="justify-content:space-between;">
+      <div id="ev-delete-area"></div>
+      <div style="display:flex;gap:7px;"><button class="btn btn-secondary" onclick="closeModal('event-modal')">キャンセル</button><button class="btn btn-primary" onclick="saveEvent()">保存</button></div>
+    </div>
   </div>
 </div>
 
@@ -493,7 +496,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="form-group"><label class="form-label">優先度</label><select class="form-select" id="tk-priority"><option value="medium">中</option><option value="high">高</option><option value="low">低</option></select></div>
     <div class="form-group"><label class="form-label">メモ</label><textarea class="form-textarea" id="tk-note" placeholder="メモ（任意）"></textarea></div>
     <div class="form-group"><label class="form-label">カラー</label><div class="color-picker" id="tk-color-picker"></div></div>
-    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('task-modal')">キャンセル</button><button class="btn btn-green" onclick="saveTask()">保存</button></div>
+    <div class="modal-actions" style="justify-content:space-between;">
+      <div id="tk-delete-area"></div>
+      <div style="display:flex;gap:7px;"><button class="btn btn-secondary" onclick="closeModal('task-modal')">キャンセル</button><button class="btn btn-green" onclick="saveTask()">保存</button></div>
+    </div>
   </div>
 </div>
 
@@ -926,6 +932,13 @@ function openEventModal(eventId=null){
   const repeat=ev?.repeat||'none';state.evRepeat=repeat;selectRepeatEv(repeat);
   document.getElementById('ev-repeat-until').value=ev?.repeatUntil||'';
   renderColorPicker('ev-color-picker',ev?.color||COLORS[0]);
+  // 削除ボタン：編集時のみ表示
+  const evDelArea=document.getElementById('ev-delete-area');
+  if(eventId){
+    evDelArea.innerHTML=`<button class="btn btn-danger" onclick="deleteEventFromModal('${eventId}')">🗑 削除</button>`;
+  }else{
+    evDelArea.innerHTML='';
+  }
   openModal('event-modal');
 }
 
@@ -946,6 +959,13 @@ function openTaskModal(taskId=null){
   document.getElementById('tk-repeat-until').value=tk?.repeatUntil||'';
   if(tk&&tk.startDate&&tk.endDate){setTaskDateType('range');document.getElementById('tk-start').value=tk.startDate;document.getElementById('tk-end').value=tk.endDate;document.getElementById('tk-due').value='';}
   else{setTaskDateType('single');document.getElementById('tk-due').value=tk?.due||state.selectedDate||'';}
+  // 削除ボタン：編集時のみ表示
+  const tkDelArea=document.getElementById('tk-delete-area');
+  if(taskId){
+    tkDelArea.innerHTML=`<button class="btn btn-danger" onclick="deleteTaskFromModal('${taskId}')">🗑 削除</button>`;
+  }else{
+    tkDelArea.innerHTML='';
+  }
   openModal('task-modal');
 }
 
@@ -984,6 +1004,10 @@ async function saveEvent(){
   await sendPush(`${isNew?'📅 予定追加':'✏️ 予定更新'}：${name}（${date}${ev.timeStart?' '+ev.timeStart:''}）【${pn}】${repeatLabel}${remLabel}`);
 }
 
+async function deleteEventFromModal(id){
+  closeModal('event-modal');
+  await deleteEvent(id);
+}
 async function deleteEvent(id,e){
   e&&e.stopPropagation();
   const ev=state.events.find(x=>x.id===id);
@@ -1033,6 +1057,10 @@ async function saveTask(){
   await sendPush(`${isNew?'✅ タスク追加':'✏️ タスク更新'}：${name}${dl?'（'+dl+'）':''}【${pn}】${repeatLabel}`);
 }
 
+async function deleteTaskFromModal(id){
+  closeModal('task-modal');
+  await deleteTask(id);
+}
 async function deleteTask(id){
   const tk=state.tasks.find(t=>t.id===id);if(!tk)return;
   const msg=tk.repeat&&tk.repeat!=='none'?`「${tk.name}」を削除します（繰り返し設定も含めてすべて削除）。よろしいですか？`:`「${tk.name}」を削除しますか？`;
