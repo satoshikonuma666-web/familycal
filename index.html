@@ -410,7 +410,13 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <button class="btn btn-secondary" onclick="openHistoryModal('ev')" style="font-size:11px;padding:5px 8px;flex-shrink:0;">📋 履歴</button>
       </div></div>
     <div class="form-group"><label class="form-label">日付 *</label><input class="form-input" type="date" id="ev-date"></div>
-    <div class="form-row">
+    <div class="form-group" style="margin-bottom:6px;">
+      <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;">
+        <input type="checkbox" id="ev-allday" onchange="onAllDayChange()" style="width:16px;height:16px;cursor:pointer;">
+        <span>終日（時間指定なし）</span>
+      </label>
+    </div>
+    <div id="ev-time-row" class="form-row">
       <div class="form-group"><label class="form-label">開始時間</label><input class="form-input" type="time" id="ev-time-start" value="12:00" onchange="onEvStartTimeChange()"></div>
       <div class="form-group"><label class="form-label">終了時間</label><input class="form-input" type="time" id="ev-time-end"></div>
     </div>
@@ -886,6 +892,14 @@ function setTaskDateType(t){
 }
 function selectRepeatEv(v){state.evRepeat=v;document.querySelectorAll('#ev-repeat-selector .repeat-opt').forEach(el=>el.classList.toggle('active',el.dataset.val===v));document.getElementById('ev-repeat-until-row').style.display=v==='none'?'none':'';}
 function selectRepeatTk(v){state.tkRepeat=v;document.querySelectorAll('#tk-repeat-selector .repeat-opt').forEach(el=>el.classList.toggle('active',el.dataset.val===v));document.getElementById('tk-repeat-until-row').style.display=v==='none'?'none':'';}
+function onAllDayChange(){
+  const allDay=document.getElementById('ev-allday').checked;
+  document.getElementById('ev-time-row').style.display=allDay?'none':'';
+  if(allDay){
+    document.getElementById('ev-time-start').value='';
+    document.getElementById('ev-time-end').value='';
+  }
+}
 function onEvStartTimeChange(){
   const start=document.getElementById('ev-time-start').value;
   if(start)document.getElementById('ev-time-end').value=addHours(start,1);
@@ -923,6 +937,9 @@ function openEventModal(eventId=null){
   document.getElementById('event-modal-title').textContent=ev?'予定を編集':'新しい予定';
   document.getElementById('ev-name').value=ev?.name||'';
   document.getElementById('ev-date').value=ev?.date||state.selectedDate;
+  const isAllDay=ev?!ev.timeStart:false;
+  document.getElementById('ev-allday').checked=isAllDay;
+  document.getElementById('ev-time-row').style.display=isAllDay?'none':'';
   document.getElementById('ev-time-start').value=ev?.timeStart||'12:00';
   document.getElementById('ev-time-end').value=ev?.timeEnd||(ev?.timeStart?addHours(ev.timeStart,1):'13:00');
   document.getElementById('ev-note').value=ev?.note||'';
@@ -985,8 +1002,8 @@ async function saveEvent(){
   if(existingEv?.reminderIds)await cancelReminders(existingEv.reminderIds);
   const ev={
     id:state.editingEventId||genId(),name,date,
-    timeStart:document.getElementById('ev-time-start').value,
-    timeEnd:document.getElementById('ev-time-end').value,
+    timeStart:document.getElementById('ev-allday').checked?'':document.getElementById('ev-time-start').value,
+    timeEnd:document.getElementById('ev-allday').checked?'':document.getElementById('ev-time-end').value,
     note:document.getElementById('ev-note').value.trim(),
     color:getSelectedColor('ev-color-picker'),
     person:state.evPerson,reminders,
@@ -1113,7 +1130,11 @@ function renderCalendar(){
     const shortH=hname.length>5?hname.slice(0,4)+'…':hname;
     // Get events and tasks for this date (including recurring)
     const dayEvs=state.events.filter(ev=>occursOnDate(ev,ds)).sort((a,b)=>(a.timeStart||'')<(b.timeStart||'')?-1:1);
-    const dayTasks=state.tasks.filter(tk=>isTaskOnDate(tk,ds));
+    // 期間タスクは最終日(endDate)のみ表示、通常タスクはそのまま
+    const dayTasks=state.tasks.filter(tk=>{
+      if(tk.startDate&&tk.endDate)return tk.endDate===ds;
+      return isTaskOnDate(tk,ds);
+    });
     const p1Evs=dayEvs.filter(e=>e.person==='p1'||e.person==='both');
     const p2Evs=dayEvs.filter(e=>e.person==='p2'||e.person==='both');
     const p1Tasks=dayTasks.filter(t=>t.person==='p1'||t.person==='both');
